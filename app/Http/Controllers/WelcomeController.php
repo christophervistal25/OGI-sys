@@ -8,6 +8,7 @@ class WelcomeController extends Controller
 {
     public function index()
     {
-    	return view('welcome');
+    	return redirect()->route('admin.auth.login');
+    	// return view('welcome');
     }
 }
