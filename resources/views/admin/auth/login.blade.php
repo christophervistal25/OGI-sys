@@ -4,16 +4,24 @@
 @prepend('page-css')
 <style>
     .bg-login-image {
-        background:url('https://res.cloudinary.com/dpcxcsdiw/image/upload/v1569824039/ascb-csogi/undraw_authentication_fsn5.svg') center center; 
+        background:url('https://res.cloudinary.com/dpcxcsdiw/image/upload/v1569829814/ascb-csogi/slider_1.webp') center center; 
         background-size: cover;
+    }
+    body {
+        background:url('https://res.cloudinary.com/dpcxcsdiw/image/upload/v1569829814/ascb-csogi/slider_3.webp') center center; 
+        background-size: cover;   
     }
 </style>
 @endprepend
-<body class="bg-gradient-primary">
+<body>
     <div class="container">
         <!-- Outer Row -->
         <div class="row justify-content-center">
             <div class="col-xl-10 col-lg-12 col-md-9">
+                <div class="text-center mt-5">
+                    <img src="https://res.cloudinary.com/dpcxcsdiw/image/upload/v1575120138/ascb-csogi/school_logo.png" width="150" alt="school image">
+                </div>
+                <h3 class="text-center mt-5" style="color:#1a1a1a">Andres Soriano Colleges of Bislig College Students Online Grade Inquiry</h3>
                 <div class="card o-hidden border-0 shadow-lg my-5">
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
@@ -56,8 +64,6 @@
                                             <i class="fa fa-lock"></i> Student Login
                                         </a>
                                     </form>
-                                    <hr>
-                                   <a href="/" class="btn btn-facebook btn-user btn-block"><i class="fa fa-home"></i> Home page</a>
                                 </div>
                             </div>
                         </div>
