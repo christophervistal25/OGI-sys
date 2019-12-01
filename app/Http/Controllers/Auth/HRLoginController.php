@@ -18,7 +18,7 @@ class HRLoginController extends Controller
      * @var string
      */
 
-    // protected $redirectTo = '/instructor/s';
+    // protected $redirectTo = '/instructor';
 
        public function __construct()
        {

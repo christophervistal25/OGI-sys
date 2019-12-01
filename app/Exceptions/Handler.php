@@ -71,6 +71,10 @@ class Handler extends ExceptionHandler
             $login = 'instructor.auth.login';
             break;
 
+         case 'hr':
+            $login = 'hr.auth.login';
+            break;
+
             
           default:
             $login = 'login';

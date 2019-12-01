@@ -64,6 +64,7 @@
 										<li><a href="{{ route('student.auth.login') }}">Student</a></li>
 										<li><a href="{{ route('instructor.auth.login') }}">Instructor</a></li>
 										<li><a href="{{ route('admin.auth.login') }}">Administrator</a></li>
+										<li><a href="{{ route('hr.auth.login') }}">Human Resources</a></li>
 								</ul>
 								<div class="hamburger menu_mm">
 									<i class="fa fa-bars menu_mm" aria-hidden="true"></i>
