@@ -12,8 +12,8 @@ class StudentSeeder extends Seeder
      */
     public function run()
     {
-        factory('App\Student', 2)->create();
-        /*Student::create([
+        // factory('App\Student', 2)->create();
+        Student::create([
             'name'         => 'John Doe',
             // 'level'        => 1,
             'gender'       => 'male',
@@ -29,6 +29,6 @@ class StudentSeeder extends Seeder
             'birthdate'    => '2019-09-13 17:06:0',
             'password'     => 1234,
             'course_id'    => 1,
-        ]);*/
+        ]);
     }
 }
