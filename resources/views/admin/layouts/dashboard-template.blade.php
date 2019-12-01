@@ -33,19 +33,6 @@
     </li>
 
     <li class="nav-item">
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInstructor" aria-expanded="true" aria-controls="collapseInstructor">
-        <i class="fas fa-chalkboard-teacher text-white"></i>
-        <span>Instructors</span>
-      </a>
-      <div id="collapseInstructor" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-          <a class="collapse-item" href="{{ route('instructor.create') }}">Add Instructor</a>
-          <a class="collapse-item" href="{{ route('instructor.index') }}">View Instructors</a>
-        </div>
-      </div>
-    </li>
-
-    <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSubject" aria-expanded="true" aria-controls="collapseSubject">
         <i class="fas fa-book text-white"></i>
         <span>Subjects</span>

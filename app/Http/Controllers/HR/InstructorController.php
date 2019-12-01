@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\HR;
 
 use App\Department;
 use App\Http\Controllers\Controller;
@@ -17,7 +17,7 @@ class InstructorController extends Controller
 
     public function __construct(InstructorRepository $instructorRepo)
     {
-        $this->middleware('auth:admin');
+        $this->middleware('auth:hr');
         $this->instructorRepository = $instructorRepo;
     }
     /**
@@ -27,7 +27,7 @@ class InstructorController extends Controller
      */
     public function index()
     {
-        return view('admin.instructor.index');
+        return view('hr.instructor.index');
     }
 
     public function instructors()
@@ -45,7 +45,7 @@ class InstructorController extends Controller
     public function create()
     {
         $departments = Department::get(['id', 'name']);
-        return view('admin.instructor.create', compact('departments'));
+        return view('hr.instructor.create', compact('departments'));
     }
 
     /**
@@ -81,7 +81,7 @@ class InstructorController extends Controller
     public function edit(Instructor $instructor)
     {
          $departments = Department::get(['id', 'name']);
-        return view('admin.instructor.edit', compact('instructor', 'departments'));
+        return view('hr.instructor.edit', compact('instructor', 'departments'));
     }
 
     /**

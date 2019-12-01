@@ -32,6 +32,11 @@ class AdminController extends Controller
         return view('admin.dashboard', compact('noOfStudents', 'noOfInstructors', 'noOfCourse', 'noOfDepartments'));
     }
 
+    public function create()
+    {
+        // return view('admin.auth.register');
+    }
+
     public function edit()
     {
         return view('admin.auth.edit');

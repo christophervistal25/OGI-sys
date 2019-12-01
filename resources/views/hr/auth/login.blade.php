@@ -1,5 +1,5 @@
-@extends('instructor.layouts.app')
-@section('title', 'Instructor Login')
+@extends('admin.layouts.app')
+@section('title', 'HR Login')
 @section('content')
 @prepend('page-css')
 <style>
@@ -30,9 +30,9 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Welcome Instructor!</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">Welcome HR!</h1>
                                     </div>
-                                    <form class="user"  method="POST" action="{{  route('instructor.auth.loginInstructor') }}">
+                                    <form class="user"  method="POST" action="{{  route('hr.auth.loginHR') }}">
                                         {{ csrf_field() }}
                                         
                                         <div class="form-group">
@@ -41,13 +41,13 @@
 
 
                                         <div class="form-group">
-                                            <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" class="form-control form-control-user" name="id_number" id="idNumber" aria-describedby="idNumberHelper" placeholder="Enter ID Number ..." value="{{ old('id_number') }}">
+                                            <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" class="form-control form-control-user" name="id_number" id="idNumber" aria-describedby="idNumberHelper" placeholder="Enter ID Number ..."  value="{{ old('id_number') }}">
 
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user" name="password" id="userPassword" placeholder="Password">
                                         </div>
-                                     {{--    <div class="form-group">
+                                       {{--  <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
                                                 <input type="checkbox" class="custom-control-input" id="customCheck">
                                                 <label class="custom-control-label" for="customCheck">Remember Me</label>
@@ -57,14 +57,14 @@
                                         Login
                                         </button>
                                         <hr>
-                                        <a href="/admin/login" class="btn btn-google btn-user btn-block">
-                                            <i class="fa fa-lock"></i> Administrator Login
+                                        <a href="/instructor/login" class="btn btn-google btn-user btn-block">
+                                            <i class="fa fa-lock"></i> Instructor Login
                                         </a>
                                         <a href="/student/login" class="btn btn-facebook btn-user btn-block">
                                             <i class="fa fa-lock"></i> Student Login
                                         </a>
-                                        <a href="/hr/login" class="btn btn-success btn-user btn-block">
-                                            <i class="fa fa-lock"></i> HR Login
+                                        <a href="/admin/login" class="btn btn-success btn-user btn-block">
+                                            <i class="fa fa-lock"></i> Administrator Login
                                         </a>
                                     </form>
                                 </div>

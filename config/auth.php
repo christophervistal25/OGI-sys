@@ -67,6 +67,14 @@ return [
        'instructor-api' => [
            'driver' => 'token',
            'provider' => 'instructors',
+       ],
+       'hr' => [
+           'driver' => 'session',
+           'provider' => 'hrs',
+       ],
+       'hr-api' => [
+           'driver' => 'token',
+           'provider' => 'hrs',
        ]
     ],
 
@@ -103,6 +111,10 @@ return [
         'instructors' => [
             'driver' => 'eloquent',
             'model' => App\Instructor::class,
+        ],
+        'hrs' => [
+            'driver' => 'eloquent',
+            'model' => App\HR::class,
         ],
    
     ],
@@ -141,6 +153,11 @@ return [
         ],
         'instructors' => [
             'provider' => 'instructors',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'hrs' => [
+            'provider' => 'hrs',
             'table' => 'password_resets',
             'expire' => 60,
         ],

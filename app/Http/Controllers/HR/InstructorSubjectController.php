@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\HR;
 
 use App\Http\Controllers\Controller;
 use App\Instructor;
@@ -10,7 +10,7 @@ class InstructorSubjectController extends Controller
 {
 	public function __construct()
 	{
-		$this->middleware('auth:admin');
+		$this->middleware('auth:hr');
 	}
 
     public function show(int $id)
@@ -19,6 +19,6 @@ class InstructorSubjectController extends Controller
     	{
     		$query->where('instructor_id', $id);
     	}])->find($id);
-    	return view('admin.instructor.subject.show', compact('instructor'));
+    	return view('hr.instructor.subject.show', compact('instructor'));
     }
 }

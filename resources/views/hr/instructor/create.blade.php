@@ -1,4 +1,4 @@
-@extends('admin.layouts.dashboard-template')
+@extends('hr.layouts.dashboard-template')
 @section('title','New Instructor')
 @section('content')
 <div class="row mb-2">

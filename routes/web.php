@@ -6,9 +6,28 @@ Route::get('/', 'WelcomeController@index');
 
 Auth::routes();
 
+Route::group(['prefix' => 'hr'], function () {
+    Route::get('/', 'HRController@index')->name('hr.dashboard');
+
+    Route::get('dashboard', 'HRController@index')->name('hr.dashboard');
+    Route::get('edit', 'HRController@edit')->name('hr.edit');
+    Route::put('edit/{hr}', 'HRController@update')->name('hr.update');
+
+    Route::get('login', 'Auth\HRLoginController@login')->name('hr.auth.login');
+    Route::post('login', 'Auth\HRLoginController@loginHR')->name('hr.auth.loginHR');
+    Route::post('logout', 'Auth\HRLoginController@logout')->name('hr.auth.logout');
+
+    Route::get('/instructor/list', 'HR\InstructorController@instructors')
+        ->name('instructor.lists');
+
+    Route::resource('instructor', 'HR\InstructorController');
+
+    Route::resource('instructorsubjects', 'HR\InstructorSubjectController');
+
+});
 
 Route::group(['prefix' => 'admin'] , function () {
-	  Route::get('/', 'AdminController@index')->name('admin.dashboard');
+	Route::get('/', 'AdminController@index')->name('admin.dashboard');
   	Route::get('dashboard', 'AdminController@index')->name('admin.dashboard');
     Route::get('edit', 'AdminController@edit')->name('admin.edit');
     Route::put('edit/{admin}', 'AdminController@update')->name('admin.update');
@@ -33,10 +52,10 @@ Route::group(['prefix' => 'admin'] , function () {
 
     Route::post('/student/grade/print', 'Admin\StudentGradePrintController@print')->name('admin.student.subjects.print');
 
-    Route::get('/instructor/list', 'Admin\InstructorController@instructors')
-        ->name('instructor.lists');
+    // Route::get('/instructor/list', 'Admin\InstructorController@instructors')
+    //     ->name('instructor.lists');
 
-    Route::resource('instructor', 'Admin\InstructorController');
+    // Route::resource('instructor', 'Admin\InstructorController');
 
     Route::get('/subject/list', 'Admin\SubjectController@subjects')
         ->name('subject.lists');
@@ -52,7 +71,7 @@ Route::group(['prefix' => 'admin'] , function () {
         
     Route::resource('department', 'Admin\DepartmentController');
 
-    Route::resource('instructorsubjects', 'Admin\InstructorSubjectController');
+    // Route::resource('instructorsubjects', 'Admin\InstructorSubjectController');
 
     Route::get('/subject/{subject}/students', 'Admin\SubjectStudentsController@show');
 });
@@ -74,7 +93,7 @@ Route::group(['prefix' => 'student'] , function () {
 });
 
 Route::group(['prefix' => 'instructor'] , function () {
-	  Route::get('/', 'InstructorController@index')->name('instructor.dashboard');
+	Route::get('/', 'InstructorController@index')->name('instructor.dashboard');
   	Route::get('dashboard', 'InstructorController@index')->name('instructor.dashboard');
 
     Route::get('edit', 'InstructorController@edit')->name('instructor.account.edit');

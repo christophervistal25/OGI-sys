@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             DepartmentSeeder::class,
             CourseSeeder::class,
             SubjectSeeder::class,
+            HRSeeder::class,
         ]);
 
         // Student::all()->each(function ($student) {
