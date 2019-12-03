@@ -12,7 +12,7 @@ class StudentSeeder extends Seeder
      */
     public function run()
     {
-        // factory('App\Student', 2)->create();
+        // factory('App\Student', 100)->create();
         Student::create([
             'name'         => 'John Doe',
             // 'level'        => 1,
