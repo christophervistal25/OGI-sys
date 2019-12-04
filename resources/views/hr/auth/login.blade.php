@@ -4,7 +4,7 @@
 @prepend('page-css')
 <style>
     .bg-login-image {
-        background:url('https://res.cloudinary.com/dpcxcsdiw/image/upload/v1569829814/ascb-csogi/slider_1.webp') center center; 
+        background:url('https://res.cloudinary.com/dpcxcsdiw/image/upload/v1575386330/ascb-csogi/undraw_interview_rmcf.png') center center; 
         background-size: cover;
     }
     body {
