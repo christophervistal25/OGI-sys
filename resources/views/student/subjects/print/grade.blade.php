@@ -56,7 +56,7 @@
           GRADE EVALUATION <br> 
             <span>
               @php $semester-- @endphp
-              {{ $level }} Year - 
+              {{ addSuffixToLevel($level)  }} Year - 
               {{ $semesters[$semester] }} Semester
               {{ date('Y', strtotime($subject->first()->pivot->created_at)) }} - {{ date('Y', strtotime($subject->first()->pivot->created_at . ' +1 year')) }}
             </span>
