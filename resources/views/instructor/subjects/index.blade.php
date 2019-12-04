@@ -39,7 +39,7 @@
 						  </a>
 
 						  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-						    <a class="dropdown-item" href="/instructor/subject/{{$subject->id}}/add/student">Edit subject add new student</a>
+						    <a class="dropdown-item" href="/instructor/subject/{{$subject->id}}/add/student">Add student</a>
 						    <a class="dropdown-item" href="{{ route('subject.students.show', [$subject->id]) }}">View Students</a>
 						  </div>
 						</div>
