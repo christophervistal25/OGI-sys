@@ -36,6 +36,8 @@ Route::group(['prefix' => 'admin'] , function () {
   	Route::post('login', 'Auth\AdminLoginController@loginAdmin')->name('admin.auth.loginAdmin');
   	Route::post('logout', 'Auth\AdminLoginController@logout')->name('admin.auth.logout');
     
+    Route::get('/student/grade/{student}', 'Admin\StudentGradeController@show')->name('student.grade.show');
+
     Route::get('/student/list', 'Admin\StudentController@students')
         ->name('student.lists');
 
