@@ -50,7 +50,7 @@
 				<tr>
 					<td> {{ $items->name }}</td>
 					<td> {{ $items->description }}</td>
-					<td class="text-center font-weight-bold"> {{ (number_format($items->pivot->remarks, 1) == 0.0) ?	'NG' : number_format($items->pivot->remarks, 1) }}</td>
+					<td class="text-center font-weight-bold"> {{ (number_format($items->pivot->remarks, 1) == 0.0) ? 'NG' : number_format($items->pivot->remarks, 1) }}</td>
 					@php $total_credits += $items->credits @endphp
 					@php $total_subjects++ @endphp
 					@php $total_rating += $items->pivot->remarks @endphp

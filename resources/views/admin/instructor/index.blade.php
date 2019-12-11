@@ -1,4 +1,4 @@
-@extends('hr.layouts.dashboard-template')
+@extends('admin.layouts.dashboard-template')
 @section('title','List of instructor')
 @section('content')
 @prepend('page-css')
@@ -151,7 +151,7 @@
     serverSide: true,
     processing: true,
     responsive: true,
-    ajax: '/hr/instructor/list',
+    ajax: '/admin/instructor/list',
     columns: [
         { name: 'id_number' },
         { name: 'firstname' },
@@ -184,7 +184,7 @@
 		
 		if ( confirmation ) {
 			$.ajax({
-			   url: `/hr/instructor/${instructorId}`,
+			   url: `/admin/instructor/${instructorId}`,
 			   type: 'DELETE',
 			   success: function(response) {
 			   		if (response.success) {
@@ -200,7 +200,7 @@
 		$('#instructorProfileModal').modal('toggle');
 
 		$.ajax({
-			url : `/hr/instructor/${instructorId}`,
+			url : `/admin/instructor/${instructorId}`,
 			method : 'GET',
 			success : function (instructor) {
 				$('#loader').hide();

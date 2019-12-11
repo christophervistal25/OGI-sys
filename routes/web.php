@@ -17,12 +17,7 @@ Route::group(['prefix' => 'hr'], function () {
     Route::post('login', 'Auth\HRLoginController@loginHR')->name('hr.auth.loginHR');
     Route::post('logout', 'Auth\HRLoginController@logout')->name('hr.auth.logout');
 
-    Route::get('/instructor/list', 'HR\InstructorController@instructors')
-        ->name('instructor.lists');
-
-    Route::resource('instructor', 'HR\InstructorController');
-
-    Route::resource('instructorsubjects', 'HR\InstructorSubjectController');
+  
 
 });
 
@@ -35,6 +30,13 @@ Route::group(['prefix' => 'admin'] , function () {
   	Route::get('login', 'Auth\AdminLoginController@login')->name('admin.auth.login');
   	Route::post('login', 'Auth\AdminLoginController@loginAdmin')->name('admin.auth.loginAdmin');
   	Route::post('logout', 'Auth\AdminLoginController@logout')->name('admin.auth.logout');
+
+    Route::get('/instructor/list', 'Admin\InstructorController@instructors')
+        ->name('instructor.lists');
+
+    Route::resource('instructor', 'Admin\InstructorController');
+
+    Route::resource('instructorsubjects', 'Admin\InstructorSubjectController');
     
     Route::get('/student/grade/{student}', 'Admin\StudentGradeController@show')->name('student.grade.show');
 

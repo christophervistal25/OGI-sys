@@ -1,4 +1,4 @@
-@extends('hr.layouts.dashboard-template')
+@extends('admin.layouts.dashboard-template')
 @section('title','List of ' . $instructor->name . ' subjects')
 @section('content')
 @prepend('page-css')

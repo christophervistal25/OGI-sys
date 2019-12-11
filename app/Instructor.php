@@ -107,12 +107,12 @@ class Instructor extends Authenticatable
      */
     public static function laratablesCustomAction($instructor)
     {
-        return view('hr.instructor.includes.index_action', compact('instructor'))->render();
+        return view('admin.instructor.includes.index_action', compact('instructor'))->render();
     }
 
     public static function laratablesIdNumber($instructor)
     {
-        return view('hr.instructor.includes.profile', compact('instructor'))->render();
+        return view('admin.instructor.includes.profile', compact('instructor'))->render();
     }
 
 }

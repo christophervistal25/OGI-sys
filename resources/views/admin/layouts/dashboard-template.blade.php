@@ -18,6 +18,20 @@
     </li>
     <!-- Divider -->
     <hr class="sidebar-divider">
+     
+     <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInstructor" aria-expanded="true" aria-controls="collapseInstructor">
+          <i class="fas fa-chalkboard-teacher text-white"></i>
+          <span>Instructors</span>
+        </a>
+        <div id="collapseInstructor" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{{ route('instructor.create') }}">Add Instructor</a>
+            <a class="collapse-item" href="{{ route('instructor.index') }}">View Instructors</a>
+          </div>
+        </div>
+     </li>
+
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">

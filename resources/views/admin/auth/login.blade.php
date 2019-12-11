@@ -63,9 +63,9 @@
                                         <a href="/student/login" class="btn btn-facebook btn-user btn-block">
                                             <i class="fa fa-lock"></i> Student Login
                                         </a>
-                                        <a href="/hr/login" class="btn btn-success btn-user btn-block">
+                                    {{--     <a href="/hr/login" class="btn btn-success btn-user btn-block">
                                             <i class="fa fa-lock"></i> HR Login
-                                        </a>
+                                        </a> --}}
                                     </form>
                                 </div>
                             </div>
