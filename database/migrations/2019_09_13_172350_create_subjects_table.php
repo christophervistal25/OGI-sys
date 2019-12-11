@@ -19,7 +19,7 @@ class CreateSubjectsTable extends Migration
             $table->string('description');
             $table->integer('credits');
             $table->integer('level');
-            $table->enum('semester', [1, 2, 3]);
+            $table->enum('semester', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
             $table->string('school_year');
             $table->integer('department_id');
             $table->timestamps();

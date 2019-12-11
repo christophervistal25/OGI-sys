@@ -33,7 +33,7 @@ class AddSubjectRequest extends FormRequest
             'description' => 'required',
             'school_year' => 'required',
             'department_id' => ['required', 'numeric', Rule::in($departments)],
-            'semester'    => ['required', Rule::in([1,2,3])]
+            'semester'      => ['required', Rule::in([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])]
         ];
     }
 
