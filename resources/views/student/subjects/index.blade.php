@@ -75,7 +75,7 @@
 				</tr>
 				<tr>
 					<td></td>
-					<td class="text-right font-weight-bold">TOTAL RATING > > ></td>
+					<td class="text-right font-weight-bold">WEIGHTED AVERAGE > > ></td>
 					<td class="text-center font-weight-bold">{{ number_format($total_rating / $total_subjects, 2) }}</td>
 				</tr>
 			</tbody>
