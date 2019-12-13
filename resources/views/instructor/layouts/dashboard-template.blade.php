@@ -14,18 +14,15 @@
     <hr class="sidebar-divider">
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-book text-white"></i>
-        <span>Subjects</span>
-      </a>
-      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-          <a class="collapse-item" href="{{ route('instructor.subject.create') }}">Add Subject</a>
-          <a class="collapse-item" href="{{ route('instructor.subject.index') }}">View Subjects</a>
-        </div>
-      </div>
+      <a class="nav-link" href="{{ route('instructor.subject.create') }}"><i class="fas fa-plus text-white"></i>
+      <span>Add Subject</span>
+    </a>
     </li>
-    <hr class="sidebar-divider">
+    <li class="nav-item">
+      <a class="nav-link" href="{{ route('instructor.subject.index') }}"><i class="fas fa-book text-white"></i></i>
+      <span>List of subject</span>
+    </a>
+    </li>
     
     <!-- Nav Item - Utilities Collapse Menu -->
    {{--  <li class="nav-item">
