@@ -9,6 +9,8 @@
 		<h6 class="m-0 font-weight-bold text-primary">Instructors</h6>
 	</div>
 	<div class="card-body">
+		<a class="btn btn-primary float-right mb-2" href="{{ route('instructor.create') }}">Add Instructor</a>
+		<div class="clearfix"></div>
 		<table class="table table-bordered table-hover" id="instructors-table">
 			<thead>
 				<tr>

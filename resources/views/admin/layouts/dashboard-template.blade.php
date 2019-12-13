@@ -19,7 +19,7 @@
     <!-- Divider -->
     <hr class="sidebar-divider">
      
-     <li class="nav-item">
+     {{-- <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInstructor" aria-expanded="true" aria-controls="collapseInstructor">
           <i class="fas fa-chalkboard-teacher text-white"></i>
           <span>Instructors</span>
@@ -32,7 +32,6 @@
         </div>
      </li>
 
-    <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
         <i class="fas fa-graduation-cap text-white"></i>
@@ -57,7 +56,7 @@
           <a class="collapse-item" href="{{ route('subject.index') }}">View Subjects</a>
         </div>
       </div>
-    </li>
+    </li> --}}
 
     <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDepartments" aria-expanded="true" aria-controls="collapseDepartments">
@@ -66,8 +65,9 @@
       </a>
       <div id="collapseDepartments" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-          <a class="collapse-item" href="{{ route('department.index') }}">View Departments</a>
-          <a class="collapse-item" href="{{ route('course.index') }}">View Courses</a>
+          <a class="collapse-item" href="{{ route('department.index') }}">List of Departments</a>
+           <a class="collapse-item" href="{{ route('instructor.index') }}">Instructors</a>
+          {{-- <a class="collapse-item" href="{{ route('course.index') }}">View Courses</a> --}}
         </div>
       </div>
     </li>

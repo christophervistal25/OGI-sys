@@ -40,7 +40,9 @@
 	    responsive: true,
 	    ajax: '/admin/department/list',
 	    columns: [
-	        { name: 'name' },
+	        { 
+	        	name : 'name', render :  (data) => `<a class='text-center text-primary' style='cursor:pointer;' onclick="viewSubjects(this)" data-src='${data}'>${data}</a>`
+	        },
 	        { name: 'action', searchable :false },
 	    ],
 	});
@@ -94,8 +96,14 @@
 	};
 
 	const viewSubjects = (e) => {
-		let department = JSON.parse(e.getAttribute('data-src'));
-		session.setItem('departmentName', department.name);
+		let department = e.getAttribute('data-src');
+		try {
+			 let objectDepartment = JSON.parse(department)
+			 session.setItem('departmentName', objectDepartment.name);
+		} catch(err) {
+			// This simply means that the department value is string 
+			session.setItem('departmentName', department);
+		}
 		window.location.href = '/admin/subject';
 	};
 </script>

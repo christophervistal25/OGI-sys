@@ -9,6 +9,9 @@
 		<h6 class="m-0 font-weight-bold text-primary">Subjects</h6>
 	</div>
 	<div class="card-body">
+		<a class="btn btn-primary float-right mb-2" href="{{ route('subject.create') }}">Add Subjects</a>
+		<a class="btn btn-info float-right mb-2 mr-2" href="{{ route('student.create') }}">Add Student with subject</a>
+		<div class="clearfix"></div>
 		<table class="table table-bordered table-hover" id="subjects-table">
 			<thead>
 				<tr>

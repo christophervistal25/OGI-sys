@@ -27,7 +27,7 @@ class UpdateSubjectRequest extends FormRequest
     {
         $departments = Department::pluck('id');
         return [
-            'semester'      => ['required', Rule::in([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])],
+            'semester'      => ['required', Rule::in([1, 2, 3])],
             'level'         => 'required|numeric',
             'credits'       => 'required|numeric',
             'name'          => 'required|unique:subjects,name,'.request('id'),
