@@ -61,7 +61,7 @@ Route::group(['prefix' => 'admin'] , function () {
 
     // Route::resource('instructor', 'Admin\InstructorController');
 
-    Route::get('/subject/list', 'Admin\SubjectController@subjects')
+    Route::get('/subject/list/{id}', 'Admin\SubjectController@subjects')
         ->name('subject.lists');
 
     Route::resource('subject', 'Admin\SubjectController');

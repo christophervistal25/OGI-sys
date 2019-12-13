@@ -34,4 +34,9 @@ class Department extends Model
         return view('admin.departments.includes.index_action', 
             compact('department'))->render();
     }
+    
+    public static function laratablesName($department)
+    {
+        return view('admin.departments.includes.clickable_name', compact('department'))->render();
+    }
 }

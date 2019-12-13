@@ -23,12 +23,14 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        return view('admin.subjects.index');
+        // return view('admin.subjects.index');
     }
 
-    public function subjects()
+    public function subjects($id)
     {
-        return Laratables::recordsOf(Subject::class);
+        return Laratables::recordsOf(Subject::class, function ($query) use($id) {
+            return $query->where('department_id', $id);
+        });
     }
 
     /**
@@ -62,7 +64,7 @@ class SubjectController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('admin.subjects.show', compact('id'));
     }
 
     /**
