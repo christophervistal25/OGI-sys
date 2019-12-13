@@ -93,7 +93,7 @@
 		}
 	};
 
-	const viewSubjects = (e) => window.location.herf = `/admin/subject/${JSON.parse(e.getAttribute('data-src')).id}`;
+	const viewSubjects = (e) => window.location.href = `/admin/subject/${JSON.parse(e.getAttribute('data-src')).id}`;
 </script>
 @endpush
 @endsection
