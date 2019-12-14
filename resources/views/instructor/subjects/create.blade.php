@@ -120,20 +120,20 @@
         document.querySelector(`#student-${id}-container`).remove();
     };
         
-
+    
     const addStudentToSubject = (e) => {
         let student = JSON.parse(JSON.stringify(e.getAttribute('data-src')));
         student = JSON.parse(student);
         if ( !isInTheList(student.id) ) {
             // Push new item to studentsParentContainer
-            studentsParentContainer.innerHTML += `                                                                                        
-                <div id="student-${student.id}-container" class="row">
+            studentsParentContainer.innerHTML += `
+            <div id="student-${student.id}-container" class="row">
                     <input type="hidden" class="form-control" name="students[ids][]" value="${student.id}" />
                     <div class="col-lg-6 mb-2">
                         <input type="text" id="student-${student.id}" class="form-control" readonly name="students[names][]" value="${student.name}" />
                     </div>
                     <div class="col-lg-5">
-                        <input type="text" class="form-control" name="students[remarks][]"  placeholder="Enter Grade here..." />
+                        <input type="text" class="form-control" name="students[remarks][]" onblur="sample(this)" placeholder="Enter Grade here..." />
                     </div>
                     <div class="col-lg-1">
                         <button type="button" class="btn btn-sm font-weight-bold mt-1 btn-danger" onclick="removeStudent(${student.id})">X</button>
@@ -154,10 +154,10 @@
         }
     };
 
-    // Subject sections.
-    const subjectNameField = document.querySelector('#subjectName');
+/*    // Subject sections.
+    const subjectNameField = document.querySelector('#subjectName');*/
 
-    subjectNameField.addEventListener('change', (e) => {
+    /*subjectNameField.addEventListener('change', (e) => {
         let subject = e.target.options[e.target.selectedIndex];
         let dataSource = JSON.parse(subject.getAttribute('data-src'));
    
@@ -168,15 +168,10 @@
         document.querySelector('#subjectCredits').value     = dataSource.credits;
         document.querySelector('#subjectSchoolYear').value  = dataSource.school_year;
         document.querySelector('#subjectDepartment').value  = dataSource.department.name;
-    });
+    });*/
 
     document.querySelector('#addStudentByCsv').addEventListener('click', (e) => {
-        if (subjectNameField.value.length !== 0) {
-            let subject = JSON.parse(subjectNameField.options[subjectNameField.selectedIndex].getAttribute('data-src'));
-            window.location.href = `/instructor/subject/${subject.id}/edit`;
-        } else {
-            alert('Please select a subject first.');
-        }
+        window.location.href = `/instructor/subject/{{$subject->id}}/edit`;
     });
 
 
