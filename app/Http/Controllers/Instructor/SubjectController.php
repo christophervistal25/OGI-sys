@@ -62,15 +62,24 @@ class SubjectController extends Controller
         });
     }
 
+
+    public function subjects()
+    {
+        return Laratables::recordsOf(Subject::class);
+    }
+
+    public function select()
+    {
+        return view('instructor.subjects.select');
+    }
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Subject $subject)
     {
-        $subjects = Subject::with('department')->get();
-        return view('instructor.subjects.create', compact('subjects'));
+        return view('instructor.subjects.create', compact('subject'));
     }
 
     /**
@@ -130,7 +139,7 @@ class SubjectController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
+     * Imporation of CSV file.
      * @param  \Illuminate\Http\Request  $request
      * @param  subject id int $id
      * @return \Illuminate\Http\Response

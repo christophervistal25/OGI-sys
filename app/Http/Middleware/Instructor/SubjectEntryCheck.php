@@ -37,7 +37,7 @@ class SubjectEntryCheck
         }
         
         if (!is_null($instructor)) {
-          return back()->withInput($request->all())->withErrors(['message' => 'You already add this subject please check your subjects.']);  
+          return back()->withInput($request->all())->withErrors(['message' => 'You already have this subject please check your subjects if you want to add new student.']);  
         } else if(is_null($request->students)) {
             return back()->withInput($request->only('name', 'description', 'level', 'semester', 'school_year', 'subject_id'))
                                  ->withErrors(['message' => 'Please include your students to this subject.']);  

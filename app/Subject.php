@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Subject extends Model
 {
@@ -46,6 +47,14 @@ class Subject extends Model
 
     public static function laratablesName($subject)
     {
-        return view('admin.subjects.includes.clickable_name', compact('subject'))->render();
+        $urlHasInstructorPrefix = request()->segment(1) === 'instructor';
+
+        if ($urlHasInstructorPrefix) {
+            return view('instructor.subjects.includes.clickable_name', compact('subject'))->render();    
+        } else {
+            return view('admin.subjects.includes.clickable_name', compact('subject'))->render();    
+        }
     }
+
+
 }

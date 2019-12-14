@@ -107,9 +107,10 @@ Route::group(['prefix' => 'instructor'] , function () {
   	Route::post('login', 'Auth\InstructorLoginController@loginInstructor')->name('instructor.auth.loginInstructor');
   	Route::post('logout', 'Auth\InstructorLoginController@logout')->name('instructor.auth.logout');
 
-
+    Route::get('/subject/list', 'Instructor\SubjectController@subjects');
     Route::get('/subjects', 'Instructor\SubjectController@index')->name('instructor.subject.index');
-    Route::get('/subject/create', 'Instructor\SubjectController@create')->name('instructor.subject.create');
+    Route::get('/subject/select', 'Instructor\SubjectController@select')->name('instructor.subject.select');
+    Route::get('/subject/create/{subject}', 'Instructor\SubjectController@create')->name('instructor.subject.create');
     Route::post('/subject/create', 'Instructor\SubjectController@store')->name('instructor.subject.store')->middleware('check.subject_entry');
 
     // Add some route name.

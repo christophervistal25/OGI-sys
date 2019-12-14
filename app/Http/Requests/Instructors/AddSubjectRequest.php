@@ -26,12 +26,12 @@ class AddSubjectRequest extends FormRequest
     {
         $semester = [1, 2, 3];
         return [
-            'name'               => 'required',
-            'description'        => 'required',
-            'level'              => 'required|numeric',
-            'credits'            => 'required|numeric',
-            'semester'           => [Rule::in($semester)],
-            'school_year'        => 'required',
+            // 'name'               => 'required',
+            // 'description'        => 'required',
+            // 'level'              => 'required|numeric',
+            // 'credits'            => 'required|numeric',
+            // 'semester'           => [Rule::in($semester)],
+            // 'school_year'        => 'required',
             'students.ids.*'     => 'required',
             'students.names.*'   => 'required',
             'students.remarks.*' => 'nullable|numeric|min:1|max:5|regex:/^[1-5](.+)?$/',
@@ -43,9 +43,9 @@ class AddSubjectRequest extends FormRequest
         return [
             'students.names.*'   => 'names',
             'students.remarks.*' => 'grade',
-            'name'               => 'subject name',
-            'description'        => 'subject description',
-            'level'              => 'subject level',
+            // 'name'               => 'subject name',
+            // 'description'        => 'subject description',
+            // 'level'              => 'subject level',
             
         ];
     }

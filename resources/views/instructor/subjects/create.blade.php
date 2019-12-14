@@ -29,56 +29,8 @@
             @csrf
             <div class="row">
                 {{-- <label for="subjectId">Subject ID</label> --}}
-                <input class="form-control" hidden type="number" name="subject_id"  id="subjectId" value="{{ old('subject_id') }}">
-                <div class="col-lg-2">
-                    <div class="form-group">
-                        <label for="subjectName">Course No</label>
-                        <select name="name" id="subjectName" class="form-control" required>
-                            <option value="" hidden selected disabled>Choose Subject</option>
-                            @foreach($subjects as $subject)
-                                <option value="{{ $subject->name }}" {{ old('name') == $subject->name ? 'selected' : '' }} data-src="{{ $subject }}">{{ $subject->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="form-group">
-                        <label for="subjectDescription">Description</label>
-                        <input type="text" readonly class="form-control" name="description" id="subjectDescription"  value="{{ old('description') }}">
-                    </div>
-                </div>
-                <div class="col-lg-1">
-                    <div class="form-group">
-                        <label for="subjectLevel">Year level</label>
-                        <input type="number" readonly class="form-control" name="level" id="subjectLevel"  value="{{ old('level') }}">
-                    </div>
-                </div>
-                <div class="col-lg-1">
-                    <div class="form-group">
-                        <label for="subjectCredits">Units</label>
-                        <input type="number" readonly class="form-control" name="credits" id="subjectCredits"  value="{{ old('credits') }}">
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="form-group">
-                        <label for="subjectSemester">Semester</label>
-                        <input type="number" readonly class="form-control" name="semester" id="subjectSemester" value="{{ old('semester') }}">
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="form-group">
-                        <label for="subjectSchoolYear">School Year</label>
-                        <input type="text" readonly class="form-control" name="school_year" id="subjectSchoolYear" placeholder="Enter School Year..." value="{{ old('school_year') }}">
-                    </div>
-                </div>
-                 <div class="col-lg-1">
-                    <div class="form-group">
-                        <label for="subjectDepartment">Department</label>
-                        <input type="text"  readonly class="form-control" id="subjectDepartment">
-                    </div>
-                </div>
+                <input class="form-control" hidden type="number" name="subject_id"  id="subjectId" value="{{ $subject->id }}">
             </div>
-            <hr>
             <div class="row">
                 <div class="col-lg-6">
                     <table class="table table-bordered" id="students-table">

@@ -26,7 +26,8 @@
 			<tbody>
 				@foreach($instructor->subjects as $subject)
 				<tr>
-					<td>{{ $subject->name }}</td>
+					
+					<td><a href="/instructor/subject/{{ $subject->id }}/students"><u>{{ $subject->name }}</u></a></td>
 					<td>{{ $subject->description }}</td>
 					<td class="text-center">{{ $subject->semester }}</td>
 					<td class="text-center">{{ $subject->credits }}</td>

@@ -14,8 +14,8 @@
     <hr class="sidebar-divider">
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-      <a class="nav-link" href="{{ route('instructor.subject.create') }}"><i class="fas fa-plus text-white"></i>
-      <span>Add Subject</span>
+      <a class="nav-link" href="{{ route('instructor.subject.select') }}"><i class="fas fa-plus text-white"></i>
+      <span>Select Subject w/ Student</span>
     </a>
     </li>
     <li class="nav-item">
