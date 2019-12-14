@@ -78,7 +78,7 @@
                 </div>
             </div>
             <div class="float-right mt-2">
-                <input type="button" value="Add student by CSV" id="addStudentByCsv" class="btn btn-success font-weight-bold">
+                <input type="button" value="Add students by CSV" id="addStudentByCsv" class="btn btn-success font-weight-bold">
                 <input type="submit" value="Add subject with students" class="btn btn-primary font-weight-bold">
             </div>
         </form>
@@ -120,7 +120,7 @@
         document.querySelector(`#student-${id}-container`).remove();
     };
         
-    
+
     const addStudentToSubject = (e) => {
         let student = JSON.parse(JSON.stringify(e.getAttribute('data-src')));
         student = JSON.parse(student);
