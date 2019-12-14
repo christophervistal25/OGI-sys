@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 
 class Department extends Model
 {
@@ -37,6 +39,11 @@ class Department extends Model
     
     public static function laratablesName($department)
     {
-        return view('admin.departments.includes.clickable_name', compact('department'))->render();
+        if (Str::contains(url()->previous(), 'department/students')) {
+            // The request is from the list of students.
+            return view('admin.departments.includes.clickable_name_student', compact('department'))->render();
+        } else {
+            return view('admin.departments.includes.clickable_name', compact('department'))->render();    
+        }
     }
 }

@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
 use App\Course;
+use App\Department;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\AddStudentRequest;
+use App\Http\Requests\EditStudentRequest;
+use App\Repositories\StudentRepository;
 use App\Student;
 use App\Subject;
 use DB;
-use App\Http\Requests\AddStudentRequest;
-use App\Http\Requests\EditStudentRequest;
-use App\Http\Controllers\Controller;
-use App\Repositories\StudentRepository;
 use Freshbitsweb\Laratables\Laratables;
+use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
@@ -35,6 +36,18 @@ class StudentController extends Controller
     public function students()
     {
         return Laratables::recordsOf(Student::class);
+    }
+
+    public function studentsByDepartment($departmentId)
+    {
+        return Laratables::recordsOf(Student::class, function ($query) use($departmentId) {
+            return $query->with(['course', 'course.department'])->whereHas('course' , function ($query) use ($departmentId) {
+                $query->where('department_id', $departmentId);
+            });
+        });
+        /*$students = Student::with(['course', 'course.department'])->whereHas('course', function ($query) use($departmentId) {
+            return $query->where('department_id', $departmentId);
+        })->get();*/
     }
 
     /**
@@ -67,9 +80,9 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($departmentId)
     {
-        //
+        return view('admin.student.show', compact('departmentId'));
     }
 
     /**

@@ -25,6 +25,7 @@ class DepartmentController extends Controller
         return view('admin.departments.index');
     }
 
+
     public function departments()
     {
         return Laratables::recordsOf(Department::class);

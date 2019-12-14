@@ -43,6 +43,9 @@ Route::group(['prefix' => 'admin'] , function () {
     Route::get('/student/list', 'Admin\StudentController@students')
         ->name('student.lists');
 
+    // List of students by Department
+    Route::get('/student/department/list/{departmentId}', 'Admin\StudentController@studentsByDepartment');
+
     Route::resource('student', 'Admin\StudentController');
 
     Route::get('/student/{student}/subject/create', 'Admin\StudentSubjectController@create')
@@ -72,7 +75,10 @@ Route::group(['prefix' => 'admin'] , function () {
 
     Route::get('/department/list', 'Admin\DepartmentController@departments')
         ->name('department.lists');
-        
+
+    Route::get('/department/students', 'Admin\DepartmentController@index')->name('department.students');
+
+
     Route::resource('department', 'Admin\DepartmentController');
 
     // Route::resource('instructorsubjects', 'Admin\InstructorSubjectController');
