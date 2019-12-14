@@ -21,6 +21,15 @@
 </div>
 
 <div class="card shadow mb-4 rounded-0">
+    <div class="card-body">
+        Course No : <span class="text-primary font-weight-bold">{{ $subject->name }}</span> <br>
+        Level : <span class="text-primary font-weight-bold">{{ $subject->level }}</span> <br>
+        Semester : <span class="text-primary font-weight-bold">{{ addSuffixToLevel($subject->semester) }} Semester</span> <br>
+        School Year : <span class="text-primary font-weight-bold">{{ $subject->school_year }}</span>
+    </div>
+</div>
+
+<div class="card shadow mb-4 rounded-0">
     <div class="card-header py-3 rounded-0">
         <h6 class="m-0 font-weight-bold text-primary">Add subject form</h6>
     </div>
