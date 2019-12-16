@@ -75,7 +75,7 @@
     <li class="nav-item">
     <a class="nav-link" href="{{route('department.students')}}">
       <i class="fas fa-fw fa-users text-white"></i>
-      <span>List of Students</span></a>
+      <span>Students</span></a>
     </li>
    
     <hr class="sidebar-divider">
