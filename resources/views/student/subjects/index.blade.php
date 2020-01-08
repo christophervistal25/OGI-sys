@@ -1,5 +1,5 @@
 @extends('student.layouts.dashboard-template')
-@section('title','List of your subjects')
+@section('title','')
 @section('content')
 @prepend('page-css')
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/startbootstrap-sb-admin-2@4.0.3/vendor/datatables/dataTables.bootstrap4.min.css">
