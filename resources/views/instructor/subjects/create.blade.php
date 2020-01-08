@@ -49,7 +49,7 @@
                                 <th>Name</th>
                                 <th>Course</th>
                                 <th>Department</th>
-                                <th>Actions</th>
+                                <th>Select</th>
                             </tr>
                         </thead>
                     </table>
