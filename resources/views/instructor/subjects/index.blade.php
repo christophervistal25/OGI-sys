@@ -34,15 +34,9 @@
 					<td class="text-center">{{ $subject->level }}</td>
 					<td class="text-center">{{ $subject->students->count() }}</td>
 					<td class="text-center">
-						<div class="dropdown show">
-						  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						    Actions
-						  </a>
-
-						  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-						    <a class="dropdown-item" href="/instructor/subject/{{$subject->id}}/add/student">Add student</a>
-						    <a class="dropdown-item" href="{{ route('subject.students.show', [$subject->id]) }}">View Students</a>
-						  </div>
+						  <a class="btn btn-primary btn-sm" href="/instructor/subject/{{$subject->id}}/add/student"><i class='fa fa-plus'></i></a>
+						  <a class="btn btn-info btn-sm" href="{{ route('subject.students.show', [$subject->id]) }}"><i class='fa fa-eye'></i></a>
+					
 						</div>
 
 					</td>
