@@ -80,6 +80,16 @@
    
     <hr class="sidebar-divider">
 
+      <li class="nav-item">
+        <a class="nav-link" href="{{route('evaluation.index')}}">
+          <i class="fas fa-fw fa-calendar text-white"></i>
+          <span>Grade Evaluation Control</span></a>
+      </li>
+
+
+
+    <hr class="sidebar-divider">
+
     <!-- Nav Item - Utilities Collapse Menu -->
     {{-- <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">

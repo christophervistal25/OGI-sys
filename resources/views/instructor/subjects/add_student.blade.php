@@ -17,6 +17,12 @@
     <div class="card-header py-3 rounded-0">
         <h6 class="m-0 font-weight-bold text-primary">Edit subject add new student form</h6>
     </div>
+        @if(isset($evaluation->end_date))
+            <span class='pt-2 pl-2 mt-3  text-danger font-weight-bold'>You can only update grade until {{ $evaluation->end_date->format('F d, Y') }}</span>
+            @else
+            <span class='pt-2 pl-2 mt-3  text-danger font-weight-bold'>You can only view the grades of your student</span>
+        @endif
+<hr>
     <div class="card-body">
         <form action="{{ route('subject.submit.new.student', [$subject->id]) }}" method="POST" autocomplete="off">
             @csrf
@@ -87,6 +93,7 @@
     });
 </script>
 <script>
+    let canAddStatus = "{{$canAddStatus}}";
     let studentIds = [];
     const studentsParentContainer = document.querySelector('#added-students');
 
@@ -115,7 +122,7 @@
                         <input type="text" id="student-${student.id}" class="form-control" readonly name="students[names][]" value="${student.name}" />
                     </div>
                     <div class="col-lg-5">
-                        <input type="text" class="form-control" name="students[remarks][]"  placeholder="Enter Grade here..." />
+                        <input type="text" class="form-control" ${canAddStatus ? '' : 'disabled'} name="students[remarks][]"  placeholder="Enter Grade here..." />
                     </div>
                     <div class="col-lg-1">
                         <button type="button" class="btn btn-sm font-weight-bold mt-1 btn-danger" onclick="removeStudent(${student.id})">X</button>

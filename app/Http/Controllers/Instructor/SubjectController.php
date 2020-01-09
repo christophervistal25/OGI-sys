@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Instructor;
 
 use App\Department;
+use App\GradeEvaluation;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EditSubjectAddNewStudentRequest;
 use App\Http\Requests\Instructors\AddSubjectRequest;
@@ -79,7 +80,9 @@ class SubjectController extends Controller
      */
     public function create(Subject $subject)
     {
-        return view('instructor.subjects.create', compact('subject'));
+        $evaluation = GradeEvaluation::canAdd();
+        $canAdd = isset($evaluation->end_date);
+        return view('instructor.subjects.create', compact('subject', 'canAdd', 'evaluation'));
     }
 
     /**
@@ -90,29 +93,35 @@ class SubjectController extends Controller
      */
     public function store(AddSubjectRequest $request)
     {
-        DB::beginTransaction();
-        try {
-             // Get the instructor.
-            $instructor = Instructor::with('subjects')->find(Auth::user()->id);
-        
-            $subject = Subject::with('students')->find($request->subject_id);
+        $evaluation = GradeEvaluation::canAdd();
+        $canAdd = isset($evaluation->end_date);
+        if($canAdd) {
+            DB::beginTransaction();
+                try {
+                     // Get the instructor.
+                    $instructor = Instructor::with('subjects')->find(Auth::user()->id);
+                
+                    $subject = Subject::with('students')->find($request->subject_id);
 
 
-            // Insert the subject for the instructor.
-            $instructor->subjects()->attach($subject);
+                    // Insert the subject for the instructor.
+                    $instructor->subjects()->attach($subject);
 
-            // Insert all students for this subject.
-            foreach ($request->students['ids'] as $index => $id) {
-                $subject->students()->attach($id, ['instructor_id' => Auth::user()->id, 'remarks' => $request->students['remarks'][$index] ]);
+                    // Insert all students for this subject.
+                    foreach ($request->students['ids'] as $index => $id) {
+                        $subject->students()->attach($id, ['instructor_id' => Auth::user()->id, 'remarks' => $request->students['remarks'][$index] ]);
+                    }
+
+                    DB::commit();
+                    return back()->with('success', 'Successfully add new subject named ' . $request->name . ' with ' . count($request->students['ids']) .' students');
+                  
+                } catch (Exception $e) {
+                    return back();
+                    DB::rollback();
+                }
+            } else {
+                dd('You can\'t add grade.');
             }
-
-            DB::commit();
-            return back()->with('success', 'Successfully add new subject named ' . $request->name . ' with ' . count($request->students['ids']) .' students');
-          
-        } catch (Exception $e) {
-            return back();
-            DB::rollback();
-        }
     }
 
     /**
@@ -146,6 +155,11 @@ class SubjectController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $evaluation = GradeEvaluation::canAdd();
+        if(!isset($evaluation->end_date)) {
+            return back()->withErrors(['message' => 'You are not allowed to add some grade to your students please remove it.']);
+        }
+        
         DB::beginTransaction();
         try {
             // Checking for Intstructor subject to avoid duplicate subject with same attributes.
@@ -196,35 +210,41 @@ class SubjectController extends Controller
 
     public function addNewStudent(Subject $subject)
     {
+        $evaluation = GradeEvaluation::canAdd();
+        $canAddStatus = isset($evaluation->end_date);
         $subjects = Subject::all();
-        return view('instructor.subjects.add_student', compact('subject', 'subjects'));
+        return view('instructor.subjects.add_student', compact('subject', 'subjects', 'evaluation', 'canAddStatus'));
     }
 
     public function submitAddNewStudent(EditSubjectAddNewStudentRequest $request, $subject)
     {
-        DB::beginTransaction();
-        try {
-             // Get the instructor.
-            $instructor = Instructor::with(['subjects' => function ($query) use ($subject) {
-                    $query->where('id', $subject);
-            }])->find(Auth::user()->id);
+        $evaluation = GradeEvaluation::canAdd();
+        if(isset($evaluation->end_date)) {
+            DB::beginTransaction();
+            try {
+                 // Get the instructor.
+                $instructor = Instructor::with(['subjects' => function ($query) use ($subject) {
+                        $query->where('id', $subject);
+                }])->find(Auth::user()->id);
+                
+                $subject = $instructor->subjects->first();
             
-            $subject = $instructor->subjects->first();
-        
-            // Insert all students for this subject.
-            foreach ($request->students['ids'] as $index => $id) {
-                $subject->students()->attach($id, ['instructor_id' => Auth::user()->id, 'remarks' => $request->students['remarks'][$index] ]);
-            }
+                // Insert all students for this subject.
+                foreach ($request->students['ids'] as $index => $id) {
+                    $subject->students()->attach($id, ['instructor_id' => Auth::user()->id, 'remarks' => $request->students['remarks'][$index] ]);
+                }
 
-            DB::commit();
-            return back()->with('success', 'Successfully add new subject named ' . $request->name . ' with ' . count($request->students['ids']) .' students');
-          
-        } catch (Exception $e) {
-            dd($e->getMessage());
-            return back();
-            DB::rollback();
+                DB::commit();
+                return back()->with('success', 'Successfully add new subject named ' . $request->name . ' with ' . count($request->students['ids']) .' students');
+              
+            } catch (Exception $e) {
+                dd($e->getMessage());
+                return back();
+                DB::rollback();
+            }
+        } else {
+            dd('You can\'t add grade.');
         }
-    
     }
 
     /**

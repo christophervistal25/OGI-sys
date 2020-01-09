@@ -36,9 +36,7 @@
 					<td class="text-center">
 						  <a class="btn btn-primary btn-sm" href="/instructor/subject/{{$subject->id}}/add/student"><i class='fa fa-plus'></i></a>
 						  <a class="btn btn-info btn-sm" href="{{ route('subject.students.show', [$subject->id]) }}"><i class='fa fa-eye'></i></a>
-					
 						</div>
-
 					</td>
 				</tr>
 				@endforeach

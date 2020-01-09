@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Instructors\EditStudentRating;
 use App\Student;
 use App\Subject;
+use App\GradeEvaluation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -55,6 +56,7 @@ class SubjectStudentController extends Controller
     public function show($subject)
     {
         
+        $evaluation = GradeEvaluation::canAdd();
         $students = Student::whereHas('subjects', function ($query) use($subject) {
              $query->where(['subject_id' => $subject, 'instructor_id' => Auth::user()->id]);
         })->with(['subjects' => function ($query) use($subject) {
@@ -63,7 +65,7 @@ class SubjectStudentController extends Controller
 
         $subject = Subject::find($subject);
 
-        return view('instructor.subjectstudents.show', compact('students', 'subject'));
+        return view('instructor.subjectstudents.show', compact('students', 'subject', 'evaluation'));
     }
 
     /**
@@ -86,9 +88,15 @@ class SubjectStudentController extends Controller
      */
     public function update(EditStudentRating $request, Subject $subject)
     {
-        $student = Student::find($request->student_id);
-        $status = $subject->students()->updateExistingPivot($student,['remarks' => $request->pivot['remarks']], false);
-        return response()->json(['success' => (bool) $status], 200);
+        $evaluation = GradeEvaluation::canAdd();
+        if(isset($evaluation->end_date)) {
+            $student = Student::find($request->student_id);
+            $status = $subject->students()->updateExistingPivot($student,['remarks' => $request->pivot['remarks']], false);
+            return response()->json(['success' => (bool) $status], 200);    
+        } else {
+            dd('You can\'t add grade.');
+        }
+        
     }
 
     /**
