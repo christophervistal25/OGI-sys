@@ -21,10 +21,22 @@
 				</div>
 				<div class="card-body">
 					<div class="row">
-						<div class="col-lg-6">
+						<div class="col-lg-4">
 							<div class="form-group">
-								<label for="studentFullname">Fullname</label>
-								<input type="text" class="form-control" name="name" id="studentFullname" placeholder="Enter Fullname..." value="{{ old('name') }}">
+								<label for="studentFirstname">Firstname</label>
+								<input type="text" class="form-control" name="firstname" id="studentFirstname" placeholder="Enter Firstname..." value="{{ old('firstname') }}">
+							</div>
+						</div>
+						<div class="col-lg-4">
+							<div class="form-group">
+								<label for="studentMiddlename">Middlename</label>
+								<input type="text" class="form-control" name="middlename" id="studentMiddlename" placeholder="Enter Middlename..." value="{{ old('middlename') }}">
+							</div>
+						</div>
+						<div class="col-lg-4">
+							<div class="form-group">
+								<label for="studentLastname">Lastname</label>
+								<input type="text" class="form-control" name="lastname" id="studentLastname" placeholder="Enter Lastname..." value="{{ old('lastname') }}">
 							</div>
 						</div>
 						<div class="col-lg-6">
@@ -49,8 +61,15 @@
 
 						<div class="col-lg-6">
 							<div class="form-group">
-								<label for="studentBirthDate">Birthdate</label>
-								<input type="date" class="form-control" name="birthdate" value={{ old('birthdate') }}>
+								<label>School Year</label>
+								<input type="text" class="form-control" name="school_year" value={{ old('school_year') }}>
+							</div>
+						</div>
+
+						<div class="col-lg-6">
+							<div class="form-group">
+								<label>Semester</label>
+								<input type="number" class="form-control" name="semester" value={{ old('semester') }}>
 							</div>
 						</div>
 

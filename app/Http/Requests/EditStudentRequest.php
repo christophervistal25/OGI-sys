@@ -29,11 +29,14 @@ class EditStudentRequest extends FormRequest
         $gender = ['male', 'female'];
 
         $rules = [
-            'name'      => 'required',
-            'gender'    => ['required', Rule::in($gender)],
-            'course_id' => ['required', Rule::in($courses)],
-            'birthdate' => 'required|date',
-            'profile'   => 'nullable',
+            'firstname'  => 'required',
+            'middlename' => 'required',
+            'lastname'   => 'required',
+            'gender'     => ['required', Rule::in($gender)],
+            'course_id'  => ['required', Rule::in($courses)],
+            'school_year'  => 'required',
+            'semester' => ['required', Rule::in([1, 2, 3])],
+            'profile'    => 'nullable',
         ];
 
         if (!is_null(request()->password) || !is_null(request()->password_confirmation)) {

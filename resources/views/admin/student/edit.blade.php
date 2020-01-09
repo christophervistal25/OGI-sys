@@ -21,12 +21,27 @@
 		</div>
 		<div class="card-body">
 			<div class="row">
-				<div class="col-lg-12">
+				<div class="col-lg-4">
 					<div class="form-group">
-						<label for="studentFullname">Fullname</label>
-						<input type="text" class="text-capitalize form-control" name="name" id="studentFullname" value="{{ old('name') ?? $student->name }}" placeholder="Enter Fullname...">
+						<label for="studentFullname">Firstname</label>
+						<input type="text" class="text-capitalize form-control" name="firstname" id="studentFullname" value="{{ old('firstname') ?? $student->firstname }}" placeholder="Enter Fullname...">
 					</div>
 				</div>
+
+				<div class="col-lg-4">
+					<div class="form-group">
+						<label for="studentMiddlename">Middlename</label>
+						<input type="text" class="text-capitalize form-control" name="middlename" id="studentMiddlename" value="{{ old('middlename') ?? $student->middlename }}" placeholder="Enter Middlename...">
+					</div>
+				</div>
+
+				<div class="col-lg-4">
+					<div class="form-group">
+						<label for="studentLastname">Lastname</label>
+						<input type="text" class="text-capitalize form-control" name="lastname" id="studentLastname" value="{{ old('lastname')  ?? $student->lastname }}" placeholder="Enter Lastname...">
+					</div>
+				</div>
+
 				<div class="col-lg-6">
 					<div class="form-group">
 						<label for="studentGender" >Gender</label>
@@ -47,10 +62,17 @@
 					</div>
 				</div>
 			
-				<div class="col-lg-6">
+				<div class="col-lg-3">
 					<div class="form-group">
-						<label for="studentBirthdate">Birthdate</label>
-						<input name="birthdate" type="date" class="form-control" id="studentBirthdate" value="{{ old('birthdate')  ?? $student->birthdate}}">
+						<label for="studentSchoolYear">School Year</label>
+						<input name="school_year" type="text" class="form-control" id="studentSchoolYear" value="{{ old('school_year')  ?? $student->school_year }}">
+					</div>
+				</div>
+
+				<div class="col-lg-3">
+					<div class="form-group">
+						<label for="studentSemester">Semester</label>
+						<input name="semester" type="number" class="form-control" id="studentSemester" value="{{ old('semester')  ?? $student->semester }}">
 					</div>
 				</div>
 

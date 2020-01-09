@@ -94,8 +94,8 @@ class StudentController extends Controller
     public function edit(Student $student)
     {
         $courses = Course::all();
-        $hasSubjects = $student->subjects->count();
-        return view('admin.student.edit', compact('student', 'courses', 'hasSubjects'));
+        // $hasSubjects = $student->subjects->count();
+        return view('admin.student.edit', compact('student', 'courses'));
     }
 
     /**

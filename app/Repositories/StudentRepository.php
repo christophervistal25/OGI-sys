@@ -1,10 +1,11 @@
 <?php 
 namespace App\Repositories;
 
-use App\Student;
-use Illuminate\Database\Eloquent\Collection;
 use App\Contracts\StudentRepositoryContract;
 use App\Repositories\StudentImageUpload;
+use App\Student;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use JD\Cloudder\Facades\Cloudder;
 
 class StudentRepository implements StudentRepositoryContract
@@ -26,6 +27,8 @@ class StudentRepository implements StudentRepositoryContract
 
     public function store(array $items = []) : Student
     {
+        $items['name'] = $items['firstname'] . ' ' . $items['middlename'] . ' ' . $items['lastname'];
+        $items['birthdate'] = Carbon::now();
     	return $this->model->create($items);
     }
 
@@ -46,7 +49,7 @@ class StudentRepository implements StudentRepositoryContract
         if ( is_null(request('password'))) {
             unset($items['password']);
         }
-
+        $items['name'] = $items['firstname'] . ' ' . $items['middlename'] . ' ' . $items['lastname'];
    	    return $this->find($items['id'])->update($items);
     }
 }
