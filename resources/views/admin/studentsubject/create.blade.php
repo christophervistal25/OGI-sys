@@ -1,137 +1,116 @@
 @extends('admin.layouts.dashboard-template')
-@section('title','Add subject for student')
+@section('title','Add Subject')
 @section('content')
+@prepend('page-css')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/startbootstrap-sb-admin-2@4.0.3/vendor/datatables/dataTables.bootstrap4.min.css">
+@endprepend
 <div class="row mb-2">
-	<div class="col-lg-12">
-		@if(\Session::has('success'))
-			@include('templates.success')
-		@else
-			@include('templates.error')
-		@endif
-	</div>
+    <div class="col-lg-12">
+        @if(\Session::has('success'))
+            @include('templates.success')
+        @elseif($errors->any())
+            @include('templates.error')
+        @else
+        <div class="card bg-info text-white shadow mb-2">
+                <div class="card-body font-weight-bold">
+                  Click the <i class="fas fa-arrow-right"></i> icon to add the students in the list.
+                </div>
+            </div>
+        @endif
+    </div>
 </div>
-<div class="row">
-	<div class="col-lg-12">
-		<div class="card shadow mb-4 rounded-0">
-			<div class="card-header py-3 rounded-0">
-				<h6 class="m-0 font-weight-bold text-primary">Add subject for {{ ucwords($student->name) }}</h6>
-			</div>
-			<div class="card-body" >
-				<form action="{{ route('student.subject.store', [$student]) }}" method="POST">
-					@csrf
-					<div class="row" id="subjectFields">
-					@if( !empty(old('subjects.name')) && !empty(old('subjects.description')) && !empty(old('subjects.semester')))
-					@foreach(old('subjects.name') as $index => $name)
-					<div class="col-lg-3 form-group name-index-{{$index}}">
-						<input type="text" class="form-control" name="subjects[name][{{ $index }}]" id="subjectName{{$index}}" placeholder="Enter Subject name..." value="{{ old('subjects.name.' . $index)}}">
-					</div>
-					<div class="col-lg-3 form-group description-index-{{$index}}">
-						<input type="text" class="form-control" name="subjects[description][{{$index}}]" id="subjectDescription{{$index}}" placeholder="Enter Subject description..." value="{{ old('subjects.description.' . $index)}}">
-					</div>
-					<div class="col-lg-3 form-group level-index-{{$index}}">
-						<input type="text" class="form-control" name="subjects[level][{{$index}}]" id="subjectLevel{{$index}}" placeholder="Enter Subject level..." value="{{ old('subjects.level.' . $index)}}">
-					</div>
-					<div class="col-lg-2 form-group semester-index-{{$index}}">
-						<input type="text" class="form-control" name="subjects[semester][{{$index}}]" id="subjectSemester{{$index}}" placeholder="Enter Subject semester..." value="{{ old('subjects.semester.' . $index)}}">
-					</div>
-					<div class="col-lg-1 remove-field-{{$index}}">
-						<button type="button" class="btn btn-sm btn-danger font-weight-bold text-white mt-1" data-index="{{ $index }}" onclick="removeField(this)">X</button>
-					</div>
-					@endforeach
-					
-					@endif
-				</div>
-				<div class="float-right">
-					<button id="addNewSubjectField" type="button" class="btn btn-circle btn-info font-weight-bold" title="Add subject field"><i class="fa fa-plus-circle"></i></button>
-				</div>
-				<div class="clearfix"></div>
-				<hr>
-					<div class="float-right">
-						<input type="submit" class="btn btn-primary mt-1 font-weight-bold" value="Add Subjects">
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+
+<div class="card shadow mb-4 rounded-0">
+    <div class="card-body">
+        Student ID Number : <span class="text-primary font-weight-bold">{{ $student->id_number }}</span> <br>
+        Student Name : <span class="text-primary font-weight-bold">{{ $student->name }}</span> <br>
+        Course : <span class="text-primary font-weight-bold">{{ $student->course->abbr }}</span> <br>
+    </div>
+</div>
+
+
+<div class="card shadow mb-4 rounded-0">
+    <div class="card-header py-3 rounded-0">
+        <h6 class="m-0 font-weight-bold text-primary">Add subject form</h6>
+    </div>
+    <div class="card-body">
+        <form action="{{ route('student.subject.store', [$student]) }}" method="POST" autocomplete="off">
+            @csrf
+            <div class="row">
+                <div class="col-lg-6">
+                    <table class="table table-bordered" id="subjects-table">
+                        <thead>
+                            <tr>
+                                <th>Course No</th>
+                                <th>Description</th>
+                                <th>Level</th>
+                                <th>Semester</th>
+                                <th>School Year</th>
+                                <th>Select</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="col-lg-6" style="border : 1px solid #e3e6f0;">
+                    <h6 class="m-0 pt-3 pl-3 font-weight-bold text-primary">Subjects</h6>
+                    <hr>
+                    <div id="added-subjects">
+                    </div>
+                </div>
+            </div>
+            <div class="float-right mt-2">
+                <input type="submit" value="Add subject to student" class="btn btn-primary font-weight-bold">
+            </div>
+        </form>
+        
+    </div>
 </div>
 @push('page-scripts')
+<script src="https://cdn.jsdelivr.net/npm/startbootstrap-sb-admin-2@4.0.3/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/startbootstrap-sb-admin-2@4.0.3/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 <script>
-	const cardSubjectsBody = document.querySelector('#subjectFields');
-	let index = 0;
+    let studentId = "{{$student->id}}";
+    $('#subjects-table').DataTable({
+            orderCellsTop: true,
+            serverSide: true,
+            processing: true,
+            responsive: true,
+            ajax : `/admin/student/subject/list/${studentId}`,
+            columns: [
+                { name: 'name', },
+                { name: 'description', orderable: false },
+                { name: 'level', orderable: false , searchable : false },
+                { name : 'semester' , searchable : false, },
+                { name : 'school_year' , searchable : false, },
+                { name : 'actionclick' , searchable : false, }
+            ],
+    });
 
-	document.addEventListener('DOMContentLoaded', (e) => {
-		
-		document.querySelector('#addNewSubjectField').addEventListener('click' , (e) => {
-		index++;
-		let subjectNameField = document.createElement('input');
-		let subjectDescriptionField = document.createElement('input');
-		let subjectYearField = document.createElement('input');
-		let subjectSemesterField = document.createElement('input');
+    function removeSubject(id) {
+        $(`#subject-${id}-container`).remove();
+    }
 
+    function addThisSubject(e) {
+        let subject = JSON.parse(e.getAttribute('data-src'));
+        $('#added-subjects').append(`
+                <div id="subject-${subject.id}-container" class="row">
+                    <input type="hidden" class="form-control" name="subjects[ids][]" value="${subject.id}" />
+                    <div class="col-lg-6 mb-2">
+                        <label>Course No.</label>
+                        <input type="text"  class="form-control" readonly name="subjects[names][]" value="${subject.name}" />
+                    </div>
+                    <div class="col-lg-5 mb-2">
+                        <label>Course Description.</label>
+                        <input type="text"  class="form-control" readonly  value="${subject.description}" />
+                    </div>
+                    <div class="col-lg-1">
+                        <p></p>
+                        <button type="button" class="btn btn-sm font-weight-bold mt-3 btn-danger" onclick="removeSubject(${subject.id})">X</button>
+                    </div>
+                </div>
 
-		subjectNameField.setAttribute('type', 'text');
-		subjectNameField.setAttribute('class', `form-control`);
-		subjectNameField.setAttribute('name', `subjects[name][]`);
-		subjectNameField.setAttribute('placeholder', 'Enter Subject name...');
-		subjectDescriptionField.setAttribute('type', 'text');
-		subjectDescriptionField.setAttribute('class', `form-control`);
-		subjectDescriptionField.setAttribute('name', `subjects[description][]`);
-		subjectDescriptionField.setAttribute('placeholder', 'Enter Subject description...');
-		subjectYearField.setAttribute('type', 'number');
-		subjectYearField.setAttribute('class', `form-control`);
-		subjectYearField.setAttribute('name', `subjects[level][]`);
-		subjectYearField.setAttribute('placeholder', 'Enter Subject level...');
-		subjectSemesterField.setAttribute('type', 'number');
-		subjectSemesterField.setAttribute('class', `form-control`);
-		subjectSemesterField.setAttribute('name', `subjects[semester][]`);
-		subjectSemesterField.setAttribute('placeholder', 'Enter Subject semester...');
-
-		let subjectNameFieldContainer = document.createElement('div');
-		let subjectDescriptionFieldContainer = document.createElement('div');
-		let subjectSemesterFieldContainer = document.createElement('div');
-		let subjectLevelFieldContainer = document.createElement('div');
-		let removeButtonContainer = document.createElement('div');
-
-		subjectNameFieldContainer.setAttribute('class', `col-lg-3 form-group name-index-${index}`);
-		subjectDescriptionFieldContainer.setAttribute('class', `col-lg-3 form-group description-index-${index}`);
-		subjectLevelFieldContainer.setAttribute('class', `col-lg-3 form-group level-index-${index}`);
-		subjectSemesterFieldContainer.setAttribute('class', `col-lg-2 form-group semester-index-${index}`);
-		removeButtonContainer.setAttribute('class', `col-lg-1 remove-field-${index}`);
-
-		cardSubjectsBody.appendChild(subjectNameFieldContainer);
-		subjectNameFieldContainer.appendChild(subjectNameField);
-		cardSubjectsBody.appendChild(subjectDescriptionFieldContainer);
-		subjectDescriptionFieldContainer.appendChild(subjectDescriptionField);
-		cardSubjectsBody.appendChild(subjectLevelFieldContainer);
-		subjectLevelFieldContainer.appendChild(subjectYearField);
-		cardSubjectsBody.appendChild(subjectSemesterFieldContainer);
-		subjectSemesterFieldContainer.appendChild(subjectSemesterField);
-
-		cardSubjectsBody.appendChild(removeButtonContainer);
-
-		let removeButton = document.createElement('button');
-			removeButton.appendChild(document.createTextNode('X'));
-			removeButton.setAttribute('type', 'button');
-			removeButton.setAttribute('class', `btn btn-sm btn-danger font-weight-bold text-white mt-1`);
-			removeButton.setAttribute('data-index', index);
-			removeButton.setAttribute('onclick', `removeField(this)`);
-			removeButtonContainer.appendChild(removeButton);
-		});
-	});
-
-	function removeField( button) {
-		let index = button.getAttribute('data-index');
-		let subjectNameField = document.querySelector(`.name-index-${index}`);
-		let subjectDescriptionField = document.querySelector(`.description-index-${index}`);
-		let subjectYearField = document.querySelector(`.level-index-${index}`);
-		let subjectSemesterField = document.querySelector(`.semester-index-${index}`);
-		let thisButton = document.querySelector(`.remove-field-${index}`);
-		cardSubjectsBody.removeChild(subjectNameField);
-		cardSubjectsBody.removeChild(subjectDescriptionField);
-		cardSubjectsBody.removeChild(subjectYearField);
-		cardSubjectsBody.removeChild(subjectSemesterField);
-		cardSubjectsBody.removeChild(thisButton);
-	}
+        `);
+    }
 </script>
 @endpush
 @endsection

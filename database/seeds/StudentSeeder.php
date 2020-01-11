@@ -37,7 +37,7 @@ class StudentSeeder extends Seeder
         ]);
 
 
-        $student =  Student::find(1);
+       /* $student =  Student::find(1);
         $secondStudent = Student::find(2);
 
 
@@ -50,6 +50,6 @@ class StudentSeeder extends Seeder
                         $secondStudent->subjects()->attach($subject->id, ['instructor_id' => 1, 'remarks' => '1.0']);
                     }
                 }
-        }
+        }*/
     }
 }

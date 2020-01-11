@@ -122,7 +122,7 @@
                         <input type="text" id="student-${student.id}" class="form-control" readonly name="students[names][]" value="${student.name}" />
                     </div>
                     <div class="col-lg-5">
-                        <input type="text" class="form-control" ${canAddStatus ? '' : 'disabled'} name="students[remarks][]"  placeholder="Enter Grade here..." />
+                        <input type="text" class="form-control" ${canAddStatus ? '' : 'readonly'} name="students[remarks][]"  placeholder="Enter Grade here..." />
                     </div>
                     <div class="col-lg-1">
                         <button type="button" class="btn btn-sm font-weight-bold mt-1 btn-danger" onclick="removeStudent(${student.id})">X</button>

@@ -17,6 +17,7 @@ use Freshbitsweb\Laratables\Laratables;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Database\Eloquent\Builder;
 
 class SubjectController extends Controller
 {
@@ -42,9 +43,18 @@ class SubjectController extends Controller
         return view('instructor.subjects.index', compact('instructor'));
     }
 
-    public function students()
+    public function students($subject)
     {
-        return Laratables::recordsOf(Student::class);
+        $students = Student::whereDoesntHave('subjects', function (Builder $query) use($subject) {
+            $query->where('subject_id', '=', $subject);
+        })->pluck('id_number')
+          ->toArray();
+
+        return Laratables::recordsOf(Student::class, function($query) use($students)
+        {
+            return $query->whereIn('id_number', $students);
+        });
+
     }
 
     public function studentForEditSubject($subject)
@@ -95,30 +105,33 @@ class SubjectController extends Controller
     {
         $evaluation = GradeEvaluation::canAdd();
         $canAdd = isset($evaluation->end_date);
+
         if($canAdd) {
-            DB::beginTransaction();
-                try {
+                    $subjectId = $request->subject_id;
                      // Get the instructor.
                     $instructor = Instructor::with('subjects')->find(Auth::user()->id);
                 
-                    $subject = Subject::with('students')->find($request->subject_id);
+                    $subject = Subject::with('students')->find($subjectId);
 
 
+
+                    
                     // Insert the subject for the instructor.
                     $instructor->subjects()->attach($subject);
+                    
 
                     // Insert all students for this subject.
                     foreach ($request->students['ids'] as $index => $id) {
-                        $subject->students()->attach($id, ['instructor_id' => Auth::user()->id, 'remarks' => $request->students['remarks'][$index] ]);
+                        $subject->students()->attach($id, ['instructor_id' => Auth::user()->id, 'remarks' => $request->students['remarks'][$index] ?? '0']);
                     }
 
-                    DB::commit();
+
+                    $studentWithNoInstructor = DB::table('student_subjects')->where(['subject_id' => $subjectId, 'instructor_id' => '0'])
+                                                                            ->first();
+                    DB::table('student_subjects')->update(['instructor_id' => Auth::user()->id]);                    
+                    
+
                     return back()->with('success', 'Successfully add new subject named ' . $request->name . ' with ' . count($request->students['ids']) .' students');
-                  
-                } catch (Exception $e) {
-                    return back();
-                    DB::rollback();
-                }
             } else {
                 dd('You can\'t add grade.');
             }

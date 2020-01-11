@@ -1,7 +1,9 @@
 <?php
 
-use Illuminate\Database\Seeder;
+use App\GradeEvaluation;
 use App\Subject;
+use Carbon\Carbon;
+use Illuminate\Database\Seeder;
 
 class SubjectSeeder extends Seeder
 {
@@ -12,7 +14,7 @@ class SubjectSeeder extends Seeder
      */
     public function run()
     {
-    	foreach(range(1,4) as $level) {
+    	/*foreach(range(1,4) as $level) {
     		foreach(range(1,2) as $iteration) {
     				foreach(range(1,3) as $semester) {
 		    			Subject::create([
@@ -26,7 +28,8 @@ class SubjectSeeder extends Seeder
 						]);
 		    		}
     		}
-    	}
+    	}*/
+
 		/*Subject::create([
 			'name'        => 'SS1 1',
 			'description' => 'Sample Subject 1',

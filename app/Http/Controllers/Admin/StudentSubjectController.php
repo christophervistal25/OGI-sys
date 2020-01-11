@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-use App\Http\Requests\AddStudentSubjectRequest;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Arr;
+use App\Http\Requests\AddStudentSubjectRequest;
 use App\Student;
 use App\Subject;
 use DB;
+use Freshbitsweb\Laratables\Laratables;
+use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class StudentSubjectController extends Controller
 {
@@ -16,6 +17,16 @@ class StudentSubjectController extends Controller
     public function __construct()
     {
         $this->middleware('auth:admin');
+    }
+
+    public function subjects($studentId)
+    {
+        $student = Student::with('subjects')->find($studentId);
+        $studentSubjects = $student->subjects->pluck('id')->toArray();
+        return Laratables::recordsOf(Subject::class, function($query) use($studentSubjects)
+        {
+            return $query->whereNotIn('id', $studentSubjects);
+        });
     }
 
     /**
@@ -35,7 +46,8 @@ class StudentSubjectController extends Controller
      */
     public function create(Student $student)
     {
-        return view('admin.studentsubject.create', compact('student'));
+        $subjects = Subject::orderBy('level')->get();
+        return view('admin.studentsubject.create', compact('student', 'subjects'));
     }
 
     /**
@@ -44,27 +56,14 @@ class StudentSubjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AddStudentSubjectRequest $request, Student $student)
+    public function store(Request $request, Student $student)
     {
         if ($request->has('subjects')) {
-            DB::transaction(function () use ($request, $student) {
-                $names        = array_unique($request->subjects['name']);
-                $descriptions = array_unique($request->subjects['description']);
+            $subjects = array_unique($request->subjects['ids']);
+            $subjectNames = array_unique($request->subjects['names']);
 
-                foreach ($names as $index => $name) {
-                    $subjects[] = Subject::updateOrCreate(
-                        [
-                            'name'        => $name,
-                            'description' => $descriptions[$index],
-                            'level'       => $request->subjects['level'][$index],
-                            'semester'    => $request->subjects['semester'][$index]
-                        ]
-                    )->id;
-                }
-
-                $student->subjects()->attach($subjects);    
-            });
-            return back()->with('success', 'Subjects successfully add.');
+            $student->subjects()->attach($subjects, ['instructor_id' => 0 , 'remarks' => 0]);
+            return redirect()->route('student.subject.create', [$student])->with('success', 'Subjects successfully add.');
         } else {
             return back()->withErrors(['message' => 'Please add some fields click the plus(+) icon.']);
         }

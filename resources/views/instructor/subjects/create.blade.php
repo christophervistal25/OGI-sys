@@ -96,12 +96,13 @@
 <script src="https://cdn.jsdelivr.net/npm/startbootstrap-sb-admin-2@4.0.3/vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/startbootstrap-sb-admin-2@4.0.3/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 <script>
+    let subject = "{{$subject->id}}";
     $('#students-table').DataTable({
             orderCellsTop: true,
             serverSide: true,
             processing: true,
             responsive: true,
-            ajax : `/instructor/student/list`,
+            ajax : `/instructor/student/list/${subject}`,
             columns: [
                 { name: 'id_number', },
                 { name: 'name', },
@@ -141,7 +142,7 @@
                         <input type="text" id="student-${student.id}" class="form-control" readonly name="students[names][]" value="${student.name}" />
                     </div>
                     <div class="col-lg-5">
-                        <input type="text" class="form-control" ${canAdd ? '' : 'disabled' } name="students[remarks][]"  placeholder="Enter Grade here..." />
+                        <input type="text" class="form-control" ${canAdd ? '' : 'readonly' } name="students[remarks][]"  placeholder="Enter Grade here..." />
                     </div>
                     <div class="col-lg-1">
                         <button type="button" class="btn btn-sm font-weight-bold mt-1 btn-danger" onclick="removeStudent(${student.id})">X</button>

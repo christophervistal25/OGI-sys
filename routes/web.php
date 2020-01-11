@@ -48,6 +48,7 @@ Route::group(['prefix' => 'admin'] , function () {
 
     Route::resource('student', 'Admin\StudentController');
 
+    Route::get('/student/subject/list/{student}', 'Admin\StudentSubjectController@subjects');
     Route::get('/student/{student}/subject/create', 'Admin\StudentSubjectController@create')
         ->name('student.subject.create');
 
@@ -125,7 +126,7 @@ Route::group(['prefix' => 'instructor'] , function () {
     Route::get('/subject/{subject}/edit', 'Instructor\SubjectController@edit');
     Route::put('/subject/{subject}/edit', 'Instructor\SubjectController@update');
 
-    Route::get('/student/list', 'Instructor\SubjectController@students')->name('student.list');
+    Route::get('/student/list/{subject}', 'Instructor\SubjectController@students')->name('student.list');
     Route::get('/student/edit/list/{subject}', 'Instructor\SubjectController@studentForEditSubject');
 
     Route::get('/subject/{subject}/add/student', 'Instructor\SubjectController@addNewStudent');

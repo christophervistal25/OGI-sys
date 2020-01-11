@@ -31,12 +31,12 @@ class SubjectEntryCheck
         if (!is_null($request->students)) {
               foreach ($request->students['ids'] as $id) {
                 $studentsAlreadyHaveThisSubject[] = Student::whereHas('subjects', function ($query) use($request, $id) {
-                    $query->where(['student_id' => $id, 'subject_id' => $request->subject_id]);
+                    $query->where(['student_id' => $id, 'subject_id' => $request->subject_id])
+                          ->where('instructor_id', '!=', '0');
                 })->find($id, ['name', 'id_number']);
             }
         }
-        
-        if (!is_null($instructor)) {
+      if (!is_null($instructor)) {
           return back()->withInput($request->all())->withErrors(['message' => 'You already have this subject please check your subjects if you want to add new student.']);  
         } else if(is_null($request->students)) {
             return back()->withInput($request->only('name', 'description', 'level', 'semester', 'school_year', 'subject_id'))
