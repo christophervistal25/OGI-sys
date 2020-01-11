@@ -80,10 +80,10 @@
  	$('.studentGradeField').focus(function (e) {
  		studentGradeOldValue = e.target.innerText.trim();
  	});
+
  	
- 	// Disable the new line
- 	$('.studentGradeField').keypress(function (e) {
- 		if (e.keyCode == 13) {
+ 	$('#student-subjects-table ').on('keypress', 'tr td.studentGradeField', function(e) {
+   		if (e.keyCode == 13) {
  			e.preventDefault();
  			let studentGradeNewValue = e.target.innerText.trim();
 	 		if (studentGradeNewValue !== studentGradeOldValue) {
@@ -119,7 +119,8 @@
 	 			}
 	 		}
  		}
- 	});
+	});
+ 	
  
 </script>
 @endpush
