@@ -35,8 +35,7 @@ class StudentGradePrintController extends Controller
         }
 
         $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('student.subjects.print.grade', compact('student','subjects', 'studentLevel'));
+        $pdf->loadView('admin.student.print.grade', compact('student','subjects', 'studentLevel'));
         return $pdf->stream();
-        
     }
 }
