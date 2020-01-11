@@ -21,11 +21,11 @@ class DatabaseSeeder extends Seeder
         $this->call([
             AdminSeeder::class,
             InstructorSeeder::class,
-            StudentSeeder::class,
             DepartmentSeeder::class,
             CourseSeeder::class,
             SubjectSeeder::class,
             HRSeeder::class,
+            StudentSeeder::class,
         ]);
 
         // Student::all()->each(function ($student) {

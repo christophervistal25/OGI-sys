@@ -3,7 +3,7 @@
     <title>Student Grades</title>
     <style>
     /* @page { margin: 100px 25px; } */
-    header { position: fixed; top: 0px; left: 0px; right: 0px; height: auto; }
+    header { position: fixed; top: 0px; left: 0px; right: 0px; height: auto;  }
     footer { position: fixed; bottom: -60px; left: 0px; right: 0px; background-color: lightblue; height: 50px; }
     p { page-break-after: always; }
     p:last-child { page-break-after: never; }
@@ -36,6 +36,7 @@
     <header>
       <h4>ANDRES SORIANO COLLEGES OF BISLIG <span style="font-size: 17px;"><br>Mangagoy, Bislig City</span></h4>
     </header>
+    <br>
     <main>
       @php $index = 0; @endphp
       @foreach($subjects as $level => $year)
@@ -62,7 +63,7 @@
       <h4>GRADE EVALUATION</h4>
       <h4>Stundent I.D : {{ $student->id_number }}  <br>Student Name : {{ $student->name }}</h4>
       @endif
-      <table width="100%" style="border-collapse: collapse;">
+      <table width="100%" style="border-collapse: collapse; margin-top : 20px;">
         <thead>
           <tr>
             <th>Course No.</th>
@@ -76,7 +77,7 @@
           @foreach($year as $student_level => $student_subject)
             <tr>
               <td colspan="5" class='font-weight-bold'>
-                <u>{{ addSuffixToLevel($student_subject->first()->semester) }} Semester {{$student_subject[0]->created_at->format('Y')}}-{{ Carbon\Carbon::parse($student_subject[0]->created_at)->addYears(1)->format('Y') }} ({{ $student->course->abbr }})</u>
+                <u>{{ addSuffixToLevel($student_subject->first()->semester) }} Semester {{$student_subject[0]->created_at->format('Y')}}-{{ Carbon\Carbon::parse($student_subject[0]->created_at)->addYears(1)->format('Y') }} ({{ $student->course->abbr }} {{ $student_subject[0]->level}})</u>
               </td>
             </tr>
             @foreach($student_subject as $items)
@@ -93,7 +94,6 @@
                       </tr>
            @endforeach
           @endforeach
-          
         </tbody>
       </table>
       {{-- This P tag represents new page --}}

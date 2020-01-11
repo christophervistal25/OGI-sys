@@ -12,26 +12,22 @@ class SubjectSeeder extends Seeder
      */
     public function run()
     {
-    	/*$index = 1;
-    	foreach (range(1, 3) as $semester) {
-    		foreach (range(1, 4) as $value) {
-	    		foreach (range(1, 8) as $v) {
-	    			Subject::create([
-						'name'          => 'SS1 ' . $index,
-						'description'   => 'Sample Subject ' . $index,
-						'level'         => $value,
-						'credits'       => 3,
-						'semester'      => $semester,
-						'school_year'   => '2019-2020',
-						'department_id' => $value,
-					]);
-					$index++;
-	    		}
-	    	}
-    	}*/
-    	
-    	
-		Subject::create([
+    	foreach(range(1,4) as $level) {
+    		foreach(range(1,2) as $iteration) {
+    				foreach(range(1,3) as $semester) {
+		    			Subject::create([
+		    				'name'        => 'S ' . $level . '-' . $semester . ' ' . rand(1,999),
+							'description' => 'Subject' . rand(1,999),
+							'level'       => $level,
+							'credits'     => 3,
+							'semester'    => $semester,
+							'school_year' => '2019-2020',
+							'department_id' => 1,
+						]);
+		    		}
+    		}
+    	}
+		/*Subject::create([
 			'name'        => 'SS1 1',
 			'description' => 'Sample Subject 1',
 			'level'       => 1,
@@ -42,7 +38,7 @@ class SubjectSeeder extends Seeder
 		]);
 		
 		Subject::create([
-			'name'        => 'SS1 2',
+			'name'        => 'SS1 1',
 			'description' => 'Sample Subject 2',
 			'level'       => 1,
 			'credits'     => 3,
@@ -59,6 +55,6 @@ class SubjectSeeder extends Seeder
 			'semester'    => 3,
 			'school_year' => '2019-2020',
 			'department_id' => 3,
-		]);
+		]);*/
     }
 }
