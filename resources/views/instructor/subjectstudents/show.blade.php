@@ -34,8 +34,8 @@
 					<th>ID Number</th>
 					<th>Name</th>
 					<th class="text-center">Course</th>
-					<th class="text-center">Department</th>
-					<th class="text-center">Rating</th>
+					<th class="text-center">Year</th>
+					<th class="text-center">Enter Grade</th>
 					<th class="text-center">Remarks</th>
 				</tr>
 			</thead>
@@ -45,7 +45,7 @@
 					<td>{{ $student->id_number }}</td>
 					<td>{{ $student->name }}</td>
 					<td class="text-center">{{ $student->course->abbr }}</td>
-					<td class="text-center">{{ $student->course->department->name }}</td>
+					<td class="text-center">{{ $student->level }}</td>
 					@if(number_format($student->subjects[0]->pivot->remarks, 1) == 0.0 ) 
 						<td class="text-center {{isset($evaluation->end_date) ? 'studentGradeField' : ''}} text-danger font-weight-bold" {{isset($evaluation->end_date) ? 'contenteditable=true' : ''}} data-student-id="{{ $student->id }}" data-student-subject="{{ $student->subjects[0] }}">NG</td>
 						<td class="text-center font-weight-bold">NO GRADE</td>
