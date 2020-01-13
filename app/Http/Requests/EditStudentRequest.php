@@ -26,21 +26,21 @@ class EditStudentRequest extends FormRequest
     public function rules()
     {
         $courses = Course::pluck('id')->toArray();
-        $gender = ['male', 'female'];
+        // $gender = ['male', 'female'];
 
         $rules = [
             'firstname'  => 'required',
             'middlename' => 'required',
             'lastname'   => 'required',
-            'gender'     => ['required', Rule::in($gender)],
+            'level'     => ['required', Rule::in([1, 2, 3, 4, 5])],
             'course_id'  => ['required', Rule::in($courses)],
             'school_year'  => 'required',
             'semester' => ['required', Rule::in([1, 2, 3])],
-            'profile'    => 'nullable',
+            // 'profile'    => 'nullable',
         ];
 
         if (!is_null(request()->password) || !is_null(request()->password_confirmation)) {
-            $rules['password'] = 'required|confirmed|min:8|max:20';
+            $rules['password'] = 'required|confirmed|min:6|max:20';
         }
 
         return $rules;

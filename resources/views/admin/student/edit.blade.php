@@ -24,7 +24,7 @@
 				<div class="col-lg-4">
 					<div class="form-group">
 						<label for="studentFullname">Firstname</label>
-						<input type="text" class="text-capitalize form-control" name="firstname" id="studentFullname" value="{{ old('firstname') ?? $student->firstname }}" placeholder="Enter Fullname...">
+						<input type="text" class="text-capitalize form-control" name="firstname" id="studentFullname" value="{{ old('firstname') ?? $student->firstname }}" placeholder="Enter Firstname...">
 					</div>
 				</div>
 
@@ -44,10 +44,13 @@
 
 				<div class="col-lg-6">
 					<div class="form-group">
-						<label for="studentGender" >Gender</label>
-						<select name="gender" class="form-control" id="studentGender">
-							<option value="male" {{ $student->gender == 'male' ? 'selected' : null }}>Male</option>
-							<option value="female" {{ $student->gender == 'female' ? 'selected' : null }} >Female</option>
+						<label for="studentLevel">Year Level</label>
+						<select name="level" class="form-control" id="studentLevel">
+							<option value="1" {{ $student->level == '1' ? 'selected' : null }}>1</option>
+							<option value="2" {{ $student->level == '2' ? 'selected' : null }} >2</option>
+							<option value="3" {{ $student->level == '3' ? 'selected' : null }} >3</option>
+							<option value="4" {{ $student->level == '5' ? 'selected' : null }} >4</option>
+							<option value="5" {{ $student->level == '5' ? 'selected' : null }} >5</option>
 						</select>
 					</div>
 				</div>
@@ -62,21 +65,21 @@
 					</div>
 				</div>
 			
-				<div class="col-lg-3">
+				<div class="col-lg-6">
 					<div class="form-group">
 						<label for="studentSchoolYear">School Year</label>
 						<input name="school_year" type="text" class="form-control" id="studentSchoolYear" value="{{ old('school_year')  ?? $student->school_year }}">
 					</div>
 				</div>
 
-				<div class="col-lg-3">
+				<div class="col-lg-6">
 					<div class="form-group">
 						<label for="studentSemester">Semester</label>
 						<input name="semester" type="number" class="form-control" id="studentSemester" value="{{ old('semester')  ?? $student->semester }}">
 					</div>
 				</div>
 
-				<div class="col-lg-6">
+				{{-- <div class="col-lg-6">
 					<div class="form-group">
 						<label>&nbsp;</label>
 						  <div class="custom-file">
@@ -84,7 +87,7 @@
 						    <label class="custom-file-label" for="customFile">Student Image</label>
 						  </div>
 					</div>
-				</div>
+				</div> --}}
 
 				<div class="col-lg-6">
 					<div class="form-group">

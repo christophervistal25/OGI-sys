@@ -33,7 +33,7 @@ class AddStudentRequest extends FormRequest
          'lastname'   => 'required',
          'gender'                 => ['required', Rule::in(['male', 'female'])],
          'course_id'              => ['required', Rule::in($courses)],
-         'password'               => 'required|confirmed|min:8|max:20',
+         'password'               => 'required|confirmed|min:6|max:20',
          'school_year' => 'required',
          'semester' => ['required', Rule::in([1, 2, 3])],
         ];
