@@ -14,7 +14,7 @@
 				<tr>
 					<th>ID Number</th>
 					<th>Name</th>
-					<th>Gender</th>
+					<th>Level</th>
 					<th>School Year</th>
 					<th>Course</th>
 					<th>Actions</th>
@@ -97,7 +97,7 @@
 		    columns: [
 		        { name: 'id_number' },
 		        { name: 'name' },
-		        { name: 'gender' },
+		        { name: 'level' },
 		        { name: 'school_year' },
 		        { name: 'course.abbr', orderable: false },
 		         { name: 'action', orderable: false, searchable: false }
