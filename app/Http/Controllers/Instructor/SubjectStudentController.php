@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Instructor;
 
+use App\GradeEvaluation;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Instructors\EditStudentRating;
 use App\Student;
 use App\Subject;
-use App\GradeEvaluation;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -64,8 +65,8 @@ class SubjectStudentController extends Controller
         }, 'course', 'course.department'])->get();
 
         $subject = Subject::find($subject);
-
-        return view('instructor.subjectstudents.show', compact('students', 'subject', 'evaluation'));
+        $daysLeft = (int) $evaluation->end_date->format('d') - (int) Carbon::now()->format('d');
+        return view('instructor.subjectstudents.show', compact('students', 'subject', 'evaluation', 'daysLeft'));
     }
 
     /**

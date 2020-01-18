@@ -30,7 +30,7 @@ class SubjectSeeder extends Seeder
     		}
     	}*/
 
-		/*Subject::create([
+		Subject::create([
 			'name'        => 'SS1 1',
 			'description' => 'Sample Subject 1',
 			'level'       => 1,
@@ -58,6 +58,6 @@ class SubjectSeeder extends Seeder
 			'semester'    => 3,
 			'school_year' => '2019-2020',
 			'department_id' => 3,
-		]);*/
+		]);
     }
 }

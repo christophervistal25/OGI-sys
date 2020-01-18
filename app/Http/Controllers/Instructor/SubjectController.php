@@ -11,13 +11,14 @@ use App\Instructor;
 use App\Student;
 use App\Subject;
 use Auth;
+use Carbon\Carbon;
 use DB;
 use Exception;
 use Freshbitsweb\Laratables\Laratables;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-use Illuminate\Database\Eloquent\Builder;
 
 class SubjectController extends Controller
 {
@@ -92,7 +93,8 @@ class SubjectController extends Controller
     {
         $evaluation = GradeEvaluation::canAdd();
         $canAdd = isset($evaluation->end_date);
-        return view('instructor.subjects.create', compact('subject', 'canAdd', 'evaluation'));
+        $daysLeft = (int) $evaluation->end_date->format('d') - (int) Carbon::now()->format('d');
+        return view('instructor.subjects.create', compact('subject', 'canAdd', 'evaluation', 'daysLeft'));
     }
 
     /**
@@ -226,7 +228,8 @@ class SubjectController extends Controller
         $evaluation = GradeEvaluation::canAdd();
         $canAddStatus = isset($evaluation->end_date);
         $subjects = Subject::all();
-        return view('instructor.subjects.add_student', compact('subject', 'subjects', 'evaluation', 'canAddStatus'));
+        $daysLeft = (int) $evaluation->end_date->format('d') - (int) Carbon::now()->format('d');
+        return view('instructor.subjects.add_student', compact('subject', 'subjects', 'evaluation', 'canAddStatus', 'daysLeft'));
     }
 
     public function submitAddNewStudent(EditSubjectAddNewStudentRequest $request, $subject)

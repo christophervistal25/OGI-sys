@@ -23,7 +23,9 @@
 
 	<div class="card-body">
 		@if(isset($evaluation->end_date))
-			<span class='text-danger font-weight-bold'>You can only update grade until {{ $evaluation->end_date->format('F d, Y') }}</span>
+			 <span class='pt-2 pl-2 mt-3  text-danger font-weight-bold'>
+                    You only have ({{$daysLeft}} of {{$daysLeft >= 2 ? 'days' : 'day' }}) left to edit grades
+            </span>
 			@else
 			<span class='text-danger font-weight-bold'>You can only view the grades of your student</span>
 		@endif
