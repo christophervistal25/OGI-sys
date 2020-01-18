@@ -56,7 +56,7 @@ class SubjectStudentController extends Controller
      */
     public function show($subject)
     {
-        
+        $daysLeft = "";
         $evaluation = GradeEvaluation::canAdd();
         $students = Student::whereHas('subjects', function ($query) use($subject) {
              $query->where(['subject_id' => $subject, 'instructor_id' => Auth::user()->id]);
@@ -65,7 +65,9 @@ class SubjectStudentController extends Controller
         }, 'course', 'course.department'])->get();
 
         $subject = Subject::find($subject);
-        $daysLeft = (int) $evaluation->end_date->format('d') - (int) Carbon::now()->format('d');
+        if(isset($evaluation->end_date)) {
+            $daysLeft = (int) $evaluation->end_date->format('d') - (int) Carbon::now()->format('d');    
+        }
         return view('instructor.subjectstudents.show', compact('students', 'subject', 'evaluation', 'daysLeft'));
     }
 

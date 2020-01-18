@@ -20,7 +20,7 @@
 			@csrf
 			@method('PUT')
 			<div class="form-group">
-				<input type="file" name="csv" id="csvFile">
+				<input type="file" name="csv" id="csvFile"  required />
 			</div>
 				<input type="submit" value="Import" class="btn btn-primary">
 		</form>

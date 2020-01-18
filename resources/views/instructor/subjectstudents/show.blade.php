@@ -15,6 +15,7 @@
 
 <br>
 
+<a href="{{  route('subject.students.print', [$subject->id]) }}">Print</a>
 
 <div class="card shadow mb-4 rounded-0">
 	<div class="card-header py-3 rounded-0">

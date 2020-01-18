@@ -91,9 +91,13 @@ class SubjectController extends Controller
      */
     public function create(Subject $subject)
     {
+        $daysLeft = "";
         $evaluation = GradeEvaluation::canAdd();
         $canAdd = isset($evaluation->end_date);
-        $daysLeft = (int) $evaluation->end_date->format('d') - (int) Carbon::now()->format('d');
+        if(isset($evaluation->end_date)) {
+            $daysLeft = (int) $evaluation->end_date->format('d') - (int) Carbon::now()->format('d');    
+        }
+        
         return view('instructor.subjects.create', compact('subject', 'canAdd', 'evaluation', 'daysLeft'));
     }
 
@@ -107,36 +111,32 @@ class SubjectController extends Controller
     {
         $evaluation = GradeEvaluation::canAdd();
         $canAdd = isset($evaluation->end_date);
+       
+        $subjectId = $request->subject_id;
+         // Get the instructor.
+        $instructor = Instructor::with('subjects')->find(Auth::user()->id);
 
-        if($canAdd) {
-                    $subjectId = $request->subject_id;
-                     // Get the instructor.
-                    $instructor = Instructor::with('subjects')->find(Auth::user()->id);
-                
-                    $subject = Subject::with('students')->find($subjectId);
-
+        $subject = Subject::with('students')->find($subjectId);
 
 
-                    
-                    // Insert the subject for the instructor.
-                    $instructor->subjects()->attach($subject);
-                    
 
-                    // Insert all students for this subject.
-                    foreach ($request->students['ids'] as $index => $id) {
-                        $subject->students()->attach($id, ['instructor_id' => Auth::user()->id, 'remarks' => $request->students['remarks'][$index] ?? '0']);
-                    }
+        
+        // Insert the subject for the instructor.
+        $instructor->subjects()->attach($subject);
+        
+
+        // Insert all students for this subject.
+        foreach ($request->students['ids'] as $index => $id) {
+            $subject->students()->attach($id, ['instructor_id' => Auth::user()->id, 'remarks' => $request->students['remarks'][$index] ?? '0']);
+        }
 
 
-                    $studentWithNoInstructor = DB::table('student_subjects')->where(['subject_id' => $subjectId, 'instructor_id' => '0'])
-                                                                            ->first();
-                    DB::table('student_subjects')->update(['instructor_id' => Auth::user()->id]);                    
-                    
+        $studentWithNoInstructor = DB::table('student_subjects')->where(['subject_id' => $subjectId, 'instructor_id' => '0'])
+                                                                ->first();
+        DB::table('student_subjects')->update(['instructor_id' => Auth::user()->id]);                    
+        
 
-                    return back()->with('success', 'Successfully add new subject named ' . $request->name . ' with ' . count($request->students['ids']) .' students');
-            } else {
-                dd('You can\'t add grade.');
-            }
+        return back()->with('success', 'Successfully add new subject named ' . $request->name . ' with ' . count($request->students['ids']) .' students');
     }
 
     /**
@@ -225,10 +225,14 @@ class SubjectController extends Controller
 
     public function addNewStudent(Subject $subject)
     {
+        $daysLeft = "";
         $evaluation = GradeEvaluation::canAdd();
         $canAddStatus = isset($evaluation->end_date);
         $subjects = Subject::all();
-        $daysLeft = (int) $evaluation->end_date->format('d') - (int) Carbon::now()->format('d');
+        if(isset($evaluation->end_date)) {
+            $daysLeft = (int) $evaluation->end_date->format('d') - (int) Carbon::now()->format('d');    
+        }
+        
         return view('instructor.subjects.add_student', compact('subject', 'subjects', 'evaluation', 'canAddStatus', 'daysLeft'));
     }
 

@@ -60,6 +60,9 @@ Route::group(['prefix' => 'admin'] , function () {
 
     Route::post('/student/grade/print', 'Admin\StudentGradePrintController@print')->name('admin.student.subjects.print');
 
+    Route::get('/import/student', 'Admin\ImportStudentController@create')->name('admin.student.import');
+    Route::post('/import/student', 'Admin\ImportStudentController@store')->name('admin.student.import.action');
+
     // Route::get('/instructor/list', 'Admin\InstructorController@instructors')
     //     ->name('instructor.lists');
 
@@ -136,6 +139,8 @@ Route::group(['prefix' => 'instructor'] , function () {
 
     Route::put('/subject/{subject}/students', 'Instructor\SubjectStudentController@update')
           ->name('subject.students.update');
+
+    Route::get('/subject/{subject}/students/print', 'Instructor\SubjectStudentPrintController@print')->name('subject.students.print');
 });
 
 

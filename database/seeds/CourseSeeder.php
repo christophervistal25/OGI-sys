@@ -19,12 +19,6 @@ class CourseSeeder extends Seeder
                 'department_id' => 1
             ],
             [
-                'name'          => 'Bachelor of Science in Education',
-                'abbr'          => 'BSED',
-                'department_id' => 1
-            ],
-
-            [
                 'name'          => 'Bachelor of Elementary Education',
                 'abbr'          => 'BEED',
                 'department_id' => 1
