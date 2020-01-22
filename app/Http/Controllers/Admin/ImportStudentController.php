@@ -29,7 +29,7 @@ class ImportStudentController extends Controller
         DB::beginTransaction();
         try {
 
-            $destination =  public_path() . time() .'_' .  $request->file('csv')->getClientOriginalName();
+            $destination =  public_path() . '/' . time() .'_' .  $request->file('csv')->getClientOriginalName();
 
             move_uploaded_file($request->file('csv'), $destination);
 
