@@ -20,7 +20,7 @@ class Student extends Authenticatable
      */
     // 'level'
     protected $fillable = [
-        'firstname', 'middlename', 'lastname', 'name', 'password','birthdate', 'gender', 'profile', 'course_id', 'school_year', 'semester','level'
+        'firstname', 'middlename', 'lastname', 'name', 'password','birthdate', 'gender', 'profile', 'course_id', 'school_year', 'semester','level', 'parents_email'
     ];
     /**
      * The attributes that should be hidden for arrays.

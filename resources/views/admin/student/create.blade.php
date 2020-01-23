@@ -21,22 +21,28 @@
 				</div>
 				<div class="card-body">
 					<div class="row">
-						<div class="col-lg-4">
+						<div class="col-lg-3">
 							<div class="form-group">
 								<label for="studentFirstname">Firstname</label>
 								<input type="text" class="form-control" name="firstname" id="studentFirstname" placeholder="Enter Firstname..." value="{{ old('firstname') }}">
 							</div>
 						</div>
-						<div class="col-lg-4">
+						<div class="col-lg-3">
 							<div class="form-group">
 								<label for="studentMiddlename">Middlename</label>
 								<input type="text" class="form-control" name="middlename" id="studentMiddlename" placeholder="Enter Middlename..." value="{{ old('middlename') }}">
 							</div>
 						</div>
-						<div class="col-lg-4">
+						<div class="col-lg-3">
 							<div class="form-group">
 								<label for="studentLastname">Lastname</label>
 								<input type="text" class="form-control" name="lastname" id="studentLastname" placeholder="Enter Lastname..." value="{{ old('lastname') }}">
+							</div>
+						</div>
+						<div class="col-lg-3">
+							<div class="form-group">
+								<label for="studentParentEmail">Parent's Email</label>
+								<input type="text" class="form-control" name="parents_email" id="studentParentEmail" placeholder="Enter Parent's Email..." value="{{ old('parents_email') }}">
 							</div>
 						</div>
 						<div class="col-lg-6">

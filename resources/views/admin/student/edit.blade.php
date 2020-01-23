@@ -21,24 +21,31 @@
 		</div>
 		<div class="card-body">
 			<div class="row">
-				<div class="col-lg-4">
+				<div class="col-lg-3">
 					<div class="form-group">
 						<label for="studentFullname">Firstname</label>
 						<input type="text" class="text-capitalize form-control" name="firstname" id="studentFullname" value="{{ old('firstname') ?? $student->firstname }}" placeholder="Enter Firstname...">
 					</div>
 				</div>
 
-				<div class="col-lg-4">
+				<div class="col-lg-3">
 					<div class="form-group">
 						<label for="studentMiddlename">Middlename</label>
 						<input type="text" class="text-capitalize form-control" name="middlename" id="studentMiddlename" value="{{ old('middlename') ?? $student->middlename }}" placeholder="Enter Middlename...">
 					</div>
 				</div>
 
-				<div class="col-lg-4">
+				<div class="col-lg-3">
 					<div class="form-group">
 						<label for="studentLastname">Lastname</label>
 						<input type="text" class="text-capitalize form-control" name="lastname" id="studentLastname" value="{{ old('lastname')  ?? $student->lastname }}" placeholder="Enter Lastname...">
+					</div>
+				</div>
+
+				<div class="col-lg-3">
+					<div class="form-group">
+						<label for="studentParentsEmail">Parent's Email</label>
+						<input type="text" class="form-control" name="parents_email" id="studentParentsEmail" value="{{ old('parents_email')  ?? $student->parents_email }}" placeholder="Enter Parent's Email...">
 					</div>
 				</div>
 

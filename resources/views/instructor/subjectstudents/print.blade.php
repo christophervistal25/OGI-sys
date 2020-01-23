@@ -10,6 +10,7 @@
     .text-center { text-align:center; }
     .text-right { text-align: right; }
     .font-weight-bold { font-weight: bold; }
+    .text-center { text-align :center; }
     /* Create three equal columns that floats next to each other */
     .column {
     float: left;
@@ -34,8 +35,21 @@
   </head>
   <body>
     <header>
-      <h4>ANDRES SORIANO COLLEGES OF BISLIG <span style="font-size: 17px;"><br>Mangagoy, Bislig City</span></h4>
+      <center>
+      <h4>
+        ANDRES SORIANO COLLEGES OF BISLIG 
+        <span style="font-size: 17px;">
+          <br>Mangagoy, Bislig City
+        </span>
+        <span style="font-size: 17px;">
+          <br>SCHOOL YEAR : {{ date('Y') }} - {{ date('Y', strtotime('+1 years')) }}
+
+        </span>
+      </h4>
+      </center>
     </header>
+    <br>
+    <br>
     <br>
     <main>
       {{--       <h3>
@@ -52,14 +66,19 @@
       <br>
       <br>
       <br>
+      <span>Department : <b>{{ $subject->department->name }}</b></span>
+      <span style='margin-left : 277px;'>Subject : <b>{{ $subject->name }}</b></span>
+      <br>
+      <span>Semester : <b>{{ addSuffixToLevel($subject->semester) }} Semester</b></span>
+      <span style='margin-left : 278px;'>Units : <b>{{ $subject->credits }}</b></span>
+      <br>
       <table style='border-collapse : collapse;' width="100%" border='1'>
 			<thead>
 				<tr>
-					<th>ID Number</th>
-					<th>Name</th>
+					<th class='text-center'>NO</th>
+					<th class='text-center'>Name</th>
 					<th class="text-center">Course</th>
-					<th class="text-center">Department</th>
-					<th class="text-center">Rating</th>
+					<th class="text-center">Ratings</th>
 					<th class="text-center">Remarks</th>
 				</tr>
 			</thead>
@@ -69,7 +88,6 @@
 					<td>{{ $student->id_number }}</td>
 					<td>{{ ucfirst($student->name) }}</td>
 					<td class="text-center">{{ $student->course->abbr }}</td>
-					<td class="text-center">{{ $student->course->department->name }}</td>
 					@if(number_format($student->subjects[0]->pivot->remarks, 1) == 0.0 ) 
 						<td class="text-center {{isset($evaluation->end_date) ? 'studentGradeField' : ''}} text-danger font-weight-bold" {{isset($evaluation->end_date) ? 'contenteditable=true' : ''}} data-student-id="{{ $student->id }}" data-student-subject="{{ $student->subjects[0] }}">NG</td>
 						<td class="text-center font-weight-bold">NO GRADE</td>

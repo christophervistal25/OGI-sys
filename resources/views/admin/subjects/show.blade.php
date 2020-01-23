@@ -1,12 +1,12 @@
 @extends('admin.layouts.dashboard-template')
-@section('title','List of subject')
+@section('title','Add subject & Add Student')
 @section('content')
 @prepend('page-css')
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/startbootstrap-sb-admin-2@4.0.3/vendor/datatables/dataTables.bootstrap4.min.css">
 @endprepend
 <div class="card shadow mb-4 rounded-0">
 	<div class="card-header py-3 rounded-0">
-		<h6 class="m-0 font-weight-bold text-primary">Subjects</h6>
+		<h6 class="m-0 font-weight-bold text-primary">List of Subject</h6>
 	</div>
 	<div class="card-body">
 		<a class="btn btn-primary float-right mb-2" href="{{ route('subject.create') }}">Add Subject</a>

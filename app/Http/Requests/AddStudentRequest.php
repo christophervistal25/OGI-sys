@@ -36,6 +36,7 @@ class AddStudentRequest extends FormRequest
          'password'               => 'required|confirmed|min:6|max:20',
          'school_year' => 'required',
          'semester' => ['required', Rule::in([1, 2, 3])],
+         'parents_email' => 'required|email|unique:students',
         ];
 
     }

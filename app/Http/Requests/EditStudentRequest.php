@@ -27,7 +27,6 @@ class EditStudentRequest extends FormRequest
     {
         $courses = Course::pluck('id')->toArray();
         // $gender = ['male', 'female'];
-
         $rules = [
             'firstname'  => 'required',
             'middlename' => 'required',
@@ -36,6 +35,7 @@ class EditStudentRequest extends FormRequest
             'course_id'  => ['required', Rule::in($courses)],
             'school_year'  => 'required',
             'semester' => ['required', Rule::in([1, 2, 3])],
+            'parents_email' => 'required|email|unique:students,parents_email,' . request('id'),
             // 'profile'    => 'nullable',
         ];
 

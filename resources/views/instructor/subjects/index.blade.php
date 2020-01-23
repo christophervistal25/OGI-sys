@@ -14,7 +14,7 @@
 		<table class="table table-bordered table-hover" id="subjects-table">
 			<thead>
 				<tr>
-					<th>Name</th>
+					<th>Course No.</th>
 					<th>Description</th>
 					<th class="text-center">Semester</th>
 					<th class="text-center">Credits</th>

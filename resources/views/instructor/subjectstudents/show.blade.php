@@ -14,8 +14,9 @@
 
 
 <br>
-
-<a href="{{  route('subject.students.print', [$subject->id]) }}">Print</a>
+<a class='btn btn-primary' href="{{  route('subject.students.print', [$subject->id]) }}"><i class='fa fa-print'></i> Print</a>
+<br>
+<br>
 
 <div class="card shadow mb-4 rounded-0">
 	<div class="card-header py-3 rounded-0">
