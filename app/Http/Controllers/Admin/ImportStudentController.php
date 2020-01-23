@@ -36,7 +36,8 @@ class ImportStudentController extends Controller
             $content = str_replace("\r", "", file_get_contents($destination));
             $arrayContent = array_filter(explode("\n", $content));
             foreach ($arrayContent as $key => $s) {
-            	list($firstname,$middlename,$lastname,$gender,$course,$school_year,$semester,$level) = explode(',', $s);
+            	list($firstname,$middlename,$lastname,$gender,$course,$school_year,$semester,$level,$parents_email) = explode(',', $s);
+
 
             	$student = new Student();
 				$student->firstname   = $firstname;
@@ -50,13 +51,14 @@ class ImportStudentController extends Controller
 				$student->school_year = $school_year;
 				$student->semester    = $semester;
 				$student->level       = $level;
+                $student->parents_email = $parents_email;
 				$student->save();
             }
      
           
             DB::commit();
             File::delete($destination);
-            return back()->with('success', 'Succesfully add many new students');
+            // return back()->with('success', 'Succesfully add many new students');
         } catch (Exception $e) {
             return back();
             DB::rollback();

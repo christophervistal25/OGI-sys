@@ -14,7 +14,7 @@
 <div class="card shadow mb-4 rounded-0">
 	<div class="card-header py-3 rounded-0">
 		<h6 class="m-0 font-weight-bold text-primary">
-			Before importation make sure that the format csv each row is (firstname,middlename,lastname,gender,course,school year,semester,level)
+			Before importation make sure that the format csv each row is (firstname,middlename,lastname,gender,course,school year,semester,level,parents email)
 			course must be abbr e.g (BEED,BSIT)
 		</h6>
 	</div>
