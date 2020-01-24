@@ -17,6 +17,7 @@
 					<th>Level</th>
 					<th>School Year</th>
 					<th>Course</th>
+					<th>Parent's Email</th>
 					<th>Actions</th>
 				</tr>
 			</thead>
@@ -100,7 +101,8 @@
 		        { name: 'level' },
 		        { name: 'school_year' },
 		        { name: 'course.abbr', orderable: false },
-		         { name: 'action', orderable: false, searchable: false }
+		        { name: 'parents_email', orderable: false },
+		        { name: 'action', orderable: false, searchable: false }
 		    ],
 	});
 
