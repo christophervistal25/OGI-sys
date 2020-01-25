@@ -192,7 +192,7 @@ class SubjectController extends Controller
             move_uploaded_file($request->file('csv'), $destination);
 
             $content = str_replace("\r", "", file_get_contents($destination));
-            $arrayContent = explode("\n", $content);
+            $arrayContent = array_filter(explode("\n", $content));
 
             foreach ($arrayContent as $key => $student) {
                 $studentInfo[] = explode(',', $student);
@@ -217,6 +217,7 @@ class SubjectController extends Controller
             File::delete($destination);
             return back()->with('success', 'Succesfully add new students to ' . $subject->name . ' - ' . $subject->description);
         } catch (Exception $e) {
+            dd($e->getMessage());
             return back();
             DB::rollback();
         }

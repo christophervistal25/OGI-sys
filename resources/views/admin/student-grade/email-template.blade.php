@@ -61,7 +61,7 @@
       <br>
       @if($index === 0)
       <h4>GRADE EVALUATION</h4>
-      <h4>Stundent I.D : {{ $student->id_number }}  <br>Student Name : <span>{{ \Str::title($student->name) }}</span></h4>
+      <h4>Stundent I.D : {{ $student->id_number }}  <br>Student Name : <span>{{ \Str::title($student->name) }}</h4>
       @endif
       <table width="100%" style="border-collapse: collapse; margin-top : 20px;">
         <thead>

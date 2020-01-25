@@ -14,6 +14,7 @@
 <div class="card shadow mb-4 rounded-0">
 	<div class="card-header py-3 rounded-0">
 		<h6 class="m-0 font-weight-bold text-primary">Import student for {{ $subject->name }} - {{ $subject->description }}</h6>
+		<span class='text-danger'>*Please make sure that the format of the CSV content must be like this(STUDENT_ID_NUMBER, GRADE)</span>
 	</div>
 	<div class="card-body">
 		<form action="/instructor/subject/{{$subject->id}}/edit" method="POST" enctype="multipart/form-data">
