@@ -41,7 +41,7 @@ class StudentGradePrintController extends Controller
             $pdf->loadView('admin.student.print.grade', compact('student','subjects', 'studentLevel'));
             return $pdf->stream();
         } else {
-             Mail::to('christophervistal26@gmail.com')->send(new SendGrade($student, $subjects, $studentLevel));
+             Mail::to($student->parents_email)->send(new SendGrade($student, $subjects, $studentLevel));
              return back()->with('success', 'Succesfully send the grade to it\'s parent.');
         }
       }
