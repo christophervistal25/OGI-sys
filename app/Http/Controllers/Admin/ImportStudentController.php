@@ -44,7 +44,7 @@ class ImportStudentController extends Controller
 				$student->middlename  = $middlename;
 				$student->lastname    = $lastname;
 				$student->name        = $firstname . ' ' . $middlename . ' ' . $lastname;
-				$student->gender      = strtolower($gender)
+				$student->gender      = strtolower($gender);
 				$student->course_id   = Course::where('abbr', strtoupper($course))->first(['id'])->id;
 				$student->password    = '123456789';
 				$student->birthdate   = Carbon::now();
