@@ -58,8 +58,9 @@ class ImportStudentController extends Controller
           
             DB::commit();
             File::delete($destination);
-            // return back()->with('success', 'Succesfully add many new students');
+            return back()->with('success', 'Succesfully add many new students');
         } catch (Exception $e) {
+            dd($e->getMessage());
             return back();
             DB::rollback();
         }
