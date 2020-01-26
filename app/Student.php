@@ -42,9 +42,10 @@ class Student extends Authenticatable
         });
     }
 
-    public function getId(string $name) 
+    public function getId(int $id_number) 
     {
-        return self::where( 'name', 'ilike', "$name" )->first();
+        $this->primaryKey = 'id_number';
+        return $this->find($id_number, ['id']);
     }
 
     public function course()

@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\File;
 
 class SubjectController extends Controller
 {
-    public const STUDENT_NAME = 0;
+    public const ID_NUMBER_KEY = 0;
     public const RATING_KEY    = 1;
 
     public function __construct(Student $student)
@@ -187,7 +187,7 @@ class SubjectController extends Controller
                  return back()->withErrors(['message' => "You already have this subject if you want to add some changes please proceed to edit subject section."]);
             }
 
-            $destination =  public_path() . '/' . time() .'_' .  $request->file('csv')->getClientOriginalName();
+            $destination =  public_path() . time() .'_' .  $request->file('csv')->getClientOriginalName();
 
             move_uploaded_file($request->file('csv'), $destination);
 
@@ -196,11 +196,10 @@ class SubjectController extends Controller
 
             foreach ($arrayContent as $key => $student) {
                 $studentInfo[] = explode(',', $student);
-                $studentInfo[$key][self::STUDENT_NAME] = $this->student->getId( (int) $studentInfo[$key][self::STUDENT_NAME]);
+                $studentInfo[$key][self::ID_NUMBER_KEY] = $this->student->getId( (int) $studentInfo[$key][self::ID_NUMBER_KEY]);
             }
 
-            $studentIdNumbers = array_filter(array_column($studentInfo, self::STUDENT_NAME));
-            dd($studentIdNumbers);
+            $studentIdNumbers = array_filter(array_column($studentInfo, self::ID_NUMBER_KEY));
 
            // Get the instructor.
             $instructor = Instructor::with('subjects')->find(Auth::user()->id);
@@ -210,8 +209,8 @@ class SubjectController extends Controller
             // Insert the subject for the instructor.
             $instructor->subjects()->attach($subject);
 
-            foreach ($studentIdNumbers as $key => $student) {
-                $subject->students()->attach($student, ['instructor_id' => Auth::user()->id, 'remarks' => $studentInfo[$key][self::RATING_KEY] ?? 0.0 ]);
+            foreach ($studentIdNumbers as $key => $id) {
+                $subject->students()->attach($id, ['instructor_id' => Auth::user()->id, 'remarks' => $studentInfo[$key][self::RATING_KEY] ?? 0.0 ]);
             }
 
             DB::commit();
