@@ -38,21 +38,24 @@ class ImportStudentController extends Controller
             foreach ($arrayContent as $key => $s) {
             	list($firstname,$middlename,$lastname,$gender,$course,$school_year,$semester,$level,$parents_email) = explode(',', $s);
 
-
-            	$student = new Student();
-				$student->firstname   = $firstname;
-				$student->middlename  = $middlename;
-				$student->lastname    = $lastname;
-				$student->name        = $firstname . ' ' . $middlename . ' ' . $lastname;
-				$student->gender      = strtolower($gender);
-				$student->course_id   = Course::where('abbr', strtoupper($course))->first(['id'])->id;
-				$student->password    = '123456789';
-				$student->birthdate   = Carbon::now();
-				$student->school_year = $school_year;
-				$student->semester    = $semester;
-				$student->level       = $level;
-                $student->parents_email = $parents_email;
-				$student->save();
+                $student = Student::firstOrNew(
+                    ['parents_email' => $parents_email],
+                    [
+                        'firstname'   => $firstname,
+                        'middlename'  => $middlename,
+                        'lastname'    => $lastname,
+                        'name'        => $firstname . ' ' . $middlename . ' ' . $lastname,
+                        'gender'      => strtolower($gender),
+                        'course_id'   => Course::where('abbr', strtoupper($course))->first(['id'])->id,
+                        'password'    => '123456789',
+                        'birthdate'   => Carbon::now(),
+                        'school_year' => $school_year,
+                        'semester'    => $semester,
+                        'level'       => $level,
+                        'parents_email' => $parents_email,
+                    ]
+                );
+                $student->save();
             }
      
           
