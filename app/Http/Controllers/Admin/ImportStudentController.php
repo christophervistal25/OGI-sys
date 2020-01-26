@@ -39,7 +39,11 @@ class ImportStudentController extends Controller
             	list($firstname,$middlename,$lastname,$gender,$course,$school_year,$semester,$level,$parents_email) = explode(',', $s);
 
                 $student = Student::firstOrNew(
-                    ['parents_email' => $parents_email],
+                    [   
+                        'course_id' => Course::where('abbr', strtoupper($course))->first(['id'])->id,
+                        'name' => $firstname . ' ' . $middlename . ' ' . $lastname,
+                        'gender' => strtolower($gender),
+                    ],
                     [
                         'firstname'   => $firstname,
                         'middlename'  => $middlename,
