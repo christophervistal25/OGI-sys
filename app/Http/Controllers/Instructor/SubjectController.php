@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\File;
 
 class SubjectController extends Controller
 {
-    public const ID_NUMBER_KEY = 0;
+    public const STUDENT_NAME = 0;
     public const RATING_KEY    = 1;
 
     public function __construct(Student $student)
@@ -196,10 +196,10 @@ class SubjectController extends Controller
 
             foreach ($arrayContent as $key => $student) {
                 $studentInfo[] = explode(',', $student);
-                $studentInfo[$key][self::ID_NUMBER_KEY] = $this->student->getId( (int) $studentInfo[$key][self::ID_NUMBER_KEY]);
+                $studentInfo[$key][self::STUDENT_NAME] = $this->student->getId( (int) $studentInfo[$key][self::STUDENT_NAME]);
             }
 
-            $studentIdNumbers = array_filter(array_column($studentInfo, self::ID_NUMBER_KEY));
+            $studentIdNumbers = array_filter(array_column($studentInfo, self::STUDENT_NAME));
 
            // Get the instructor.
             $instructor = Instructor::with('subjects')->find(Auth::user()->id);
@@ -209,8 +209,8 @@ class SubjectController extends Controller
             // Insert the subject for the instructor.
             $instructor->subjects()->attach($subject);
 
-            foreach ($studentIdNumbers as $key => $id) {
-                $subject->students()->attach($id, ['instructor_id' => Auth::user()->id, 'remarks' => $studentInfo[$key][self::RATING_KEY] ?? 0.0 ]);
+            foreach ($studentIdNumbers as $key => $student) {
+                $subject->students()->attach($student, ['instructor_id' => Auth::user()->id, 'remarks' => $studentInfo[$key][self::RATING_KEY] ?? 0.0 ]);
             }
 
             DB::commit();
