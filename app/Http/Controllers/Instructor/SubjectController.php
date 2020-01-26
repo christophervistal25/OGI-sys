@@ -200,6 +200,7 @@ class SubjectController extends Controller
             }
 
             $studentIdNumbers = array_filter(array_column($studentInfo, self::STUDENT_NAME));
+            dd($studentIdNumbers);
 
            // Get the instructor.
             $instructor = Instructor::with('subjects')->find(Auth::user()->id);
