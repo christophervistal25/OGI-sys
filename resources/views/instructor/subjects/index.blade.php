@@ -49,5 +49,8 @@
 @push('page-scripts')
 <script src="https://cdn.jsdelivr.net/npm/startbootstrap-sb-admin-2@4.0.3/vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/startbootstrap-sb-admin-2@4.0.3/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script>
+	$('#subjects-table').dataTable();
+</script>
 @endpush
 @endsection

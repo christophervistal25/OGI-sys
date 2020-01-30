@@ -105,7 +105,6 @@
         </tbody>
       </table>
       {{-- This P tag represents new page --}}
-      <p></p>
       @php $index++; @endphp
       @endforeach
     </main>
