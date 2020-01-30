@@ -58,7 +58,7 @@
 					@if(number_format($items->pivot->remarks, 1) == 0.0)
                           <td class="text-center"></td>
                           <td class="text-center">NG</td>
-                         @elseif(number_format($items->credits, 1) >= 3.1)
+                         @elseif(number_format($items->pivot->remarks, 1) >= 3.1)
                           <td class="text-center"></td>
                           <td class='text-center'>FAILED</td>
                          @else
