@@ -77,7 +77,7 @@
           @foreach($year as $student_level => $student_subject)
             <tr>
               <td colspan="5" class='font-weight-bold'>
-                <u>{{ addSuffixToLevel($student_subject->first()->semester) }} Semester {{$student_subject[0]->created_at->format('Y')}}-{{ Carbon\Carbon::parse($student_subject[0]->created_at)->addYears(1)->format('Y') }} ({{ $student->course->abbr }} {{ $student_subject[0]->level}})</u>
+                <u>{{ addSuffixToLevel($student_subject->first()->semester) }} Semester {{$student_subject[0]->pivot->created_at->format('Y')}}-{{ Carbon\Carbon::parse($student_subject[0]->pivot->created_at)->addYears(1)->format('Y') }} ({{ $student->course->abbr }} {{ $student_subject[0]->level}})</u>
               </td>
             </tr>
             @foreach($student_subject as $items)
@@ -90,11 +90,14 @@
                         @php $total_rating += $items->pivot->remarks @endphp
                         @php $total_weighted += $items->pivot->remarks * $items->credits @endphp
                          @if(number_format($items->pivot->remarks, 1) == 0.0)
-                         <td class="text-center"></td>
+                          <td class="text-center"></td>
                           <td class="text-center">NG</td>
-                          @else
+                         @elseif(number_format($items->credits, 1) <= 3.1)
+                          <td class="text-center"></td>
+                          <td>FAILED</td>
+                         @else
                           <td class="text-center"> {{ number_format($items->credits, 1) }}</td>
-                          <td class="text-center"> {{ ($items->pivot->remarks > 3.0 ) ? 'FAILED' : 'PASSED' }}</td>
+                          <td class="text-center">PASSED</td>
                         @endif
                       </tr>
            @endforeach
