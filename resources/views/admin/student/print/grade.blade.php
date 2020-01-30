@@ -89,8 +89,11 @@
                         @php $total_subjects++ @endphp
                         @php $total_rating += $items->pivot->remarks @endphp
                         @php $total_weighted += $items->pivot->remarks * $items->credits @endphp
-                        <td> {{ number_format($items->credits, 1) }}</td>
-                        <td> {{ ($items->pivot->remarks > 3.0 ) ? 'FAILED' : 'PASSED' }}</td>
+                         @if(number_format($items->pivot->remarks, 1) == 0.0)
+                          <td class="text-center">NO GRADE</td>
+                          @else
+                          <td class="text-center"> {{ ($items->pivot->remarks > 3.0 ) ? 'FAILED' : 'PASSED' }}</td>
+                        @endif
                       </tr>
            @endforeach
           @endforeach
