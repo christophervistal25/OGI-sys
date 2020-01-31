@@ -2,7 +2,7 @@
   <head>
     <title>Student Grades</title>
     <style>
-    /* @page { margin: 100px 25px; } */
+     @page { margin: 100px 25px; } 
     header { position: fixed; top: 0px; left: 0px; right: 0px; height: auto;  }
     footer { position: fixed; bottom: -60px; left: 0px; right: 0px; background-color: lightblue; height: 50px; }
     p { page-break-after: always; }
@@ -59,6 +59,12 @@
       <br>
       <br>
       <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
       @if($index === 0)
       <h4>GRADE EVALUATION</h4>
       <h4>Stundent I.D : {{ $student->id_number }}  <br>Student Name : <span>{{ \Str::title($student->name) }}</span></h4>
@@ -104,7 +110,6 @@
           @endforeach
         </tbody>
       </table>
-      {{-- This P tag represents new page --}}
       @php $index++; @endphp
       @endforeach
     </main>
