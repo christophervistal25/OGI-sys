@@ -53,15 +53,18 @@
 					@if(number_format($items->pivot->remarks, 1) == 0.0)
                           <td class="text-center"></td>
                           <td class="text-center text-danger">NG</td>
+					<td class="text-center">{{ number_format($items->pivot->remarks * $items->credits, 1) }}</td>
+
                    @elseif(number_format($items->pivot->remarks, 1) >= 3.1)
                           <td class="text-center"></td>
                           <td class='text-center text-danger'>FAILED</td>
+					<td class="text-center">{{ number_format($items->pivot->remarks * $items->credits, 1) }}</td>
+                          
                          @else
                           <td class="text-center"> {{ number_format($items->credits, 1) }}</td>
                           <td class="text-center text-primary">PASSED</td>
-                    @endif
-					
 					<td class="text-center">{{ number_format($items->pivot->remarks * $items->credits, 1) }}</td>
+                    @endif
 				</tr>
 				@endforeach
 				<tr>
