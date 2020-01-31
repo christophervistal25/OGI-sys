@@ -37,7 +37,6 @@
      
     </header> --}}
      <h4>ANDRES SORIANO COLLEGES OF BISLIG <span style="font-size: 17px;"><br>Mangagoy, Bislig City</span></h4>
-    <br>
     <main>
       @php $index = 0; @endphp
       @foreach($subjects as $level => $year)
@@ -57,8 +56,6 @@
       </span>
       </center>
       </h3> --}}
-      <br>
-      <br>
       <br>
       @if($index === 0)
       <h4>GRADE EVALUATION</h4>
