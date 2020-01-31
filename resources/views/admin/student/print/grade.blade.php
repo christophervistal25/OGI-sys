@@ -2,7 +2,7 @@
   <head>
     <title>Student Grades</title>
     <style>
-     @page { margin: 100px 25px; } 
+     /*@page { margin: 100px 25px; } */
     header { position: fixed; top: 0px; left: 0px; right: 0px; height: auto;  }
     footer { position: fixed; bottom: -60px; left: 0px; right: 0px; background-color: lightblue; height: 50px; }
     p { page-break-after: always; }
@@ -33,9 +33,10 @@
     </style>
   </head>
   <body>
-    <header>
-      <h4>ANDRES SORIANO COLLEGES OF BISLIG <span style="font-size: 17px;"><br>Mangagoy, Bislig City</span></h4>
-    </header>
+  {{--   <header>
+     
+    </header> --}}
+     <h4>ANDRES SORIANO COLLEGES OF BISLIG <span style="font-size: 17px;"><br>Mangagoy, Bislig City</span></h4>
     <br>
     <main>
       @php $index = 0; @endphp
@@ -56,12 +57,6 @@
       </span>
       </center>
       </h3> --}}
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
       <br>
       <br>
       <br>
