@@ -18,6 +18,16 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
+       
+        // To avoid visiting the login section of other user if already logged in
+         if (Auth::guard('student')->check()) {
+              return redirect()->intended(route('student.dashboard'));
+         } else if (Auth::guard('admin')->check()) {
+             return redirect()->intended(route('admin.dashboard'));
+         } else if (Auth::guard('instructor')->check()) {
+            return redirect()->intended(route('instructor.dashboard'));
+         }
+
          switch ($guard) {
           case 'admin':
             if (Auth::guard($guard)->check()) {
