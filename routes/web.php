@@ -90,6 +90,13 @@ Route::group(['prefix' => 'admin'] , function () {
     Route::get('/subject/{subject}/students', 'Admin\SubjectStudentsController@show');
 
     Route::resource('/grade/evaluation', 'Admin\GradeEvaluationController');
+
+    Route::get('/student/view/grade/control', 'Admin\StudentViewGradeController@index')->name('view-grade.control.index');
+    Route::get('/student/view/grade/control/create', 'Admin\StudentViewGradeController@create')->name('view-grade.control');
+    Route::post('/student/view/grade/control/create', 'Admin\StudentViewGradeController@store')->name('view-grade.control.submit');
+    Route::get('/student/view/grade/control/{schedule}', 'Admin\StudentViewGradeController@edit')->name('view-grade.control.edit');
+    Route::put('/student/view/grade/control/{schedule}', 'Admin\StudentViewGradeController@update')->name('view-grade.control.update');
+
 });
 
 Route::group(['prefix' => 'student'] , function () {

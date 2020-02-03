@@ -86,6 +86,14 @@
           <span>Grade Evaluation Control</span></a>
       </li>
 
+      <hr class="sidebar-divider">
+            <li class="nav-item">
+        <a class="nav-link" href="{{route('view-grade.control.index')}}">
+          <i class="fas fa-fw fa-calendar text-white"></i>
+          <span>Student View Grades Control</span></a>
+      </li>
+
+
 
 
     <hr class="sidebar-divider">
