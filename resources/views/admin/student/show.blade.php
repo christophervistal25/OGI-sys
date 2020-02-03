@@ -2,6 +2,7 @@
 @section('title','List of student')
 @section('content')
 @prepend('page-css')
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/startbootstrap-sb-admin-2@4.0.3/vendor/datatables/dataTables.bootstrap4.min.css">
 @endprepend
 <div class="row mb-2">
@@ -17,6 +18,10 @@
 		<h6 class="m-0 font-weight-bold text-primary">Students</h6>
 	</div>
 	<div class="card-body">
+		<a class="btn btn-primary float-right mr-2" href="{{ route('student.create') }}">Add new student</a>
+		<a class="btn btn-info float-right mr-2" href="{{ route('admin.student.import') }}">Import Students</a>
+		<div class="clearfix"></div>
+		<br>
 		<table class="table table-bordered table-hover" id="students-table">
 			<thead>
 				<tr>

@@ -10,8 +10,6 @@
 	</div>
 	<div class="card-body">
 		<a class="btn btn-primary float-right mb-2" href="{{ route('subject.create') }}">Add Subject</a>
-		<a class="btn btn-info float-right mr-2" href="{{ route('student.create') }}">Add new student</a>
-		<a class="btn btn-info float-right mr-2" href="{{ route('admin.student.import') }}">Import Students</a>
 		<div class="clearfix"></div>
 		<table class="table table-bordered table-hover" id="subjects-table">
 			<thead>
