@@ -10,7 +10,7 @@
 	</div>
 
 	<div class="card-body">
-		<a class="btn btn-primary btn-sm mb-2 text-center text-white  float-right font-weight-bold" href="{{ route('view-grade.control')  }}"><i class="fa fa-plus"></i> Add new deadline</a>
+		<a class="btn btn-primary btn-sm mb-2 text-center text-white  float-right font-weight-bold" href="{{ route('view-grade.control')  }}"><i class="fa fa-plus"></i> Add new schedule</a>
 		<div class="clearfix"></div>
 		<table class="table table-bordered table-hover" id="evaluations-table">
 			<thead>
