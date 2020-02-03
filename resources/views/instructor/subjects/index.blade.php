@@ -26,13 +26,12 @@
 			<tbody>
 				@foreach($instructor->subjects as $subject)
 				<tr>
-					
+					<td>{{ $subject->students }}</td>
 					<td><a href="/instructor/subject/{{ $subject->id }}/students"><u>{{ $subject->name }}</u></a></td>
 					<td>{{ $subject->description }}</td>
 					<td class="text-center">{{ $subject->semester }}</td>
 					<td class="text-center">{{ $subject->credits }}</td>
 					<td class="text-center">{{ $subject->level }}</td>
-					{{ dd($subject->students()->count() )}}
 					<td class="text-center">{{ $subject->students->count() }}</td>
 					<td class="text-center">
 						  <a class="btn btn-primary btn-sm" href="/instructor/subject/{{$subject->id}}/add/student"><i class='fa fa-plus'></i></a>
