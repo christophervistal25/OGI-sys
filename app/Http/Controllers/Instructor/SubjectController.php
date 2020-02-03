@@ -37,13 +37,14 @@ class SubjectController extends Controller
      */
     public function index()
     {
+        $instructor = Auth::user();
+        $s = $instructor->subjects;
+        dd($s[0]->students);
+
         $instructor = Instructor::with(['subjects', 'subjects.students' => function ($query) 
         {
             $query->where('instructor_id', Auth::user()->id);
         }])->find(Auth::user()->id);
-        echo '<pre>';
-        print_r($instructor);
-        echo '</pre>';
         return view('instructor.subjects.index', compact('instructor'));
     }
 
