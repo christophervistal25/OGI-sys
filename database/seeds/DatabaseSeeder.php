@@ -20,12 +20,12 @@ class DatabaseSeeder extends Seeder
         // factory('App\Instructor', 5)->create();
         $this->call([
             AdminSeeder::class,
-            InstructorSeeder::class,
             DepartmentSeeder::class,
             CourseSeeder::class,
             SubjectSeeder::class,
             HRSeeder::class,
             StudentSeeder::class,
+            InstructorSeeder::class,
         ]);
 
         // Student::all()->each(function ($student) {

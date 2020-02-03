@@ -14,7 +14,7 @@ class SubjectSeeder extends Seeder
      */
     public function run()
     {
-    	/*foreach(range(1,4) as $level) {
+    	foreach(range(1,4) as $level) {
     		foreach(range(1,2) as $iteration) {
     				foreach(range(1,3) as $semester) {
 		    			Subject::create([
@@ -28,9 +28,9 @@ class SubjectSeeder extends Seeder
 						]);
 		    		}
     		}
-    	}*/
+    	}
 
-		Subject::create([
+		/*Subject::create([
 			'name'        => 'SS1 1',
 			'description' => 'Sample Subject 1',
 			'level'       => 1,
@@ -58,6 +58,6 @@ class SubjectSeeder extends Seeder
 			'semester'    => 3,
 			'school_year' => '2019-2020',
 			'department_id' => 3,
-		]);
+		]);*/
     }
 }

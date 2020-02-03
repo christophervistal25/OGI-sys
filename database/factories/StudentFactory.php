@@ -14,7 +14,7 @@ $factory->define(Student::class, function (Faker $faker) {
 		'birthdate'      =>  '2019-09-13 17:06:0',
 		'password'       => '1234',
 		// 'remember_token' => Str::random(10),
-		'course_id'      => rand(1,11),
+		'course_id'      => rand(1,10),
     ];
 });
 

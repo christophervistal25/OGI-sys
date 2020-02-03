@@ -13,7 +13,7 @@ class StudentSeeder extends Seeder
      */
     public function run()
     {
-        // factory('App\Student', 100)->create();
+        factory('App\Student', 50)->create();
         Student::create([
             'name'         => 'John Doe',
             // 'level'        => 1,
@@ -37,7 +37,7 @@ class StudentSeeder extends Seeder
         ]);
 
 
-       /* $student =  Student::find(1);
+        $student =  Student::find(1);
         $secondStudent = Student::find(2);
 
 
@@ -45,11 +45,16 @@ class StudentSeeder extends Seeder
         foreach(range(1,4) as $level) {
                foreach(range(1,3) as $semester) {
                     $subjects = Subject::where(['level' =>  $level, 'semester' => $semester])->get(['id']);
-                    foreach($subjects as $subject) {
+                    foreach ($subjects as $subject) {
+                        Student::all()->each(function ($s) use ($subject) {
+                            $s->subjects()->attach($subject->id, ['instructor_id' => 1, 'remarks' => '1.0']);
+                        });    
+                    }
+                    /*foreach($subjects as $subject) {
                         $student->subjects()->attach($subject->id, ['instructor_id' => 1, 'remarks' => '1.0']);
                         $secondStudent->subjects()->attach($subject->id, ['instructor_id' => 1, 'remarks' => '1.0']);
-                    }
+                    }*/
                 }
-        }*/
+        }
     }
 }
