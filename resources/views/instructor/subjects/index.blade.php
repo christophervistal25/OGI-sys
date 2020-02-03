@@ -32,6 +32,7 @@
 					<td class="text-center">{{ $subject->semester }}</td>
 					<td class="text-center">{{ $subject->credits }}</td>
 					<td class="text-center">{{ $subject->level }}</td>
+					{{ dd($subject->students()->count() )}}
 					<td class="text-center">{{ $subject->students->count() }}</td>
 					<td class="text-center">
 						  <a class="btn btn-primary btn-sm" href="/instructor/subject/{{$subject->id}}/add/student"><i class='fa fa-plus'></i></a>
