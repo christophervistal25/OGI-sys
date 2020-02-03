@@ -27,7 +27,12 @@ class StudentViewGrade extends Model
     public static function isStudentCanLogin() 
     {
         $schedule = self::orderBy('start_date', 'DESC')->first();
-        $time = Carbon::now();
-        return $time->between($schedule->start_date, $schedule->end_date);
+        if (is_null($schedule)) {
+            return false;
+        } else {
+            $time = Carbon::now();
+            return $time->between($schedule->start_date, $schedule->end_date);
+        }
+        
     }
 }
