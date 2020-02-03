@@ -41,7 +41,9 @@ class SubjectController extends Controller
         {
             $query->where('instructor_id', Auth::user()->id);
         }])->find(Auth::user()->id);
+        echo '<pre>';
         print_r($instructor);
+        echo '</pre>';
         return view('instructor.subjects.index', compact('instructor'));
     }
 
