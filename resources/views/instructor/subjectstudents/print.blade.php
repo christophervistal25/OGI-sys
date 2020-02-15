@@ -2,9 +2,9 @@
   <head>
     <title>Student Grades</title>
     <style>
-    /* @page { margin: 100px 25px; } */
-    header { position: fixed; top: 0px; left: 0px; right: 0px; height: auto;  }
-    footer { position: fixed; bottom: -60px; left: 0px; right: 0px; background-color: lightblue; height: 50px; }
+     /*@page { margin: 100px 25px; } */
+    /*header { position: fixed; top: 0px; left: 0px; right: 0px; height: auto;  }*/
+    /*footer { position: fixed; bottom: -60px; left: 0px; right: 0px; background-color: lightblue; height: 50px; }*/
     p { page-break-after: always; }
     p:last-child { page-break-after: never; }
     .text-center { text-align:center; }
@@ -34,8 +34,8 @@
     </style>
   </head>
   <body>
-    <header>
-      <center>
+    <main>
+       <center>
       <h4>
         ANDRES SORIANO COLLEGES OF BISLIG 
         <span style="font-size: 17px;">
@@ -43,15 +43,10 @@
         </span>
         <span style="font-size: 17px;">
           <br>SCHOOL YEAR : {{ date('Y') }} - {{ date('Y', strtotime('+1 years')) }}
-
         </span>
       </h4>
       </center>
-    </header>
-    <br>
-    <br>
-    <br>
-    <main>
+      
       {{--       <h3>
       <center>
       GRADE EVALUATION <br>
@@ -63,9 +58,6 @@
       </span>
       </center>
       </h3> --}}
-      <br>
-      <br>
-      <br>
       <span>Department : <b>{{ $subject->department->name }}</b></span>
       <span style='margin-left : 277px;'>Subject : <b>{{ $subject->name }}</b></span>
       <br>
