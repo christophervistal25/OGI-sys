@@ -10,7 +10,7 @@
     "require": {
         "php": "^7.3",
         "ext-gd": "*",
-        "barryvdh/laravel-dompdf": "^0.8.5",
+        "barryvdh/laravel-dompdf": "^0.8.4",
         "binarytorch/larecipe": "^2.2",
         "fideloper/proxy": "^4.0",
         "freshbitsweb/laratables": "^2.1",
