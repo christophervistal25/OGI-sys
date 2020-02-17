@@ -31,6 +31,10 @@
     border-top : 1px solid black;
     border-bottom : 1px solid black;
     }
+    .float-right { 
+      float : right;
+     }
+     .clearfix { clear:both; }
     </style>
   </head>
   <body>
@@ -59,10 +63,10 @@
       </center>
       </h3> --}}
       <span>Department : <b>{{ $subject->department->name }}</b></span>
-      <span style='margin-left : 277px;'>Subject : <b>{{ $subject->name }}</b></span>
+      <span class='float-right'>Subject : <b>{{ $subject->name }} - {{ $subject->description }}</b></span>
       <br>
       <span>Semester : <b>{{ addSuffixToLevel($subject->semester) }} Semester</b></span>
-      <span style='margin-left : 278px;'>Units : <b>{{ $subject->credits }}</b></span>
+      <span class='float-right'>Units : <b>{{ $subject->credits }}</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
       <br>
       <table style='border-collapse : collapse;' width="100%" border='1'>
 			<thead>
@@ -93,6 +97,21 @@
 				@endforeach
 			</tbody>
 		</table>
+    <br>
+    <table border='0' width='100%'>
+      <thead style='border : 0px;'>
+        <tr>
+          <td width='60%'>&nbsp;</td>
+          <td style='border-bottom : 1px solid black;' class='text-center font-weight-bold'>{{ Auth::user()->firstname }} {{ Auth::user()->middlename }} {{ Auth::user()->lastname }}</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td width='60%'>&nbsp;</td>
+          <td class='text-center'>INSTRUCTOR</td>
+        </tr>
+      </tbody>
+    </table>
     </main>
   </body>
 </html>

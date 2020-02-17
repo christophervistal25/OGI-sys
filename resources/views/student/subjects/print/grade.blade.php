@@ -29,6 +29,7 @@
       display: table;
       clear: both;
     }
+    .float-right  { float:right; }
   </style>
 </head>
 <body>
@@ -121,11 +122,18 @@
                 </tbody>
               </table>
               <span>Not valid when printed without authorized signatures</span>
-            {{-- This P tag represents new page --}}
-            <p></p>
+                <br>
+                <br>
+                <div class='float-right' style='margin-right : 30px;'><b>REBECCA P. CAPONONG</b></div>
+                <div style='clear:both;'></div>
+                <div style='margin-left : 450px; border-bottom : 1px solid black; width:250px; line-height: 2px;'>&nbsp;</div>
+                <div class='float-right' style='margin-right : 80px;'>REGISTRAR</div>
+              {{-- This P tag represents new page --}}
+              <p></p>
             @php $index++; @endphp
           @endforeach
       @endforeach
+      
   </main>
 </body>
 </html>

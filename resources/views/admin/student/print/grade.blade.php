@@ -30,6 +30,7 @@
     border-top : 1px solid black;
     border-bottom : 1px solid black;
     }
+    .float-right { float :right; }
     </style>
   </head>
   <body>
@@ -104,6 +105,13 @@
       </table>
       @php $index++; @endphp
       @endforeach
+      <br>
+      <br>
+        <div class='float-right' style='margin-right : 30px;'><b>REBECCA P. CAPONONG</b></div>
+        <div style='clear:both;'></div>
+        <div style='margin-left : 450px; border-bottom : 1px solid black; width:250px; line-height: 2px;'>&nbsp;</div>
+        <div class='float-right' style='margin-right : 80px;'>REGISTRAR</div>
+    </table>
     </main>
   </body>
 </html>
