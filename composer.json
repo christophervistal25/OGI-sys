@@ -16,7 +16,7 @@
         "freshbitsweb/laratables": "^2.1",
         "guzzlehttp/guzzle": "^6.5",
         "jrm2k6/cloudder": "^0.6.0",
-        "laravel/framework": "5.8.*",
+        "laravel/framework": "6.20.*",
         "laravel/tinker": "^1.0"
     },
     "require-dev": {
