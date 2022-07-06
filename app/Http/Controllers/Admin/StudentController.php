@@ -7,18 +7,23 @@ use App\Department;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddStudentRequest;
 use App\Http\Requests\EditStudentRequest;
-use App\Repositories\StudentRepository;
+use App\Service\StudentAchievementService;
+use App\Service\StudentEducationService;
+use App\Service\StudentService;
 use App\Student;
 use Freshbitsweb\Laratables\Laratables;
+use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
-    protected $studenRepo;
+    public $studentService;
 
-    public function __construct(StudentRepository $studentRepo)
+    public function __construct(StudentService $studentService, StudentEducationService $studentEducationService, StudentAchievementService $studentAchievementService)
     {
         $this->middleware('auth:admin');
-        $this->studentRepo = $studentRepo;
+        $this->studentService = $studentService;
+        $this->studentEducationService = $studentEducationService;
+        $this->studentAchievementService = $studentAchievementService;
     }
 
     /**
@@ -43,9 +48,6 @@ class StudentController extends Controller
                 $query->where('department_id', $departmentId);
             });
         });
-        /*$students = Student::with(['course', 'course.department'])->whereHas('course', function ($query) use($departmentId) {
-            return $query->where('department_id', $departmentId);
-        })->get();*/
     }
 
     /**
@@ -56,8 +58,9 @@ class StudentController extends Controller
     public function create()
     {
         $courses = Course::get(['id', 'name']);
+        $departments = Department::get();
 
-        return view('admin.student.create', compact('courses'));
+        return view('admin.student.create', compact('courses', 'departments'));
     }
 
     /**
@@ -69,9 +72,14 @@ class StudentController extends Controller
      */
     public function store(AddStudentRequest $request)
     {
-        $student = $this->studentRepo->store($request->except('password_confirmation'));
+        DB::transaction(function () use ($request) {
+            $student = $this->studentService->addNewStudent($request->all());
+            $this->studentEducationService->addNewStudentEducation($request->all(), $student);
+            $this->studentService->addFamilyBackground($request->all(), $student);
+            $this->studentAchievementService->addAchievements($request->all(), $student);
+        });
 
-        return back()->with('success', 'Successfully add the student with ID Number '.$student->id_number.'.')->with('student_id', $student->id);
+        return back()->with('success', 'Student added successfully.');
     }
 
     /**

@@ -1,14 +1,16 @@
 <?php
 
-use App\Http\Controllers\Admin\CourseController;
-use App\Http\Controllers\Admin\DepartmentController;
-use App\Http\Controllers\Admin\InstructorController;
-use App\Http\Controllers\Admin\StudentController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\Auth\AdminLoginController;
-use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\Admin\CourseController;
+use App\Http\Controllers\Admin\StudentController;
+use App\Http\Controllers\Admin\SubjectController;
+use App\Http\Controllers\Auth\AdminLoginController;
+use App\Http\Controllers\Admin\DepartmentController;
+use App\Http\Controllers\Admin\InstructorController;
+use App\Http\Controllers\Admin\StudentSubjectController;
 
 Route::get('/', [WelcomeController::class, 'index']);
 
@@ -47,24 +49,18 @@ Route::group(['prefix' => 'admin'], function () {
 
     // Route::get('/student/department/list/{departmentId}', 'Admin\StudentController@studentsByDepartment');
 
-    Route::get('/student/subject/list/{student}', 'Admin\StudentSubjectController@subjects');
-    Route::get('/student/{student}/subject/create', 'Admin\StudentSubjectController@create')
-        ->name('student.subject.create');
-
-    Route::post('/student/{student}/subject/create', 'Admin\StudentSubjectController@store')
-        ->name('student.subject.store');
-
-    Route::get('/student/{student}/subject/edit', 'Admin\StudentSubjectController@edit')
-        ->name('student.subject.edit');
+    Route::get('/student/subject/list/{student}', [StudentSubjectController::class, 'subjects']);
+    Route::get('/student/{student}/subject/create', [StudentSubjectController::class, 'create'])->name('student.subject.create');
+    Route::post('/student/{student}/subject/create', [StudentSubjectController::class, 'store'])->name('student.subject.store');
+    Route::get('/student/{student}/subject/edit', [StudentSubjectController::class, 'edit'])->name('student.subject.edit');
 
     Route::post('/student/grade/print', 'Admin\StudentGradePrintController@print')->name('admin.student.subjects.print');
 
     Route::get('/import/student', 'Admin\ImportStudentController@create')->name('admin.student.import');
     Route::post('/import/student', 'Admin\ImportStudentController@store')->name('admin.student.import.action');
 
-    Route::get('/subject/list', 'Admin\SubjectController@subjects')->name('subject.lists');
-
-    Route::resource('subject', 'Admin\SubjectController');
+    Route::get('subject/list', [SubjectController::class, 'subjects'])->name('subject.lists');
+    Route::resource('subject', SubjectController::class);
 
     Route::get('/course/list', [CourseController::class, 'courses'])->name('course.lists');
 

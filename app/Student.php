@@ -18,7 +18,18 @@ class Student extends Authenticatable
      */
     // 'level'
     protected $fillable = [
-        'firstname', 'middlename', 'lastname', 'name', 'password', 'birthdate', 'gender', 'profile', 'course_id', 'school_year', 'semester', 'level', 'parents_email',
+        'firstname',
+        'middlename',
+        'lastname',
+        'password',
+        'gender',
+        'profile',
+        'birthdate',
+        'civil_status',
+        'citizenship',
+        'email',
+        'contact_no',
+        'address',
     ];
 
     /**
@@ -115,5 +126,20 @@ class Student extends Authenticatable
     public static function laratablesCustomInstructorAction($student)
     {
         return view('instructor.subjects.includes.create_action', compact('student'))->render();
+    }
+
+    public function familyBackground()
+    {
+        return $this->hasOne(StudentFamilyBackground::class, 'student_id');
+    }
+
+    public function educations()
+    {
+        return $this->hasMany(StudentEducation::class, 'student_id');
+    }
+
+    public function achievements()
+    {
+        return $this->hasMany(StudentAchievement::class, 'student_id');
     }
 }

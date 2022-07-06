@@ -42,6 +42,7 @@ class AddSubjectRequest extends FormRequest
     {
         return [
             'department_id' => 'department',
+            'name' => 'course no',
         ];
     }
 }

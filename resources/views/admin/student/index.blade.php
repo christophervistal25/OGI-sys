@@ -6,18 +6,24 @@
 @endprepend
 <div class="card shadow mb-4 rounded-0">
 	<div class="card-header py-3 rounded-0">
-		<h6 class="m-0 font-weight-bold text-primary">Students</h6>
+		<h6 class="m-0 font-weight-medium text-primary">Students</h6>
 	</div>
+    <div class="text-right mx-3 mt-3">
+        <a href="{{ route('student.create') }}" class='btn btn-primary font-weight-medium'>
+            <i class='fa fa-plus'></i> Add New Student
+        </a>
+    </div>
 	<div class="card-body">
 		<table class="table table-bordered table-hover" id="students-table">
 			<thead>
 				<tr>
 					<th>ID Number</th>
-					<th>Name</th>
+					<th>Firstname</th>
+					<th>Middlename</th>
+					<th>Lastname</th>
+					<th>Suffix</th>
 					<th>Gender</th>
-					<th>Birthdate</th>
-					<th>Course</th>
-					<th>Actions</th>
+					<th class='text-center'>Actions</th>
 				</tr>
 			</thead>
 		</table>
@@ -95,11 +101,12 @@
 		    responsive: true,
 		    ajax: '/admin/student/list',
 		    columns: [
-		        { name: 'id_number' },
-		        { name: 'name' },
-		        { name: 'gender' },
-		        { name: 'birthdate' },
-		        { name: 'course.abbr', orderable: false },
+		        { name: 'id_number', className : 'text-center' },
+		        { name: 'firstname', className : 'text-center' },
+		        { name: 'middlename', className : 'text-center' },
+		        { name: 'lastname', className : 'text-center' },
+		        { name: 'suffix', className : 'text-center' },
+		        { name: 'gender', className : 'text-center' },
 		         { name: 'action', orderable: false, searchable: false }
 		    ],
 	});

@@ -12,12 +12,12 @@ class DepartmentSeeder extends Seeder
      */
     public function run()
     {
-        // $departments = ['Education', 'ITE/TVET', 'Criminology', 'BSA/BSBA'];
-
-        // foreach ($departments as $department) {
-        //     Department::create([
-        //         'name' => $department
-        //     ]);
-        // }
+        Department::create([
+            'department_code' => 10001,
+            'name' => 'College of Engineering and Computer Science Technology',
+            'short_name' => 'CECST',
+            'department_head' => '*',
+            'department_head_position' => '*',
+        ]);
     }
 }

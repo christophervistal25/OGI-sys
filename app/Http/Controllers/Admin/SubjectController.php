@@ -18,7 +18,9 @@ class SubjectController extends Controller
 
     public function subjects()
     {
-        return Laratables::recordsOf(Subject::class);
+        return Laratables::recordsOf(Subject::class, function ($query) {
+            return $query->orderBy('created_at', 'DESC');
+        });
     }
 
     /**
@@ -53,7 +55,7 @@ class SubjectController extends Controller
     {
         Subject::create($request->all());
 
-        return back()->with('success', 'Subject successfully add.');
+        return back()->with('success', 'Subject added successfully.');
     }
 
     /**
@@ -91,7 +93,7 @@ class SubjectController extends Controller
     {
         $subject->update($request->all());
 
-        return back()->with('success', 'Successfully update.');
+        return back()->with('success', 'Subject successfully updated.');
     }
 
     /**
@@ -102,6 +104,8 @@ class SubjectController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $isDelete = Subject::find($id)->delete();
+
+        return response()->json(['success' => $isDelete]);
     }
 }

@@ -24,7 +24,7 @@
     <div class="card-body">
         Student ID Number : <span class="text-primary font-weight-bold">{{ $student->id_number }}</span> <br>
         Student Name : <span class="text-primary font-weight-bold">{{ $student->name }}</span> <br>
-        Course : <span class="text-primary font-weight-bold">{{ $student->course->abbr }}</span> <br>
+        Course : <span class="text-primary font-weight-bold">{{ $student->course?->abbr }}</span> <br>
     </div>
 </div>
 
