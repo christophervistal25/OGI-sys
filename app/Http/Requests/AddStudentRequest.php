@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Course;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use App\Course;
-use App\Subject;
 
 class AddStudentRequest extends FormRequest
 {
@@ -26,28 +25,27 @@ class AddStudentRequest extends FormRequest
      */
     public function rules()
     {
-      $courses = Course::pluck('id')->toArray();
-      return [
-         'firstname'  => 'required',
-         'middlename' => 'required',
-         'lastname'   => 'required',
-         'gender'                 => ['required', Rule::in(['male', 'female'])],
-         'course_id'              => ['required', Rule::in($courses)],
-         'password'               => 'required|confirmed|min:6|max:20',
-         'school_year' => 'required',
-         'semester' => ['required', Rule::in([1, 2, 3])],
-         'parents_email' => 'required|email|unique:students',
-        ];
+        $courses = Course::pluck('id')->toArray();
 
+        return [
+            'firstname' => 'required',
+            'middlename' => 'required',
+            'lastname' => 'required',
+            'gender' => ['required', Rule::in(['male', 'female'])],
+            'course_id' => ['required', Rule::in($courses)],
+            'password' => 'required|confirmed|min:6|max:20',
+            'school_year' => 'required',
+            'semester' => ['required', Rule::in([1, 2, 3])],
+            'parents_email' => 'required|email|unique:students',
+        ];
     }
 
     public function attributes()
     {
         return [
-            'course_id'              => 'course',
-            'id_number'              => 'ID number',
-            'level'             => 'year level'
+            'course_id' => 'course',
+            'id_number' => 'ID number',
+            'level' => 'year level',
         ];
     }
-
 }

@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateDepartmentsTable extends Migration
 {
@@ -15,7 +15,11 @@ class CreateDepartmentsTable extends Migration
     {
         Schema::create('departments', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('department_code')->unique();
             $table->string('name');
+            $table->string('short_name')->nullable();
+            $table->string('department_head');
+            $table->string('department_head_position');
             $table->timestamps();
         });
     }

@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests\Admin;
 
-use Illuminate\Foundation\Http\FormRequest;
 use App\Department;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
 class AddCourseRequest extends FormRequest
@@ -26,6 +26,7 @@ class AddCourseRequest extends FormRequest
     public function rules()
     {
         $departments = Department::pluck('id');
+
         return [
             'name' => 'required|unique:courses',
             'abbr' => 'required',
@@ -36,7 +37,7 @@ class AddCourseRequest extends FormRequest
     public function attributes()
     {
         return [
-            'department_id' => 'department'
+            'department_id' => 'department',
         ];
-    }    
+    }
 }

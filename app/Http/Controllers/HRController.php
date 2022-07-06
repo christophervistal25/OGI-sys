@@ -13,6 +13,7 @@ class HRController extends Controller
     {
         $this->middleware('auth:hr');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -65,13 +66,13 @@ class HRController extends Controller
         if ($request->hasFile('profile')) {
             $image_name = request()->file('profile')->getRealPath();
             Cloudder::upload($image_name, null);
-            $image_url = Cloudder::show(Cloudder::getPublicId(), ["width" => 150, "height"=> 150]);
+            $image_url = Cloudder::show(Cloudder::getPublicId(), ['width' => 150, 'height' => 150]);
             $hr->profile = $image_url;
         }
-        
+
         $hr->name = $request->name;
 
-        if (!is_null($request->password)) {
+        if (! is_null($request->password)) {
             $hr->password = $request->password;
         }
         $hr->save();

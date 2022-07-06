@@ -25,32 +25,33 @@ class EditInstructorRequest extends FormRequest
      */
     public function rules()
     {
-      
-      $gender = ['male', 'female'];
-      $status = ['full-time', 'part-time'];
-      $departments = Department::pluck('id');
-      $rules = [
-            'firstname'  => 'required',
+        $id = request()->segment(3);
+
+        $gender = ['male', 'female'];
+        $status = ['full-time', 'part-time'];
+
+        $departments = Department::pluck('id');
+
+        $rules = [
+            'firstname' => 'required',
             'middlename' => 'required',
-            'lastname'   => 'required',
-            'email'      => 'required|unique:instructors,email,' . request('id'),
-            'contact_no' => 'required|unique:instructors,contact_no,' . request('id'),
-            'gender'    => ['required', Rule::in($gender)],
-            'status'    => ['required', Rule::in($status)],
+            'lastname' => 'required',
+            'email' => 'required|unique:instructors,email,'.$id,
+            'contact_no' => 'required|unique:instructors,contact_no,'.$id,
+            'gender' => ['required', Rule::in($gender)],
+            'work_status' => ['required', Rule::in($status)],
             'civil_status' => ['required', Rule::in(['widow', 'married', 'single'])],
             'department_id' => ['required', Rule::in($departments)],
             'birthdate' => 'required|date',
-            'profile'   => 'nullable',
+            'profile' => 'nullable',
         ];
 
-
-      if ( !is_null(request('password')) || !is_null(request()->password_confirmation) ) {
-        $rules['password'] = 'required|confirmed|min:8|max:20';  
-      }
+        if (! is_null(request('password')) || ! is_null(request()->password_confirmation)) {
+            $rules['password'] = 'required|confirmed|min:8|max:20';
+        }
 
         return $rules;
     }
-
 
     public function attributes()
     {
@@ -59,6 +60,4 @@ class EditInstructorRequest extends FormRequest
             'department_id' => 'department',
         ];
     }
-
-
 }

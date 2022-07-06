@@ -3,6 +3,7 @@
 @section('content')
 @prepend('page-css')
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/startbootstrap-sb-admin-2@4.0.3/vendor/datatables/dataTables.bootstrap4.min.css">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 @endprepend
 <div class="card shadow mb-4 rounded-0">
 	<div class="card-header py-3 rounded-0">
@@ -10,20 +11,23 @@
 	</div>
 
 	<div class="card-body">
-		<button data-target="#addCourseModal" data-toggle="modal" class="btn btn-primary btn-sm mb-2 text-center text-white  float-right font-weight-bold"><i class="fa fa-plus"></i> Add Course</button>
+		<button id='btnDisplayCourseModal' class="btn btn-primary mb-3 text-center text-white  float-right">
+            <i class="fa fa-plus"></i> Add Course
+        </button>
 		<div class="clearfix"></div>
 		<table class="table table-bordered table-hover" id="courses-table">
 			<thead>
 				<tr>
-					<th>Name</th>
-					<th>Short name</th>
-					<th>Department</th>
-					<th>Action</th>
+					<th class='text-uppercase'>Description</th>
+					<th class='text-uppercase'>Short name</th>
+					<th class='text-uppercase'>Department</th>
+					<th class='text-uppercase text-center'>Action</th>
 				</tr>
 			</thead>
 		</table>
 	</div>
 </div>
+
 <!-- EDIT COURSE MODAL -->
 <div class="modal fade" id="editCourseModal" tabindex="-1" role="dialog" aria-labelledby="editCourseModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -41,6 +45,7 @@
 	      			<div class="form-group">
 	      				<label for="courseName">Course Name :</label>
 	      				<input type="text" name="name" id="courseName" class="form-control">
+                        <span class='text-danger' id='courseNameError'></span>
 	      			</div>
 	      		</div>
 
@@ -48,6 +53,7 @@
 	      			<div class="form-group">
 	      				<label for="courseShortname">Short Name :</label>
 	      				<input type="text" name="abbr" id="courseShortname" class="form-control">
+                        <span class='text-danger' id='courseShortnameError'></span>
 	      			</div>
 	      		</div>
 				
@@ -59,6 +65,7 @@
 		      					<option value="{{$department->id}}">{{ $department->name }}</option>
 		      				@endforeach
 	      				</select>
+                        <span class='text-danger' id='departmentError'></span>
 	      			</div>
 	      		</div>
 
@@ -66,7 +73,7 @@
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	        <button type="submit" class="btn btn-primary">Save changes</button>
+	        <button type="submit" class="btn btn-primary" id='btnSaveCourse'>Save changes</button>
 	      </div>
       </form>
     </div>
@@ -90,6 +97,7 @@
 	      			<div class="form-group">
 	      				<label for="addCourseName">Course Name :</label>
 	      				<input type="text" name="name" id="addCourseName" class="form-control">
+                        <span class='text-danger' id='addCourseNameError'></span>
 	      			</div>
 	      		</div>
 
@@ -97,6 +105,7 @@
 	      			<div class="form-group">
 	      				<label for="addCourseShortname">Short Name :</label>
 	      				<input type="text" name="abbr" id="addCourseShortname" class="form-control">
+                        <span class='text-danger' id='addCourseShortnameError'></span>
 	      			</div>
 	      		</div>
 				
@@ -108,6 +117,7 @@
 		      					<option value="{{$department->id}}">{{ $department->name }}</option>
 		      				@endforeach
 	      				</select>
+                        <span class='text-danger' id='addCourseDepartmentError'></span>
 	      			</div>
 	      		</div>
 
@@ -115,7 +125,7 @@
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	        <button type="submit" class="btn btn-primary">Add course</button>
+	        <button type="submit" class="btn btn-primary" id="btnAddCourse">Add course</button>
 	      </div>
       </form>
     </div>
@@ -125,85 +135,207 @@
 <script src="https://cdn.jsdelivr.net/npm/startbootstrap-sb-admin-2@4.0.3/vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/startbootstrap-sb-admin-2@4.0.3/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 <script>
-	let courseId = "";
-	let courseName       = document.querySelector('#courseName');
-	let courseShortName  = document.querySelector('#courseShortname');
-	let courseDepartment = document.querySelector('#department');
-
 	$.ajaxSetup({
 	    headers: {
 		        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 		    }
 	});
+</script>
+<script>
+	let courseId = 0;
 
 	$('#courses-table').DataTable({
 	    orderCellsTop: true,
 	    serverSide: true,
 	    processing: true,
 	    responsive: true,
+        language: {
+            processing: '<i class="text-primary fa fa-spinner fa-spin fa-2x fa-fw"></i><span class="sr-only">Loading...</span> ',
+        },
 	    ajax: '/admin/course/list',
 	    columns: [
 	        { name: 'name' },
 	        { name: 'abbr' },
-	        { name: 'department.name' , searchable : true },
-	        { name: 'action' , searchable: false },
+	        { 
+                name: 'department.name',
+                searchable : true,
+                orderable : false 
+            },
+	        { 
+                name: 'action',
+                searchable: false,
+                orderable : false, 
+            },
 	    ],
 	});
 
-	const requestByAjax = (type, route , data, modal) => {
-		$.ajax({
-			   url: route,
-			   type: type,
-			   data : data,
-			   success: function(response) {
-			   		if (response.success) {
-			   			$('#courses-table').DataTable().ajax.reload();
-			   			if (confirm('Want to view the record?')) {
-			   				$(modal).modal('toggle');
-			   			}
-			   		}
-			   },
-			  statusCode : {
-			  	422 : function (response) {
-			  		let formMessages = Object.values(response.responseJSON.errors);
-			  		let messages = "";
+    $('#btnAddCourse').click(function (e) {
+        e.preventDefault();
+        // Send a ajax request
+        $.ajax({
+            url: '/admin/course',
+            type: 'POST',
+            data: $('#modalFormAddCourse').serialize(),
+            success: function (data) {
+                $('#addCourseModal').modal('hide');
+                $('#courses-table').DataTable().ajax.reload(null, false);
+                // Display sweet alert message for success
+                swal({
+                    title: 'Success',
+                    text: 'Course added successfully',
+                    icon: 'success',
+                    buttons :false,
+                    timer : 5000,
+                });
+            },
+            error : function (response) {
+                if(response.status == 422) {
+                    let errors = response.responseJSON.errors;
+                    if(errors.name) {
+                        $('#addCourseName').addClass('is-invalid');
+                        $('#addCourseNameError').html(errors.name[0]);
+                    }
+                    if(errors.abbr) {
+                        $('#addCourseShortname').addClass('is-invalid');
+                        $('#addCourseShortnameError').html(errors.abbr[0]);
+                    }
+                    if(errors.department_id) {
+                        $('#addCourseDepartment').addClass('is-invalid');
+                        $('#addCourseDepartmentError').html(errors.department_id[0]);
+                    }
+                }
+            }
+        });
+    });
+    
+    $('#btnDisplayCourseModal').click(function () {
+        // Reset the form
+        $('#modalFormAddCourse').trigger('reset');
+        // Remove all is-invalid class inside of modalFormAddCourse
+        $('#modalFormAddCourse .form-control').removeClass('is-invalid');
+        // Remove all text-danger class inside of modalFormAddCourse
+        $('#modalFormAddCourse .text-danger').html('');
+        // Display add course modal
+        $('#addCourseModal').modal('show');
+    });
 
-			  		formMessages.forEach((message) => {
-			  			messages += message[0]  + "\n";
-			  		});
+    $(document).on('click', '.btn-edit-course', function () {
+        // Remove all is-invalid class inside of modalFormAddCourse
+        $('#modalFormEditCourse .form-control').removeClass('is-invalid');
 
-			  		alert(messages);
-			  	}
-			  }	
-		});
-	};
+        // Remove all text-danger class inside of modalFormEditCourse
+        $('#modalFormEditCourse .text-danger').html('');
 
-	const editCourse = (e) => {
-		let courseInfo = JSON.parse(e.getAttribute('data-src'));
-		courseId              = courseInfo.id;
-		courseName.value      = courseInfo.name;
-		courseShortname.value = courseInfo.abbr;
-		department.value      = courseInfo.department_id;
-		$('#editCourseModal').modal('toggle');
-	};
+        // Get the course id by the data-id attribute
+        courseId = $(this).data('key');
+        
+        // Set html content of button to an spinner
+        $(this).html('<i class="fa fa-spinner fa-spin"></i>');
+
+        // Fetch record using course ID
+        $.ajax({
+            url: '/admin/course/' + courseId,
+            success: function (data) {
+                $('#editCourseModal').modal('toggle');
+                // Set values to edit modal input fields
+                $('#courseName').val(data.name);
+                $('#courseShortname').val(data.abbr);
+                $('#courseDepartment').val(data.department_id);
+                // Get the button using the data-id attribute
+                $('.btn-edit-course').html('<i class="fa fa-pen"></i>');
+            }
+        });
+    });
+
+    $('#btnSaveCourse').click(function (e) {
+        e.preventDefault();
+        // Update course using ajax request
+        $.ajax({
+            url: '/admin/course/' + courseId,
+            type: 'PUT',
+            data: {
+                id : courseId,
+                name: $('#courseName').val(),
+                abbr: $('#courseShortname').val(),
+                department_id: $('#department').val(),
+            },
+            success: function (data) {
+                // Reload the table
+                $('#courses-table').DataTable().ajax.reload(null, false);
+                // Close the modal
+                $('#editCourseModal').modal('toggle');
+                // Display sweetalert message for success
+                swal({
+                    title: 'Success',
+                    text: 'Course updated successfully',
+                    icon: 'success',
+                    buttons :false,
+                    timer : 5000,
+                });
+            },
+            error : function (response) {
+                if(response.status == 422) {
+                    // Display error message at the bottom of all input fields of edit course modal
+                    let errors = response.responseJSON.errors;
+                    if(errors.name) {
+                        $('#courseName').addClass('is-invalid');
+                        $('#courseNameError').html(errors.name[0]);
+                    }
+                    if(errors.abbr) {
+                        $('#courseShortname').addClass('is-invalid');
+                        $('#courseShortnameError').html(errors.abbr[0]);
+                    }
+                    if(errors.department_id) {
+                        $('#department').addClass('is-invalid');
+                        $('#departmentError').html(errors.department_id[0]);
+                    }
+                }
+            }
+        });
+    });
 
 
-	document.querySelector('#modalFormEditCourse').addEventListener('submit', (e) => {
-		e.preventDefault();
-		let data = {name : courseName.value , abbr : courseShortname.value, department_id : department.value , id: courseId};
-		requestByAjax('PUT', `/admin/course/${courseId}`, data, '#editCourseModal');
-	});
+    $(document).on('click', '.btn-remove-course', function () {
+        // Set the content of this button to a spinner
+        $(this).html('<i class="fa fa-spinner fa-spin"></i>');
 
-	document.querySelector('#modalFormAddCourse').addEventListener('submit', (e) => {
-		e.preventDefault();
-		let name = document.querySelector('#addCourseName').value;
-		let abbr = document.querySelector('#addCourseShortname').value;
-		let department_id = document.querySelector('#addCourseDepartment').value;
-		let data = {name , abbr , department_id};
-		requestByAjax('POST', `/admin/course`, data, '#addCourseModal');
-	});
+        // Get the course id by the data-key attribute
+        courseId = $(this).data('key');
+        // Ask user using sweet alert if he/she is sure to delete the course
+        swal({
+            title: "Are you sure?",
+            text: "You will not be able to recover this course!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((isClicked) => {
+            if(isClicked) {
+                $.ajax({
+                    url: '/admin/course/' + courseId,
+                    type: 'DELETE',
+                    success: function (data) {
+                        if(data.success) {
+                            // Reload the table
+                            $('#courses-table').DataTable().ajax.reload(null, false);
+                            $('.btn-remove-course').html('<i class="fa fa-trash"></i>');
+                            // Display sweet alert message for success
+                            swal({
+                                title: 'Success',
+                                text: 'Course deleted successfully',
+                                icon: 'success',
+                                buttons :false,
+                                timer : 5000,
+                            });
+                        }
+                    }
+                });
+            } else {
+                $('.btn-remove-course').html('<i class="fa fa-trash"></i>');
+            }
+        })
+        
+    });
 
-	
 
 
 </script>

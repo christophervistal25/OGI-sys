@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 class WelcomeController extends Controller
 {
     public function index()
     {
-    	return redirect()->route('admin.auth.login');
+        return redirect()->route('admin.auth.login');
     }
 }

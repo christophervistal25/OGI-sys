@@ -46,7 +46,7 @@
     @endphp
       <div class="row">
         <div class="column" style="width : 20%;">
-         <img class="img-header" src="https://res.cloudinary.com/dpcxcsdiw/image/upload/w_60,h_60/v1569386717/ogi-sys/andres-soriano-logo.png">
+         {{-- <img class="img-header" src="https://res.cloudinary.com/dpcxcsdiw/image/upload/w_60,h_60/v1569386717/ogi-sys/andres-soriano-logo.png"> --}}
         </div>
         <div class="column">
           <h3><center>ANDRES SORIANO COLLEGES OF BISLIG</center> <span style="font-size: 17px;"><center>Mangagoy, Bislig City</center></span></h3>

@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware\Instructor;
 
-use App\GradeEvaluation;
 use Closure;
 
 class InstructorGradeEvaluation
@@ -16,7 +15,7 @@ class InstructorGradeEvaluation
      */
     public function handle($request, Closure $next)
     {
-        // $evaluation = 
+        // $evaluation =
         return $next($request);
     }
 }

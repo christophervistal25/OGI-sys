@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use App\Admin;
+use Illuminate\Database\Seeder;
 
 class AdminSeeder extends Seeder
 {
@@ -12,11 +12,10 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
-    	Admin::create([
-				'name' => 'John Doe',
-				'email' => 'admin@yahoo.com',
-				'password' => '1234',
-    	]);
-         
+        Admin::create([
+            'name' => 'John Doe',
+            'email' => 'admin@yahoo.com',
+            'password' => '1234',
+        ]);
     }
 }

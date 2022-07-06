@@ -17,6 +17,7 @@ class SubjectStudentController extends Controller
     {
         $this->middleware('auth:instructor');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -56,22 +57,23 @@ class SubjectStudentController extends Controller
      */
     public function show($subject)
     {
-        $daysLeft = "";
+        $daysLeft = '';
         $evaluation = GradeEvaluation::canAdd();
 
         $instructor = Auth::user();
         $subject = $instructor->subjects->where('id', $subject)->first();
         $students = $subject->students;
-/*        $students = Student::whereHas('subjects', function ($query) use($subject) {
-             $query->where(['subject_id' => $subject, 'instructor_id' => Auth::user()->id]);
-        })->with(['subjects' => function ($query) use($subject) {
-             $query->where('id', $subject);
-        }, 'course', 'course.department'])->get();
+        /*        $students = Student::whereHas('subjects', function ($query) use($subject) {
+                     $query->where(['subject_id' => $subject, 'instructor_id' => Auth::user()->id]);
+                })->with(['subjects' => function ($query) use($subject) {
+                     $query->where('id', $subject);
+                }, 'course', 'course.department'])->get();
 
-        $subject = Subject::find($subject);*/
-        if(isset($evaluation->end_date)) {
-            $daysLeft = (int) $evaluation->end_date->format('d') - (int) Carbon::now()->format('d');    
+                $subject = Subject::find($subject);*/
+        if (isset($evaluation->end_date)) {
+            $daysLeft = (int) $evaluation->end_date->format('d') - (int) Carbon::now()->format('d');
         }
+
         return view('instructor.subjectstudents.show', compact('students', 'subject', 'evaluation', 'daysLeft'));
     }
 
@@ -96,14 +98,14 @@ class SubjectStudentController extends Controller
     public function update(EditStudentRating $request, Subject $subject)
     {
         $evaluation = GradeEvaluation::canAdd();
-        if(isset($evaluation->end_date)) {
+        if (isset($evaluation->end_date)) {
             $student = Student::find($request->student_id);
-            $status = $subject->students()->updateExistingPivot($student,['remarks' => $request->pivot['remarks']], false);
-            return response()->json(['success' => (bool) $status], 200);    
+            $status = $subject->students()->updateExistingPivot($student, ['remarks' => $request->pivot['remarks']], false);
+
+            return response()->json(['success' => (bool) $status], 200);
         } else {
             dd('You can\'t add grade.');
         }
-        
     }
 
     /**

@@ -9,22 +9,22 @@
 		<h6 class="m-0 font-weight-bold text-primary">Instructors</h6>
 	</div>
 	<div class="card-body">
-		<a class="btn btn-primary float-right mb-2" href="{{ route('instructor.create') }}">Add Instructor</a>
+		<a class="btn btn-primary float-right mb-2" href="{{ route('instructor.create') }}">
+            <i class='fa fa-plus-circle'></i>
+            Add Instructor
+        </a>
 		<div class="clearfix"></div>
 		<table class="table table-bordered table-hover" id="instructors-table">
 			<thead>
 				<tr>
-					<th>ID Number</th>
-					<th>Firstname</th>
-					<th>Middlename</th>
-					<th>Lastname</th>
-					<th>Email</th>
-					<th>Contact No</th>
-				{{-- 	<th>Status</th>
-					<th>Civil Status</th>
-					<th>Department</th> --}}
-					<th>Added on</th>
-					<th class="text-center">Actions</th>
+					<th class='text-uppercase'>ID Number</th>
+					<th class='text-uppercase'>Firstname</th>
+					<th class='text-uppercase'>Middlename</th>
+					<th class='text-uppercase'>Lastname</th>
+					<th class='text-uppercase'>Suffix</th>
+					<th class='text-uppercase text-center'>Contact #</th>
+					<th class='text-uppercase'>Department</th>
+					<th class="text-center text-uppercase">Actions</th>
 				</tr>
 			</thead>
 		</table>
@@ -56,78 +56,90 @@
           			</div>
           			<br>
           			<div class="row">
-          				<div class="col-lg-4">
+          				<div class="col-lg-12">
           					<div class="form-group">
-          						First name : 
-	          					<input type="text" class="form-control" readonly id="instructorFirstname">
+                                <span class="text-dark">
+                                    Firstname : 
+                                </span>
+	          					<input type="text" class="form-control text-uppercase" readonly id="instructorFirstname">
 	          				</div>
           				</div>
 
-          				<div class="col-lg-4">
+          				<div class="col-lg-12">
           					<div class="form-group">
-          						Middle name : 
-	          					<input type="text" class="form-control" readonly id="instructorMiddlename">
+                                <span class="text-dark">
+                                    Middlename : 
+                                </span>
+	          					<input type="text" class="form-control text-uppercase" readonly id="instructorMiddlename">
 	          				</div>
           				</div>
 
 
-          				<div class="col-lg-4">
+          				<div class="col-lg-12">
           					<div class="form-group">
-          						Last name : 
-	          					<input type="text" class="form-control" readonly id="instructorLastname">
+          						<span class="text-dark">
+                                    Lastname : 
+                                </span>
+	          					<input type="text" class="form-control text-uppercase" readonly id="instructorLastname">
 	          				</div>
           				</div>
 
-          				<div class="col-lg-6">
+          				<div class="col-lg-12">
           					<div class="form-group">
-          						Email : 
+          						<span class="text-dark">
+                                    Email : 
+                                </span>
 	          					<input type="text" class="form-control" readonly id="instructorEmail">
 	          				</div>
           				</div>
 
           				<div class="col-lg-6">
           					<div class="form-group">
-          						Contact No : 
+          						<span class="text-dark">
+                                    Contact No : 
+                                </span>
 	          					<input type="text" class="form-control" readonly id="instructorContactNo">
 	          				</div>
           				</div>
 
           				<div class="col-lg-6">
           					<div class="form-group">
-          						Civil Status : 
-	          					<input type="text" class="form-control" readonly id="instructorCivilStatus">
+          						<span class="text-dark">
+                                    Civil Status : 
+                                </span>
+	          					<input type="text" class="form-control text-capitalize" readonly id="instructorCivilStatus">
 	          				</div>
           				</div>
 
           				<div class="col-lg-6">
           					<div class="form-group">
-          						Status : 
-	          					<input type="text" class="form-control" readonly id="instructorStatus">
+                                <span class="text-dark">Status : </span>
+	          					<input type="text" class="form-control text-capitalize" readonly id="instructorStatus">
 	          				</div>
           				</div>
 
           				<div class="col-lg-6">
           					<div class="form-group">
-          						Gender : 
-	          					<input type="text" class="form-control" readonly id="instructorGender">
+                                <span class='text-dark'>Gender : </span>
+	          					<input type="text" class="form-control text-capitalize" readonly id="instructorGender">
 	          				</div>
           				</div>
 
           				<div class="col-lg-6">
           					<div class="form-group">
-          						Birthdate : 
+          						<span class='text-dark'>Birthdate : </span>
 	          					<input type="text" class="form-control" readonly id="instructorBirthdate">
 	          				</div>
           				</div>
 
           				<div class="col-lg-6">
           					<div class="form-group">
-          						Department : 
+          						<span class='text-dark'>Department : </span>
 	          					<input type="text" class="form-control" readonly id="instructorDepartment">
 	          				</div>
           				</div>
 
-          				<div class="col-lg-6">
+          				<div class="col-lg-12">
           					<div class="form-group">
           						Date Registered : 
 	          					<input type="text" class="form-control" readonly id="instructorDateRegistered">
@@ -136,9 +148,6 @@
 
           			</div>
           		</div>
-          </div>
-          <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
           </div>
         </div>
       </div>
@@ -149,24 +158,42 @@
 <script src="https://cdn.jsdelivr.net/npm/startbootstrap-sb-admin-2@4.0.3/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 <script>
 	$('#instructors-table').DataTable({
-    orderCellsTop: true,
-    serverSide: true,
-    processing: true,
-    responsive: true,
-    ajax: '/admin/instructor/list',
-    columns: [
-        { name: 'id_number' },
-        { name: 'firstname' },
-        { name: 'middlename' },
-        { name: 'lastname' },
-        { name: 'email' },
-        { name: 'contact_no' },
-        // { name: 'status' },
-        // { name: 'civil_status' },
-        // { name: 'department.name' },
-        { name: 'created_at' },
-        { name: 'action', orderable: false, searchable: false }
-    ],
+        orderCellsTop: true,
+        serverSide: true,
+        processing: true,
+        responsive: true,
+        ajax: '/admin/instructor/list',
+        columns: [
+            { 
+                name: 'id_number', 
+                className : 'text-uppercase'
+            },
+            { 
+                name: 'firstname',
+                className : 'text-uppercase'
+            },
+            { 
+                name: 'middlename',
+                className : 'text-uppercase'
+            },
+            { 
+                name: 'lastname',
+                className : 'text-uppercase'
+            },
+            { 
+                name: 'suffix',
+                className : 'text-uppercase text-center'
+            },
+            { 
+                name: 'contact_no',
+                className : 'text-center',
+            },
+            { 
+                name: 'department.short_name',
+                className : 'text-center'
+            },
+            { name: 'action', orderable: false, searchable: false }
+        ],
 });
 </script>
 <script>
@@ -176,10 +203,6 @@
 		    }
 	});
 	
-	String.prototype.capitalize = function() {
-    	return this.charAt(0).toUpperCase() + this.slice(1);
-	}
-
 	const inActiveInstructor = (instructorId) =>
 	{
 		let confirmation = confirm('Are you sure you want to mark this instructor as in-active?');
@@ -209,18 +232,17 @@
 
 				$('#instructorProfileImage').attr('src', instructor.profile);
 				$('#instructorIdNumber').html(`(ID Number : ${instructor.id_number})`);
-				$('#instructorFirstname').val(instructor.firstname.capitalize());
-				$('#instructorMiddlename').val(instructor.middlename.capitalize());
-				$('#instructorLastname').val(instructor.lastname.capitalize());
-				$('#instructorGender').val(instructor.gender.capitalize());
+				$('#instructorFirstname').val(instructor.firstname);
+				$('#instructorMiddlename').val(instructor.middlename);
+				$('#instructorLastname').val(instructor.lastname);
+				$('#instructorGender').val(instructor.gender);
 				$('#instructorBirthdate').val(instructor.birthdate);
-				$('#instructorDepartment').val(instructor.department.name);
+				$('#instructorDepartment').val(instructor.department?.name || '');
 				$('#instructorEmail').val(instructor.email);
 				$('#instructorContactNo').val(instructor.contact_no);
-				$('#instructorCivilStatus').val(instructor.civil_status.capitalize());
-				$('#instructorStatus').val(instructor.status.capitalize());
+				$('#instructorCivilStatus').val(instructor.civil_status);
+				$('#instructorStatus').val(instructor.status);
 				$('#instructorDateRegistered').val(instructor.created_at);
-
 				$('#profileContainer').removeClass('d-none');
 			}
 		});

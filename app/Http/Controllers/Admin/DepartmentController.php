@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
+use App\Department;
 use App\Http\Controllers\Controller;
 use Freshbitsweb\Laratables\Laratables;
-use App\Department;
-
+use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
 {
@@ -24,7 +23,6 @@ class DepartmentController extends Controller
     {
         return view('admin.departments.index');
     }
-
 
     public function departments()
     {
@@ -49,11 +47,29 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
-         $this->validate($request ,[
-            'name' => 'required|unique:departments,name',
+        $this->validate($request, [
+            'departmentCode' => ['required', 'unique:departments,department_code'],
+            'departmentName' => ['required'],
+            'departmentShortname' => ['nullable', 'min:2'],
+            'departmentHead' => ['required'],
+            'departmentHeadPosition' => ['required'],
+        ], [], [
+            'departmentCode' => 'Department Code',
+            'departmentName' => 'Department Name',
+            'departmentShortname' => 'Department Shortname',
+            'departmentHead' => 'Department Head',
+            'departmentHeadPosition' => 'Department Head Position',
         ]);
-        $create = Department::create($request->all());
-        return response()->json(['success' => $create]);
+
+        Department::create([
+            'department_code' => $request->departmentCode,
+            'name' => $request->departmentName,
+            'short_name' => $request->departmentShortname,
+            'department_head' => $request->departmentHead,
+            'department_head_position' => $request->departmentHeadPosition,
+        ]);
+
+        return response()->json(['success' => true]);
     }
 
     /**
@@ -64,7 +80,7 @@ class DepartmentController extends Controller
      */
     public function show($id)
     {
-        //
+        return response()->json(['data' => Department::find($id)]);
     }
 
     /**
@@ -85,13 +101,31 @@ class DepartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Department $department)
+    public function update(Request $request, Department $department)
     {
-        $this->validate($request ,[
-            'name' => 'required|unique:departments,name,' . $department->id,
+        $this->validate($request, [
+            'editDepartmentCode' => ['required', 'unique:departments,department_code,'.$department->id],
+            'editDepartmentName' => ['required'],
+            'editDepartmentShortname' => ['nullable', 'min:2'],
+            'editDepartmentHead' => ['required'],
+            'editDepartmentHeadPosition' => ['required'],
+        ], [], [
+            'editDepartmentCode' => 'Department Code',
+            'editDepartmentName' => 'Department Name',
+            'editDepartmentShortname' => 'Department Shortname',
+            'editDepartmentHead' => 'Department Head',
+            'editDepartmentHeadPosition' => 'Department Head Position',
         ]);
-        $update = $department->update($request->all());
-        return response()->json(['success' => $update]);
+
+        // Update department
+        $department->department_code = $request->editDepartmentCode;
+        $department->name = $request->editDepartmentName;
+        $department->short_name = $request->editDepartmentShortname;
+        $department->department_head = $request->editDepartmentHead;
+        $department->department_head_position = $request->editDepartmentHeadPosition;
+        $department->save();
+
+        return response()->json(['success' => true]);
     }
 
     /**
@@ -102,6 +136,8 @@ class DepartmentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Department::find($id)->delete();
+
+        return response()->json(['success' => true]);
     }
 }

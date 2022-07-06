@@ -1,25 +1,25 @@
 <?php
+
 namespace App;
 
-use App\Instructor;
 use Carbon\Carbon;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 
 class Instructor extends Authenticatable
 {
-     use Notifiable;
+    use Notifiable;
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'id_number', 'firstname','middlename', 'lastname', 'email', 'password', 'gender', 'profile', 'birthdate', 'active','status', 'civil_status', 'department_id', 'contact_no'
+        'id_number', 'firstname', 'middlename', 'lastname', 'email', 'password', 'gender', 'profile', 'birthdate', 'active', 'status', 'civil_status', 'department_id', 'contact_no',
     ];
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -32,9 +32,10 @@ class Instructor extends Authenticatable
     public static function boot()
     {
         parent::boot();
-        self::creating(function(Instructor $instructor) {
+        self::creating(function (Instructor $instructor) {
             $instructorCount = Instructor::count();
-            $instructor->id_number = date('Y') . ++$instructorCount;
+            $instructor->id_number = date('Y').'-'.++$instructorCount;
+
             return true;
         });
     }
@@ -46,7 +47,7 @@ class Instructor extends Authenticatable
 
     public function department()
     {
-        return $this->belongsTo('App\Department');
+        return $this->belongsTo(Department::class)->withDefault();
     }
 
     public function setPasswordAttribute($value)
@@ -114,5 +115,4 @@ class Instructor extends Authenticatable
     {
         return view('admin.instructor.includes.profile', compact('instructor'))->render();
     }
-
 }

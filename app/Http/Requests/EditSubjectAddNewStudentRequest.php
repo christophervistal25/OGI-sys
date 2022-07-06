@@ -31,7 +31,7 @@ class EditSubjectAddNewStudentRequest extends FormRequest
     public function attributes()
     {
         return [
-            'students.names' => 'student'
+            'students.names' => 'student',
         ];
     }
 

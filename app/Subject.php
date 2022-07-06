@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 
 class Subject extends Model
 {
@@ -12,22 +11,21 @@ class Subject extends Model
     public function students()
     {
         return $this->belongsToMany('App\Student', 'student_subjects', 'subject_id', 'student_id')
-                    ->withPivot('instructor_id', 'remarks')
-                    ->withTimestamps();
+            ->withPivot('instructor_id', 'remarks')
+            ->withTimestamps();
     }
 
     public function instructors()
     {
         return $this->belongsToMany('App\Instructor', 'instructor_subjects', 'subject_id', 'instructor_id')
-                    ->withPivot('block')
-                    ->withTimestamps();
+            ->withPivot('block')
+            ->withTimestamps();
     }
 
     public function department()
     {
         return $this->belongsTo('App\Department');
     }
-
 
     public static function laratablesQueryConditions($query)
     {
@@ -61,11 +59,9 @@ class Subject extends Model
         $urlHasInstructorPrefix = request()->segment(1) === 'instructor';
 
         if ($urlHasInstructorPrefix) {
-            return view('instructor.subjects.includes.clickable_name', compact('subject'))->render();    
+            return view('instructor.subjects.includes.clickable_name', compact('subject'))->render();
         } else {
-            return view('admin.subjects.includes.clickable_name', compact('subject'))->render();    
+            return view('admin.subjects.includes.clickable_name', compact('subject'))->render();
         }
     }
-
-
 }

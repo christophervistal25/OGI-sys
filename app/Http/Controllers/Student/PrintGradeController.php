@@ -2,19 +2,18 @@
 
 namespace App\Http\Controllers\Student;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class PrintGradeController extends Controller
 {
-
     public function __invoke()
     {
-          /*$pdf = \App::make('dompdf.wrapper');
+        /*$pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML('<h1>Test</h1>');
         return $pdf->stream();*/
     }
-    
+
     /**
      * Display a listing of the resource.
      *

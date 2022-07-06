@@ -24,10 +24,9 @@ class EditStudentRating extends FormRequest
     public function rules()
     {
         return [
-             'pivot.remarks' => 'nullable|numeric|min:0|max:5|regex:/^[0-5](.+)?$/',
+            'pivot.remarks' => 'nullable|numeric|min:0|max:5|regex:/^[0-5](.+)?$/',
         ];
     }
-
 
     public function attributes()
     {
@@ -35,6 +34,4 @@ class EditStudentRating extends FormRequest
             'pivot.remarks' => 'rating',
         ];
     }
-
-
 }

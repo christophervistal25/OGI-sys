@@ -5,13 +5,16 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class SendGrade extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
+
     protected $student;
+
     protected $subjects;
+
     protected $studentLevel;
 
     /**
@@ -36,6 +39,7 @@ class SendGrade extends Mailable
         $student = $this->student;
         $subjects = $this->subjects;
         $level = $this->studentLevel;
+
         return $this->view('admin.student-grade.email-template', compact('student', 'subjects', 'level'));
     }
 }

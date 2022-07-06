@@ -2,10 +2,11 @@
 
 namespace App\Exceptions;
 
-use Exception;
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Session;
+use Throwable;
 
 class Handler extends ExceptionHandler
 {
@@ -34,7 +35,7 @@ class Handler extends ExceptionHandler
      * @param  \Exception  $exception
      * @return void
      */
-    public function report(Exception $exception)
+    public function report(Throwable $exception)
     {
         parent::report($exception);
     }
@@ -46,41 +47,41 @@ class Handler extends ExceptionHandler
      * @param  \Exception  $exception
      * @return \Illuminate\Http\Response
      */
-    public function render($request, Exception $exception)
+    public function render($request, Throwable $exception)
     {
         return parent::render($request, $exception);
     }
 
-    
     protected function unauthenticated($request, AuthenticationException $exception)
     {
         if ($request->expectsJson()) {
             return response()->json(['error' => 'Unauthenticated.'], 401);
         }
-        $guard = array_get($exception->guards(), 0);
+
+        $guard = Arr::get($exception->guards(), 0);
         switch ($guard) {
-          case 'admin':
-            $login = 'admin.auth.login';
-            break;
-            
-         case 'student':
-            $login = 'student.auth.login';
-            break;
+            case 'admin':
+                $login = 'admin.auth.login';
+                break;
 
-        case 'instructor':
-            $login = 'instructor.auth.login';
-            break;
+            case 'student':
+                $login = 'student.auth.login';
+                break;
 
-         case 'hr':
-            $login = 'hr.auth.login';
-            break;
+            case 'instructor':
+                $login = 'instructor.auth.login';
+                break;
 
-            
-          default:
-            $login = 'login';
-            break;
+            case 'hr':
+                $login = 'hr.auth.login';
+                break;
+
+            default:
+                $login = 'login';
+                break;
         }
         Session::forget('url.intented');
+
         return redirect()->route($login);
         // return redirect()->guest(route($login));
     }

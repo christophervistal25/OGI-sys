@@ -10,12 +10,12 @@ class Course extends Model
 
     public function student()
     {
-    	return $this->hasOne('App\Student');
+        return $this->hasOne('App\Student');
     }
 
     public function department()
     {
-    	return $this->belongsTo('App\Department');
+        return $this->belongsTo('App\Department');
     }
 
     public static function laratablesQueryConditions($query)
@@ -24,16 +24,16 @@ class Course extends Model
     }
 
     /**
-	 * Adds the condition for searching the name of the user in the query.
-	 *
-	 * @param \Illuminate\Database\Eloquent\Builder
-	 * @param string search term
-	 * @return \Illuminate\Database\Eloquent\Builder
-	 */
-	public static function laratablesSearchDepartment($query, $searchValue)
-	{
-	    return $query->orWhere('name', 'like', '%'. $searchValue. '%');
-	}
+     * Adds the condition for searching the name of the user in the query.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder
+     * @param string search term
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public static function laratablesSearchDepartment($query, $searchValue)
+    {
+        return $query->orWhere('name', 'like', '%'.$searchValue.'%');
+    }
 
     /**
      * Returns the action column html for datatables.
@@ -43,7 +43,9 @@ class Course extends Model
      */
     public static function laratablesCustomAction($course)
     {
-        return view('admin.courses.includes.index_action', 
-            compact('course'))->render();
+        return view(
+            'admin.courses.includes.index_action',
+            compact('course')
+        )->render();
     }
 }

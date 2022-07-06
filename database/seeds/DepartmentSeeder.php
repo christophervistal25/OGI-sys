@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use App\Department;
+use Illuminate\Database\Seeder;
 
 class DepartmentSeeder extends Seeder
 {
@@ -12,14 +12,12 @@ class DepartmentSeeder extends Seeder
      */
     public function run()
     {
-        $departments = ['Education', 'ITE/TVET', 'Criminology', 'BSA/BSBA'];
-        
-        foreach ($departments as $department) {
-            Department::create([
-                'name' => $department
-            ]);    
-        }
-        
+        // $departments = ['Education', 'ITE/TVET', 'Criminology', 'BSA/BSBA'];
 
+        // foreach ($departments as $department) {
+        //     Department::create([
+        //         'name' => $department
+        //     ]);
+        // }
     }
 }

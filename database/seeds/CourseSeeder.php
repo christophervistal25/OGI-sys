@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use App\Course;
+use Illuminate\Database\Seeder;
 
 class CourseSeeder extends Seeder
 {
@@ -14,44 +14,44 @@ class CourseSeeder extends Seeder
     {
         $courses = [
             [
-                'name'          => 'Bachelor of Science in Education',
-                'abbr'          => 'BSED',
-                'department_id' => 1
+                'name' => 'Bachelor of Science in Education',
+                'abbr' => 'BSED',
+                'department_id' => 1,
             ],
             [
-                'name'          => 'Bachelor of Elementary Education',
-                'abbr'          => 'BEED',
-                'department_id' => 1
+                'name' => 'Bachelor of Elementary Education',
+                'abbr' => 'BEED',
+                'department_id' => 1,
             ],
 
             [
                 'name' => 'Bachelor of Science in Information Tech',
                 'abbr' => 'BSIT',
-                'department_id' => 2
+                'department_id' => 2,
             ],
 
             [
                 'name' => 'Bachelor of Science in Information System',
                 'abbr' => 'BSIS',
-                'department_id' => 2
+                'department_id' => 2,
             ],
 
             [
                 'name' => 'Bachelor of Science in Computer Science',
                 'abbr' => 'BSCS',
-                'department_id' => 2
+                'department_id' => 2,
             ],
 
             [
                 'name' => 'Hotel and Restaurant Management',
                 'abbr' => 'HRM',
-                'department_id' => 2
+                'department_id' => 2,
             ],
 
             [
                 'name' => 'Associate in Computer Technology',
                 'abbr' => 'ACT',
-                'department_id' => 2
+                'department_id' => 2,
             ],
 
             [
@@ -76,7 +76,5 @@ class CourseSeeder extends Seeder
         foreach ($courses as $course) {
             Course::create($course);
         }
-
-        
     }
 }

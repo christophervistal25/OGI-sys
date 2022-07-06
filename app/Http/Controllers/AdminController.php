@@ -8,7 +8,6 @@ use App\Department;
 use App\Http\Requests\Admin\UpdateAccountRequest;
 use App\Instructor;
 use App\Student;
-use Illuminate\Http\Request;
 use JD\Cloudder\Facades\Cloudder;
 
 class AdminController extends Controller
@@ -25,10 +24,11 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $noOfStudents    = Student::count();
+        $noOfStudents = Student::count();
         $noOfInstructors = Instructor::count();
-        $noOfCourse      = Course::count();
+        $noOfCourse = Course::count();
         $noOfDepartments = Department::count();
+
         return view('admin.dashboard', compact('noOfStudents', 'noOfInstructors', 'noOfCourse', 'noOfDepartments'));
     }
 
@@ -47,18 +47,17 @@ class AdminController extends Controller
         if ($request->hasFile('profile')) {
             $image_name = request()->file('profile')->getRealPath();
             Cloudder::upload($image_name, null);
-            $image_url = Cloudder::show(Cloudder::getPublicId(), ["width" => 150, "height"=> 150]);
+            $image_url = Cloudder::show(Cloudder::getPublicId(), ['width' => 150, 'height' => 150]);
             $admin->profile = $image_url;
         }
-        
+
         $admin->name = $request->name;
 
-        if (!is_null($request->password)) {
+        if (! is_null($request->password)) {
             $admin->password = $request->password;
         }
         $admin->save();
 
         return back()->with('success', 'Successfully update your account.');
     }
-  
 }

@@ -14,14 +14,14 @@
 		<table class="table table-bordered table-hover" id="subjects-table">
 			<thead>
 				<tr>
-					<th>Course No</th>
-					<th>Description</th>
-					<th>Year level</th>
-					<th>Units</th>
-					<th>Semester</th>
-					<th>School year</th>
-					<th>Department</th>
-					<th class="text-center">Action</th>
+					<th class='text-uppercase'>Course No</th>
+					<th class='text-uppercase'>Description</th>
+					<th class='text-uppercase'>Year level</th>
+					<th class='text-uppercase'>Units</th>
+					<th class='text-uppercase'>Semester</th>
+					<th class='text-uppercase'>School year</th>
+					<th class='text-uppercase'>Department</th>
+					<th class="text-center text-uppercase">Action</th>
 				</tr>
 			</thead>
 		</table>
@@ -31,23 +31,7 @@
 <script src="https://cdn.jsdelivr.net/npm/startbootstrap-sb-admin-2@4.0.3/vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/startbootstrap-sb-admin-2@4.0.3/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 <script>
-	let session = sessionStorage;
-	let pageUrl = '/admin/subject';
-
-	$(document).ready(function () {
-		let previousURL = document.referrer;
-		if (previousURL.includes('department')) {
-			let enterEvent = $.Event( 'keyup', { keyCode: 13 } );
-			let searchInput = $('#subjects-table_filter').find('input[type="search"]');
-			searchInput.val(session.getItem('departmentName'))
-			searchInput.trigger(enterEvent);		
-		} else {
-			session.removeItem('departmentName');
-		}
-	});
-
-
-
+	
 	let table = $('#subjects-table').DataTable({
 	    orderCellsTop: true,
 	    serverSide: true,

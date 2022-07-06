@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
             CourseSeeder::class,
             SubjectSeeder::class,
             HRSeeder::class,
-            StudentSeeder::class,
+            // StudentSeeder::class,
             InstructorSeeder::class,
         ]);
 
@@ -33,6 +33,5 @@ class DatabaseSeeder extends Seeder
         //             $subject->students()->attach($student->id, ['instructor_id' => $instructor->id, 'remarks' => 1]);
         //     });
         // });
-        
     }
 }

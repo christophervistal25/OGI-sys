@@ -4,9 +4,9 @@
   <!-- Sidebar - Brand -->
   <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/admin">
     <div class="sidebar-brand-icon ">
-          <img src="https://res.cloudinary.com/dpcxcsdiw/image/upload/v1569386717/ogi-sys/andres-soriano-logo.png" width="50">
+          {{-- <img src="https://res.cloudinary.com/dpcxcsdiw/image/upload/v1569386717/ogi-sys/andres-soriano-logo.png" width="50"> --}}
     </div>
-    <div class="sidebar-brand-text mx-3">ASCB CSOGI<sup></sup></div>
+    <div class="sidebar-brand-text mx-3">{{ config('app.name') }}<sup></sup></div>
   </a>
   <!-- Divider -->
   <hr class="sidebar-divider my-0">
@@ -61,23 +61,20 @@
     <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDepartments" aria-expanded="true" aria-controls="collapseDepartments">
         <i class="fas fa-building text-white"></i>
-        <span>Departments</span>
+        <span>Maintenance</span>
       </a>
       <div id="collapseDepartments" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-          <a class="collapse-item" href="{{ route('department.index') }}">List of Departments</a>
+           <a class="collapse-item" href="{{ route('student.index') }}">Students</a>
+           <a class="collapse-item" href="{{ route('instructor.index') }}">Subjects</a>
+           <a class="collapse-item" href="{{ route('course.index') }}">Course</a>
            <a class="collapse-item" href="{{ route('instructor.index') }}">Instructors</a>
+          <a class="collapse-item" href="{{ route('department.index') }}">Departments</a>
           {{-- <a class="collapse-item" href="{{ route('course.index') }}">View Courses</a> --}}
         </div>
       </div>
     </li>
 
-    <li class="nav-item">
-    <a class="nav-link" href="{{route('department.students')}}">
-      <i class="fas fa-fw fa-users text-white"></i>
-      <span>Students</span></a>
-    </li>
-   
     <hr class="sidebar-divider">
 
       <li class="nav-item">
@@ -97,40 +94,6 @@
 
 
     <hr class="sidebar-divider">
-
-    <!-- Nav Item - Utilities Collapse Menu -->
-    {{-- <li class="nav-item">
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-        <i class="fas fa-fw fa-wrench"></i>
-        <span>Utilities</span>
-      </a> --}}
-      
-      {{-- <hr class="sidebar-divider">
-      <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-          <h6 class="collapse-header">Custom Utilities:</h6>
-          <a class="collapse-item" href="utilities-color.html">Colors</a>
-          <a class="collapse-item" href="utilities-border.html">Borders</a>
-          <a class="collapse-item" href="utilities-animation.html">Animations</a>
-          <a class="collapse-item" href="utilities-other.html">Other</a>
-        </div>
-      </div>
-    </li> --}}
-    <!-- Divider -->
-    {{-- <hr class="sidebar-divider"> --}}
-    
-    <!-- Nav Item - Charts -->
-      {{-- <li class="nav-item">
-      <a class="nav-link" href="charts.html">
-        <i class="fas fa-fw fa-chart-area"></i>
-        <span>Charts</span></a>
-      </li> --}}
-      <!-- Nav Item - Tables -->
-    {{--   <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-          <i class="fas fa-fw fa-table"></i>
-          <span>Tables</span></a>
-        </li> --}}
         <!-- Divider -->
         {{-- <hr class="sidebar-divider d-none d-md-block"> --}}
         <!-- Sidebar Toggler (Sidebar) -->
@@ -182,7 +145,7 @@
               <li class="nav-item dropdown no-arrow">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <span class="mr-2 d-none d-lg-inline text-gray-600 small text-capitalize">{{ Auth::user()->name }} </span>
-                  <img class="img-profile rounded-circle" src="{{ Auth::user()->profile }}" />
+                  <img class="img-profile rounded-circle" src="" />
                 </a>
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -198,13 +161,11 @@
                 </div>
               </li>
             </ul>
-          </nav>
+          </nav>  
           <!-- End of Topbar -->
           <!-- Begin Page Content -->
           <div class="container-fluid">
             <!-- Page Heading -->
-            <h5 class="h5 mb-4 text-gray-800">@yield('title')</h5>
-            <hr>
             @yield('content')
           </div>
           <!-- /.container-fluid -->

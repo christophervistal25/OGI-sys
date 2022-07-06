@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Instructor;
 use App\Http\Controllers\Controller;
 use App\Student;
 use App\Subject;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 

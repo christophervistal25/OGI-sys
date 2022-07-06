@@ -26,21 +26,22 @@ class AddSubjectRequest extends FormRequest
     public function rules()
     {
         $departments = Department::pluck('id');
+
         return [
-            'name'        => 'unique:subjects|required',
-            'level'       => 'required',
-            'credits'     => 'required|numeric',
+            'name' => 'unique:subjects|required',
+            'level' => 'required',
+            'credits' => 'required|numeric',
             'description' => 'required',
             'school_year' => 'required',
             'department_id' => ['required', 'numeric', Rule::in($departments)],
-            'semester'      => ['required', Rule::in([1, 2, 3])]
+            'semester' => ['required', Rule::in([1, 2, 3])],
         ];
     }
 
     public function attributes()
     {
         return [
-            'department_id' => 'department'
+            'department_id' => 'department',
         ];
     }
 }

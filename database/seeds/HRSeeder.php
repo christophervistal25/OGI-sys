@@ -12,10 +12,10 @@ class HRSeeder extends Seeder
      */
     public function run()
     {
-       HR::create([
-			'name' => 'John Doe',
-			'email' => 'hr@yahoo.com',
-			'password' => 1234,
-    	]);
+        HR::create([
+            'name' => 'John Doe',
+            'email' => 'hr@yahoo.com',
+            'password' => 1234,
+        ]);
     }
 }

@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Session;
 class AdminLoginController extends Controller
 {
     // use AuthenticatesUsers;
-    
+
     /**
      * Where to redirect users after login.
      *
@@ -20,10 +20,11 @@ class AdminLoginController extends Controller
 
     // protected $redirectTo = '/instructor/s';
 
-       public function __construct()
-       {
-           $this->middleware('guest:admin')->except('logout');
-       }
+    public function __construct()
+    {
+        $this->middleware('guest:admin')->except('logout');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -38,22 +39,23 @@ class AdminLoginController extends Controller
 
     public function loginAdmin(Request $request)
     {
-      $credentials = $request->only('id_number', 'password');
+        $credentials = $request->only('id_number', 'password');
 
-      // Attempt to log the user in
-      if (Auth::guard('admin')->attempt($credentials, $request->remember)) {
+        // Attempt to log the user in
+        if (Auth::guard('admin')->attempt($credentials, $request->remember)) {
 
         // if successful, then redirect to their intended location
-        return redirect()->intended(route('admin.dashboard'));
-      }
+            return redirect()->intended(route('admin.dashboard'));
+        }
 
-      return back()->withInput($request->only('id_number', 'remember'))
+        return back()->withInput($request->only('id_number', 'remember'))
                     ->withErrors(['message' => 'Please check your ID number or password.']);
     }
-    
+
     public function logout(Request $request)
     {
         Auth::guard('admin')->logout();
+
         return redirect()->route('admin.auth.login');
     }
 }

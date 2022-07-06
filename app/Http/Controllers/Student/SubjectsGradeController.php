@@ -14,6 +14,7 @@ class SubjectsGradeController extends Controller
     {
         $this->middleware(['auth:student']);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -32,7 +33,7 @@ class SubjectsGradeController extends Controller
         if (count($subjects) >= 1) {
             $studentLevel = max(array_column(Arr::flatten(end($subjects)), 'level'));
         } else {
-           $studentLevel = 1;
+            $studentLevel = 1;
         }
 
         return view('student.subjects.index', compact('student', 'subjects', 'studentLevel'));

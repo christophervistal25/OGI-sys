@@ -2,24 +2,23 @@
 
 namespace App;
 
-use App\Admin;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 
 class Admin extends Authenticatable
 {
-     use Notifiable;
+    use Notifiable;
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'id_number', 'name', 'email', 'password', 'profile'
+        'id_number', 'name', 'email', 'password', 'profile',
     ];
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -32,9 +31,10 @@ class Admin extends Authenticatable
     public static function boot()
     {
         parent::boot();
-        self::creating(function(Admin $admin) {
+        self::creating(function (Admin $admin) {
             $adminCount = Admin::count();
-            $admin->id_number = date('Y') . ++$adminCount;
+            $admin->id_number = date('Y').++$adminCount;
+
             return true;
         });
     }

@@ -13,6 +13,7 @@ class StudentGradeController extends Controller
     {
         $this->middleware('auth:admin');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -63,7 +64,7 @@ class StudentGradeController extends Controller
         if (count($subjects) >= 1) {
             $studentLevel = max(array_column(Arr::flatten(end($subjects)), 'level'));
         } else {
-           $studentLevel = 1;
+            $studentLevel = 1;
         }
 
         return view('admin.student.view', compact('student', 'subjects', 'studentLevel'));

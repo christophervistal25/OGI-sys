@@ -3,17 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AddStudentSubjectRequest;
 use App\Student;
 use App\Subject;
-use DB;
 use Freshbitsweb\Laratables\Laratables;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 
 class StudentSubjectController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth:admin');
@@ -23,8 +19,8 @@ class StudentSubjectController extends Controller
     {
         $student = Student::with('subjects')->find($studentId);
         $studentSubjects = $student->subjects->pluck('id')->toArray();
-        return Laratables::recordsOf(Subject::class, function($query) use($studentSubjects)
-        {
+
+        return Laratables::recordsOf(Subject::class, function ($query) use ($studentSubjects) {
             return $query->whereNotIn('id', $studentSubjects);
         });
     }
@@ -47,6 +43,7 @@ class StudentSubjectController extends Controller
     public function create(Student $student)
     {
         $subjects = Subject::orderBy('level')->get();
+
         return view('admin.studentsubject.create', compact('student', 'subjects'));
     }
 
@@ -62,12 +59,12 @@ class StudentSubjectController extends Controller
             $subjects = array_unique($request->subjects['ids']);
             $subjectNames = array_unique($request->subjects['names']);
 
-            $student->subjects()->attach($subjects, ['instructor_id' => 0 , 'remarks' => 0]);
+            $student->subjects()->attach($subjects, ['instructor_id' => 0, 'remarks' => 0]);
+
             return redirect()->route('student.subject.create', [$student])->with('success', 'Subjects successfully add.');
         } else {
             return back()->withErrors(['message' => 'Please add some fields click the plus(+) icon.']);
         }
-        
     }
 
     /**
@@ -94,6 +91,7 @@ class StudentSubjectController extends Controller
                             ->get()
                             ->groupBy(['level', 'semester'])
                             ->toArray();
+
         return view('admin.studentsubject.edit', compact('subjects', 'student'));
     }
 

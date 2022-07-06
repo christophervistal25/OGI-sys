@@ -8,7 +8,6 @@ use App\Http\Requests\Admin\AddSubjectRequest;
 use App\Http\Requests\Admin\UpdateSubjectRequest;
 use App\Subject;
 use Freshbitsweb\Laratables\Laratables;
-use Illuminate\Http\Request;
 
 class SubjectController extends Controller
 {
@@ -16,6 +15,12 @@ class SubjectController extends Controller
     {
         $this->middleware('auth:admin');
     }
+
+    public function subjects()
+    {
+        return Laratables::recordsOf(Subject::class);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -23,14 +28,7 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        // return view('admin.subjects.index');
-    }
-
-    public function subjects($id)
-    {
-        return Laratables::recordsOf(Subject::class, function ($query) use($id) {
-            return $query->where('department_id', $id);
-        });
+        return view('admin.subjects.index');
     }
 
     /**
@@ -41,6 +39,7 @@ class SubjectController extends Controller
     public function create()
     {
         $departments = Department::get(['id', 'name']);
+
         return view('admin.subjects.create', compact('departments'));
     }
 
@@ -53,6 +52,7 @@ class SubjectController extends Controller
     public function store(AddSubjectRequest $request)
     {
         Subject::create($request->all());
+
         return back()->with('success', 'Subject successfully add.');
     }
 
@@ -76,6 +76,7 @@ class SubjectController extends Controller
     public function edit(Subject $subject)
     {
         $departments = Department::get(['id', 'name']);
+
         return view('admin.subjects.edit', compact('subject', 'departments'));
     }
 
@@ -89,6 +90,7 @@ class SubjectController extends Controller
     public function update(UpdateSubjectRequest $request, Subject $subject)
     {
         $subject->update($request->all());
+
         return back()->with('success', 'Successfully update.');
     }
 

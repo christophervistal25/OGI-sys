@@ -45,37 +45,37 @@ return [
             'provider' => 'users',
         ],
         'admin' => [
-           'driver' => 'session',
-           'provider' => 'admins',
-       ],
-       'admin-api' => [
-           'driver' => 'token',
-           'provider' => 'admins',
-       ],
-       'student' => [
-           'driver' => 'session',
-           'provider' => 'students',
-       ],
-       'student-api' => [
-           'driver' => 'token',
-           'provider' => 'students',
-       ],
-       'instructor' => [
-           'driver' => 'session',
-           'provider' => 'instructors',
-       ],
-       'instructor-api' => [
-           'driver' => 'token',
-           'provider' => 'instructors',
-       ],
-       'hr' => [
-           'driver' => 'session',
-           'provider' => 'hrs',
-       ],
-       'hr-api' => [
-           'driver' => 'token',
-           'provider' => 'hrs',
-       ]
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
+        'admin-api' => [
+            'driver' => 'token',
+            'provider' => 'admins',
+        ],
+        'student' => [
+            'driver' => 'session',
+            'provider' => 'students',
+        ],
+        'student-api' => [
+            'driver' => 'token',
+            'provider' => 'students',
+        ],
+        'instructor' => [
+            'driver' => 'session',
+            'provider' => 'instructors',
+        ],
+        'instructor-api' => [
+            'driver' => 'token',
+            'provider' => 'instructors',
+        ],
+        'hr' => [
+            'driver' => 'session',
+            'provider' => 'hrs',
+        ],
+        'hr-api' => [
+            'driver' => 'token',
+            'provider' => 'hrs',
+        ],
     ],
 
     /*
@@ -116,7 +116,7 @@ return [
             'driver' => 'eloquent',
             'model' => App\HR::class,
         ],
-   
+
     ],
 
     /*
@@ -140,7 +140,7 @@ return [
             'table' => 'password_resets',
             'expire' => 60,
         ],
-        
+
         'admins' => [
             'provider' => 'admins',
             'table' => 'password_resets',

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\GradeEvaluation;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class GradeEvaluationController extends Controller
 {
@@ -12,6 +12,7 @@ class GradeEvaluationController extends Controller
     {
         return $this->middleware('auth:admin');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -20,6 +21,7 @@ class GradeEvaluationController extends Controller
     public function index()
     {
         $evaluations = GradeEvaluation::all();
+
         return view('admin.evaluation-control.index', compact('evaluations'));
     }
 
@@ -43,12 +45,12 @@ class GradeEvaluationController extends Controller
     {
         $request->validate([
             'start_date' => 'date|before:end_date',
-            'end_date'   => 'date|after:start_date'
+            'end_date' => 'date|after:start_date',
         ]);
 
         GradeEvaluation::create([
             'start_date' => $request->start_date,
-            'end_date'   => $request->end_date
+            'end_date' => $request->end_date,
         ]);
 
         return back()->with('success', 'Successfully add new grade evaluation.');
@@ -86,8 +88,8 @@ class GradeEvaluationController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'start_date' => 'date|before:end_date|unique:grade_evaluations,start_date,' . $id,
-            'end_date'   => 'date|after:start_date|unique:grade_evaluations,end_date,' . $id
+            'start_date' => 'date|before:end_date|unique:grade_evaluations,start_date,'.$id,
+            'end_date' => 'date|after:start_date|unique:grade_evaluations,end_date,'.$id,
         ]);
 
         $evaluation = GradeEvaluation::find($id);
@@ -96,7 +98,6 @@ class GradeEvaluationController extends Controller
         $evaluation->save();
 
         return back()->with('success', 'Successfully update the deadline.');
-
     }
 
     /**

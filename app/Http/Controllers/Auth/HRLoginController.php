@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Session;
 class HRLoginController extends Controller
 {
     // use AuthenticatesUsers;
-    
+
     /**
      * Where to redirect users after login.
      *
@@ -20,10 +20,11 @@ class HRLoginController extends Controller
 
     // protected $redirectTo = '/instructor';
 
-       public function __construct()
-       {
-           $this->middleware('guest:hr')->except('logout');
-       }
+    public function __construct()
+    {
+        $this->middleware('guest:hr')->except('logout');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -38,22 +39,23 @@ class HRLoginController extends Controller
 
     public function loginHR(Request $request)
     {
-      $credentials = $request->only('id_number', 'password');
+        $credentials = $request->only('id_number', 'password');
 
-      // Attempt to log the user in
-      if (Auth::guard('hr')->attempt($credentials, $request->remember)) {
+        // Attempt to log the user in
+        if (Auth::guard('hr')->attempt($credentials, $request->remember)) {
 
         // if successful, then redirect to their intended location
-        return redirect()->intended(route('hr.dashboard'));
-      }
+            return redirect()->intended(route('hr.dashboard'));
+        }
 
-      return back()->withInput($request->only('id_number', 'remember'))
+        return back()->withInput($request->only('id_number', 'remember'))
                     ->withErrors(['message' => 'Please check your ID number or password.']);
     }
-    
+
     public function logout(Request $request)
     {
         Auth::guard('hr')->logout();
+
         return redirect()->route('hr.auth.login');
     }
 }

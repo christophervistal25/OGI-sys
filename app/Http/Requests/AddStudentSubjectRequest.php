@@ -25,20 +25,20 @@ class AddStudentSubjectRequest extends FormRequest
     public function rules()
     {
         return [
-          'subjects.name.*'        => 'required',
-          'subjects.description.*' => 'required',
-          'subjects.level.*'       => 'required',
-          'subjects.semester.*'    => ['required', Rule::in([1, 2, 3])],
+            'subjects.name.*' => 'required',
+            'subjects.description.*' => 'required',
+            'subjects.level.*' => 'required',
+            'subjects.semester.*' => ['required', Rule::in([1, 2, 3])],
         ];
     }
 
     public function attributes()
     {
         return [
-           'subjects.name.*'        => 'subject name',
-           'subjects.description.*' => 'subject description',
-           'subjects.level.*' => 'subject level',
-           'subjects.semester.*'    => 'subject semester',
+            'subjects.name.*' => 'subject name',
+            'subjects.description.*' => 'subject description',
+            'subjects.level.*' => 'subject level',
+            'subjects.semester.*' => 'subject semester',
         ];
     }
 }
